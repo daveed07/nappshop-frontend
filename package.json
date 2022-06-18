@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "webpack serve --open",
-    "build": "webpack --mode production && echo /* /index.html 200 > build/_redirects"
+    "build": "webpack --mode production"
   },
   "keywords": [
     "stock",
