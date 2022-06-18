@@ -20,7 +20,7 @@ const App = () => {
         <BrowserRouter>
           <>
             <Routes>
-              <Route path="/" element={<Home/>}/>
+              <Route path="/" component={<Home/>}/>
               <Route path="/login" element={<Login/>}/>
               <Route path="/signup" element={<Signup/>}/>
               <Route path="/products/:id" element={<Product/>}/>
@@ -29,6 +29,7 @@ const App = () => {
               <Route path="/checkout" element={<CheckOut/>}/>
               <Route path="payment" element={<Payment/>}/>
               <Route path="/profile" element={<Profile/>}/>
+              <Route path="*" element={<div>404</div>}/>
             </Routes>
           </>
         </BrowserRouter>
