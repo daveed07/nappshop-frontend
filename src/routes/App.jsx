@@ -29,7 +29,6 @@ const App = () => {
               <Route path="/checkout" element={<CheckOut/>}/>
               <Route path="payment" element={<Payment/>}/>
               <Route path="/profile" element={<Profile/>}/>
-              <Route path="*" element={<div>404</div>}/>
             </Routes>
           </>
         </BrowserRouter>
