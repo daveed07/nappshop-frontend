@@ -20,8 +20,8 @@ const App = () => {
         <BrowserRouter>
           <>
             <Routes>
-              <Route path="/" component={Home}/>
-              <Route path="/login" component={Login}/>
+              <Route path="/" element={<Home/>}/>
+              <Route path="/login" element={<Login/>}/>
               <Route path="/signup" element={<Signup/>}/>
               <Route path="/products/:id" element={<Product/>}/>
               <Route path="/categories/:category/products" element={<Home/>}/>
