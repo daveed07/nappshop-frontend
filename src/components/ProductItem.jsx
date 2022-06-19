@@ -6,12 +6,11 @@ import Title from "@components/micro-components/Title";
 import SubTitle from "@components/micro-components/SubTitle";
 import Button from "@components/micro-components/Button";
 import "@styles/product-item.scss";
-import addToCartIcon from "@icons/cart.svg";
-import addedToCartIcon from "@icons/cart-check-fill.svg";
+import Cart from "./svg-components/Cart";
 
 const ProductItem = ({ product }) => {
   const cart = useSelector((state) => state.cart);
-  const [cartIcon, setCartIcon] = useState(cart.find(item => item.id === product.id) ? addedToCartIcon : addToCartIcon);
+  const [add, setAdd] = useState(cart.find(item => item.id === product.id) ? "#fff" : "#425acd");
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -25,10 +24,10 @@ const ProductItem = ({ product }) => {
   const handleAddToCart = (article) => {
     if (!cart.find(item => item.id === article.id)) {
       store.dispatch({ type: "ADD_TO_CART", payload: { ...product, quantity: 1 } });
-      setCartIcon(addedToCartIcon);
+      setAdd("#fff");
     } else {
       store.dispatch({ type: "REMOVE_FROM_CART", payload: product });
-      setCartIcon(addToCartIcon);
+      setAdd("#425acd");
     }
   }
 
@@ -42,7 +41,9 @@ const ProductItem = ({ product }) => {
         <SubTitle size="small" color="#000">{`${product.description.substring(0, 40)}...`}</SubTitle>
         <div className="product-bottom">
           <SubTitle size="medium" color="#425acd">${product.price}</SubTitle>
-          <Button secondary icon onClick={() => handleAddToCart(product)}><img src={cartIcon} /></Button>
+          <Button secondary icon add={add === "#425acd" ? "#fff" : "#425acd"} onClick={() => handleAddToCart(product)}>
+            <Cart width={18} height={18} fill={add} />
+          </Button>
         </div>
       </div>
     </div>

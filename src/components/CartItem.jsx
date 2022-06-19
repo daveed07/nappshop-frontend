@@ -6,6 +6,10 @@ import '@styles/cartItem.scss';
 import Image from '@components/micro-components/Image';
 import Title from '@components/micro-components/Title';
 import SubTitle from '@components/micro-components/SubTitle';
+import Button from '@components/micro-components/Button';
+import Dash from './svg-components/Dash';
+import Plus from './svg-components/Plus';
+import Trash from './svg-components/Trash';
 import plus from '@icons/plus.svg';
 import minus from '@icons/dash.svg';
 import trash from '@icons/trash3.svg';
@@ -40,13 +44,13 @@ const CartItem = ({ product }) => {
       </div>
       <div className="cart-item-actions">
         <div className="cart-item-quantity">
-          <button className='minus' onClick={() => {
+          <Button secondary icon onClick={() => {
             if (product.quantity > 1) {
               handleCartChange(product, product.quantity - 1);
             }
           }}>
-            <img src={minus} alt=""/>
-          </button>
+            <Dash />
+          </Button>
           <input className='quantity' type='number' placeholder={
             cart.find(item => item.id === product.id).quantity
           } onChange={e => {
@@ -56,15 +60,15 @@ const CartItem = ({ product }) => {
           }} value={
             cart.find(item => item.id === product.id).quantity
           }/>
-          <button className='plus' onClick={() => {
+          <Button secondary icon onClick={() => {
             handleCartChange(product, product.quantity + 1);
           }}>
-            <img src={plus} alt=""/>
-          </button>
+            <Plus />
+          </Button>
         </div>
-        <button className='remove' onClick={() => handleCartRemove(product)}>
-          <img src={trash} alt=""/>
-        </button>
+        <Button secondary icon onClick={() => handleCartRemove(product)}>
+          <Trash />
+        </Button>
       </div>
     </div>
   );

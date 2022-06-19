@@ -66,11 +66,8 @@
   border-radius: 4px;
 }
 .product-shipping div {
-  display: flex;
-  align-items: center;
-}
-.product-shipping img {
-  width: 18px;
+  display: grid;
+  grid-template-columns: auto auto;
 }
 .product-shipping p {
   font-size: var(--md);
@@ -79,6 +76,7 @@
 .product-shipping div p {
   color: var(--main-color);
   font-weight: 600;
+  margin: 0;
 }
 .product-shipping > p {
   margin-top: 8px;

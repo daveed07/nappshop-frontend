@@ -1,14 +1,13 @@
 import React from "react";
+import { useSelector } from 'react-redux';
 import CheckoutItem from "@components/CheckoutItem";
 import Title from "@components/micro-components/Title";
 import Input from "@components/micro-components/Input";
 import Button from "@components/micro-components/Button";
-import { useSelector } from 'react-redux';
 
 const SummaryContainer = (props) => {
   const cart = useSelector(state => state.cart);
   const costs = useSelector(state => state.costs);
-  // set value of subtotal, total, totalWithShipping and shipping from store.costs if props are not passed
   const subtotal = props.subtotal || costs.subtotal;
   const total = props.total || costs.total;
   const totalWithShipping = props.totalWithShipping || costs.totalWithShipping;
@@ -24,12 +23,6 @@ const SummaryContainer = (props) => {
           ))}
         </div>
         <div className="discount-code-container">
-          {/* <input
-            className="input discount-input"
-            type="text"
-            id="discountCode"
-            placeholder="Discount code"
-          /> */}
           <Input marginBottom="0" type="text" id="discountCode" placeholder="Discount code" />
           <Button primary icon>Apply</Button>
         </div>

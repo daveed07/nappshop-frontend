@@ -6,8 +6,8 @@ import Image from "@components/micro-components/Image";
 import Nav from "@components/micro-components/Nav";
 import Button from "@components/micro-components/Button";
 import logo from "@logos/jada-logo.png";
-import cartIcon from "@icons/cart3.svg";
-import list from "@icons/list.svg";
+import Cart from "./svg-components/Cart";
+import List from "./svg-components/List";
 import "@styles/header.scss";
 
 const Header = () => {
@@ -54,18 +54,14 @@ const Header = () => {
         )}
         <a href="/cart">
           <div className="cart-container">
-            <img className="cart-icon" src={cartIcon} />
+            <Cart width={24} height={24} />
             {cart.length > 0 ? (
               <span className="cart-quantity">{cart.length}</span>
             ) : null}
           </div>
         </a>
         <div className="menu-icon-container">
-          <img
-            className="menu-icon"
-            src={list}
-            onClick={() => setToggle(!toggle)}
-          />
+          <List width={24} height={24} onClick={() => setToggle(!toggle)} />
         </div>
         {toggle && <MobileMenu />}
       </Nav>

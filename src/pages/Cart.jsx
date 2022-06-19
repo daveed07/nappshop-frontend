@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector } from "react-redux";
-import ReactLoading from 'react-loading';
 import { store } from "@redux/store";
+import ReactLoading from 'react-loading';
 import Header from '@components/Header';
 import CartItem from '@components/CartItem';
 import Title from '@components/micro-components/Title';

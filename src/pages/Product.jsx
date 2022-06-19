@@ -1,19 +1,19 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
-import ReactLoading from 'react-loading';
 import { store } from "@redux/store";
+import ReactLoading from 'react-loading';
 import Header from "@components/Header";
 import Image from "@components/micro-components/Image";
 import Title from "@components/micro-components/Title";
 import SubTitle from "@components/micro-components/SubTitle";
 import Button from "@components/micro-components/Button";
+import Cart2 from "@components/svg-components/cart2";
+import CartFill from "@components/svg-components/CartFill";
+import BagFill from "@components/svg-components/BagFill";
+import Truck from "@components/svg-components/Truck";
 import useGetProducts from '@hooks/useGetProducts';
 import "@styles/product.scss";
-import truck from "@icons/truck.svg";
-import addToCartIcon from "@icons/cart.svg";
-import addedToCartIcon from "@icons/cart-check-fill.svg";
-import bag from "@icons/bag-heart-fill.svg";
 
 const API = 'https://api.escuelajs.co/api/v1/products';
 
@@ -22,7 +22,6 @@ const Product = () => {
   const product = useGetProducts(`${API}/${id}`);
 
   const cart = useSelector((state) => state.cart);
-  const [cartIcon, setCartIcon] = useState(cart.find(item => item.id === id) ? addToCartIcon : addedToCartIcon);
   const [loadingPage, setLoadingPage] = useState(true);
   const [loadingImage, setLoadingImage] = useState(true);
 
@@ -76,7 +75,7 @@ const Product = () => {
                   </p>
                   <div className="product-shipping">
                     <div>
-                      <img src={truck}/>
+                      <Truck width={18} height={18} />
                       <p>Free shipping</p>
                     </div>
                     <p>1-2 days delivery</p>
@@ -84,11 +83,11 @@ const Product = () => {
                 </div>
                 <div className="button-container">
                   <Button secondary buy onClick={() => handleAddToCart(product)}>
-                    <img src={cartIcon}/>
+                    {cart.find(item => item.id === product.id) ? <CartFill width={24} height={24} /> : <Cart2 width={24} height={24} />}
                     {cart.find(item => item.id === product.id) ? "Added to cart" : "Add to cart"}
                   </Button>
                   <Button primary buy onClick={() => handleBuyNow()}>
-                    <img src={bag}/>
+                    <BagFill width={24} height={24} />
                     Buy now
                   </Button>
                 </div>

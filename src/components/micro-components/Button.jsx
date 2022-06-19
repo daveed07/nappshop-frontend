@@ -43,8 +43,10 @@ const StyledButton = styled.button`
     min-width: auto;
     margin: 0;
     padding: 10px;
+    background: ${props.add || '#fff'};
     &:hover {
-      background-color: #2f4bae;
+      border-color: #2f4bae;
+      color: #2f4bae;
     }
   `}
   ${props => props.disabled && css`

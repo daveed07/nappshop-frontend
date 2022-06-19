@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { store } from "@redux/store";
-import "@styles/login.scss";
 import Header from "@components/Header";
 import Title from "@components/micro-components/Title";
 import SubTitle from "@components/micro-components/SubTitle";
 import Form from "@components/micro-components/Form";
 import Input from "@components/micro-components/Input";
 import Button from "@components/micro-components/Button";
+import "@styles/login.scss";
 
 const Login = () => {
   const [alert, setAlert] = useState('');
