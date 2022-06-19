@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import sizes from '@constants/fontSizes';
+import colors from '@constants/colors';
 
 const SubTitle = (props) => {
   return (
@@ -13,7 +14,7 @@ const SubTitle = (props) => {
 const StyledSubTitle = styled.p`
   font-size: ${props => sizes[props.size]};
   font-weight: 500;
-  color: ${props => props.color || '#000'};
+  color: ${props => props.color || colors.black};
 `;
 
 export default SubTitle;

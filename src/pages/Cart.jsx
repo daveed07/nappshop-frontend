@@ -7,6 +7,7 @@ import CartItem from '@components/CartItem';
 import Title from '@components/micro-components/Title';
 import Button from '@components/micro-components/Button';
 import '@styles/cart.scss';
+import colors from '@constants/colors';
 
 const Cart = () => {
   const cart = useSelector((state) => state.cart);
@@ -29,12 +30,12 @@ const Cart = () => {
     <>
       <Header/>
       {isLoading ? (
-        <ReactLoading className='react-loader' type="spin" color="#425acd" height={50} width={50} />
+        <ReactLoading className='react-loader' type="spin" color={colors.main} height={50} width={50} />
       ) : (
         <div className="cart">
           <div className="cart-container">
             <div className="cart-header">
-              <Title size="xxxlarge" color="#000">Cart</Title>
+              <Title size="xxxlarge" color={colors.black}>Cart</Title>
               <div className='cart-info'>
                 <p>Items: <span>{cart.length}</span></p>
                 <p>Total: <span>${totalPrice}</span></p>

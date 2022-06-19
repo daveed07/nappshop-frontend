@@ -170,9 +170,11 @@ const CheckOut = () => {
                     {isLoggedIn ? null : (
                       <a href="/signup">Create an account</a>
                     )}
-                    <a href="#" onClick={() => handleUseAccountInfo()}>
-                      Use account information
-                    </a>
+                    {isLoggedIn ? (
+                      <a href="#" onClick={() => handleUseAccountInfo()}>
+                        Use account information
+                      </a>
+                    ): null}
                   </div>
                 </div>
                 <div className="checkout-form-input contact-info-form">

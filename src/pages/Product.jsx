@@ -14,6 +14,7 @@ import BagFill from "@components/svg-components/BagFill";
 import Truck from "@components/svg-components/Truck";
 import useGetProducts from '@hooks/useGetProducts';
 import "@styles/product.scss";
+import colors from "@constants/colors";
 
 const API = 'https://api.escuelajs.co/api/v1/products';
 
@@ -52,22 +53,21 @@ const Product = () => {
   }
   const handleBuyNow = (article) => {
     store.dispatch({ type: "ADD_TO_CART", payload: { ...product, quantity: 1 } });
-    // Redirect to checkout
     window.location.href = "/checkout";
   }
   return (
     <>
       <Header />
       {loadingPage ? (
-        <ReactLoading className="react-loader" type="spin" color="#425acd" height={50} width={50} />
+        <ReactLoading className="react-loader" type="spin" color={colors.main} height={50} width={50} />
       ) : (
         <div className="product">
           <div className="product-container">
             <section className="product-section">
               <Image display loading={loadingImage} src={product.images} alt={product.name} id={product.id} />
               <div className="product-info">
-                <Title size="xxxxlarge" color="#000">{product.title}</Title>
-                <SubTitle size="large" color="#000">Vacuum cleaner</SubTitle>
+                <Title size="xxxxlarge" color={colors.black}>{product.title}</Title>
+                <SubTitle size="large" color={colors.black}>Vacuum cleaner</SubTitle>
                 <div className="price-container">
                   <p className="product-price">
                     <p className="current-price"><span>$</span>{product.price}</p>

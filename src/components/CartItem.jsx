@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector } from "react-redux";
-import ReactLoading from 'react-loading';
 import { store } from "@redux/store";
 import '@styles/cartItem.scss';
+import colors from '@constants/colors';
 import Image from '@components/micro-components/Image';
 import Title from '@components/micro-components/Title';
 import SubTitle from '@components/micro-components/SubTitle';
@@ -10,9 +10,6 @@ import Button from '@components/micro-components/Button';
 import Dash from './svg-components/Dash';
 import Plus from './svg-components/Plus';
 import Trash from './svg-components/Trash';
-import plus from '@icons/plus.svg';
-import minus from '@icons/dash.svg';
-import trash from '@icons/trash3.svg';
 
 const CartItem = ({ product }) => {
   const cart = useSelector((state) => state.cart);
@@ -38,9 +35,9 @@ const CartItem = ({ product }) => {
     <div className="cart-item">
       <Image cart src={product.images[0]} alt={product.name} id={product.id} loading={isLoading} />
       <div className="cart-item-info">
-        <Title size="medium" color="#000">{product.title}</Title>
-        <SubTitle size="small" color="#90949f">{`${product.description.substring(0, 40)}...`}</SubTitle>
-        <SubTitle size="medium" color="#000">${product.price * product.quantity}</SubTitle>
+        <Title size="medium" color={colors.black}>{product.title}</Title>
+        <SubTitle size="small" color={colors.greyDark}>{`${product.description.substring(0, 40)}...`}</SubTitle>
+        <SubTitle size="medium" color={colors.black}>${product.price * product.quantity}</SubTitle>
       </div>
       <div className="cart-item-actions">
         <div className="cart-item-quantity">

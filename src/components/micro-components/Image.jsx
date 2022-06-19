@@ -1,6 +1,7 @@
 import React from "react";
 import styled, { css } from "styled-components";
 import ReactLoading from "react-loading";
+import colors from "@constants/colors";
 
 const Image = (props) => {
   return (
@@ -9,7 +10,7 @@ const Image = (props) => {
         <ReactLoading
           className="react-loader"
           type="bubbles"
-          color="#425acd"
+          color={colors.main}
           height={50}
           width={50}
         />

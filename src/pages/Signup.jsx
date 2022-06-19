@@ -6,6 +6,7 @@ import SubTitle from "@components/micro-components/SubTitle";
 import Form from "@components/micro-components/Form";
 import Input from "@components/micro-components/Input";
 import Button from '@components/micro-components/Button';
+import colors from "@constants/colors";
 
 const Signup = () => {
   const [alert, setAlert] = React.useState('');
@@ -34,8 +35,8 @@ const Signup = () => {
     <>
       <Header />
       <div className="signup">
-        <Title size="xxxlarge" color="#000">Sign Up</Title>
-        <SubTitle size="medium" color="#90949f">
+        <Title size="xxxlarge" color={colors.black}>Sign Up</Title>
+        <SubTitle size="medium" color={colors.greyDark}>
           Welcome! Please type in your details
         </SubTitle>
         <Form width="20%">

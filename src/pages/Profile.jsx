@@ -6,6 +6,7 @@ import ProfileDetails from '@components/ProfileDetails';
 import Title from "@components/micro-components/Title";
 import Button from '@components/micro-components/Button';
 import "@styles/profile.scss";
+import colors from '@constants/colors';
 
 const Profile = () => {
   const [edit, setEdit] = useState(false);
@@ -19,7 +20,7 @@ const Profile = () => {
     <>
       <Header/>
       <div className="profile">
-        <Title size="xxxlarge" color="#000">Profile</Title>
+        <Title size="xxxlarge" color={colors.black}>Profile</Title>
         <div className="profile-container">
           <picture className="profile-picture">
             <img src="https://images.unsplash.com/photo-1518791841217-8f162f1e1131?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60" />

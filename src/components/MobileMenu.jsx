@@ -2,12 +2,13 @@ import React from 'react';
 import Title from '@components/micro-components/Title';
 import Nav from '@components/micro-components/Nav';
 import '@styles/mobile-menu.scss';
+import colors from '@constants/colors';
 
 const MobileMenu = () => {
   return (
     <div className="mobile-menu">
       <div className='menu-container'>
-        <Title size="xxxlarge" color="#000">Categories</Title>
+        <Title size="xxxlarge" color={colors.black}>Categories</Title>
         <Nav
         items={[
           { id: 1, text: "iRobot" },

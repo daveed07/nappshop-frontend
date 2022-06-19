@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import ReactLoading from 'react-loading';
 import Image from '@components/micro-components/Image';
 import "@styles/checkout-item.scss";
 

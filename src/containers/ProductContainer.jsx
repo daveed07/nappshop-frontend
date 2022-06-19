@@ -4,13 +4,14 @@ import ReactLoading from 'react-loading';
 import useGetProducts from '@hooks/useGetProducts';
 import ProductItem from '@components/ProductItem';
 import '@styles/product-container.scss';
+import colors from '@constants/colors';
 
 const API = 'https://api.escuelajs.co/api/v1';
 
 const ProductContainer = () => {
   const { category } = useParams();
   const products = useGetProducts(`${API}${category ? `/categories/${category}/products?Limit=100&offset=100` : '/products'}`);
-  
+
   const [loading, setLoading] = useState(true);
   useEffect(() => {
     const loadData = async () => {
@@ -21,7 +22,7 @@ const ProductContainer = () => {
   }, []);
 
   if (loading) {
-    return <ReactLoading className='react-loader' type="spin" color="#425acd" height={50} width={50} />
+    return <ReactLoading className='react-loader' type="spin" color={colors.main} height={50} width={50} />
   } else {
     return (
       <div className='product-container'>

@@ -4,21 +4,22 @@ import Title from "@components/micro-components/Title";
 import SubTitle from "@components/micro-components/SubTitle";
 import Button from "@components/micro-components/Button";
 import "@styles/payment.scss";
+import colors from "@constants/colors";
 
 const Payment = () => {
   return (
     <div className="payment">
       <div className="payment-container">
         <div className="payment-form-container">
-          <Title size="xxxlarge" color="#000">
+          <Title size="xxxlarge" color={colors.black}>
             Payment
           </Title>
           <div className="payment-steps">
-            <SubTitle size="medium" color="#000">
+            <SubTitle size="medium" color={colors.black}>
               Information and shipping
             </SubTitle>
             /
-            <SubTitle size="medium" color="#425acd">
+            <SubTitle size="medium" color={colors.main}>
               Payment
             </SubTitle>
           </div>

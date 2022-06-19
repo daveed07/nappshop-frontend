@@ -1,5 +1,6 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
+import colors from '@constants/colors';
 
 const Button = (props) => {
   return (
@@ -22,19 +23,19 @@ const StyledButton = styled.button`
   font-weight: 500;
   cursor: pointer;
   ${props => props.primary && css`
-    color: #fff;
-    background-color: #425acd;
+    color: ${colors.white};
+    background-color: ${colors.main};
     &:hover {
-      background-color: #2f4bae;
+      background-color: ${colors.mainDark};
     }
   `}
   ${props => props.secondary && css`
-    color: #425acd;
-    background-color: #fff;
-    border: 2px solid #425acd;
+    color: ${colors.main};
+    background-color: ${colors.white};
+    border: 2px solid ${colors.main};
     &:hover {
-      color: #2f4bae;
-      border: 2px solid #2f4bae;
+      color: ${colors.mainDark};
+      border: 2px solid ${colors.mainDark};
     }
   `}
   ${props => props.icon && css`
@@ -43,17 +44,17 @@ const StyledButton = styled.button`
     min-width: auto;
     margin: 0;
     padding: 10px;
-    background: ${props.add || '#fff'};
+    background: ${props.add || colors.white};
     &:hover {
-      border-color: #2f4bae;
-      color: #2f4bae;
+      border-color: ${colors.mainDark};
+      color: ${colors.mainDark};
     }
   `}
   ${props => props.disabled && css`
-    color: #425acd;
-    background-color: #f5f5f5;
+    color: ${colors.main};
+    background-color: ${colors.greyLight};
     &:hover {
-      background-color: #f5f5f5;
+      background-color: ${colors.greyLight};
     }
   `}
   ${props => props.buy && css`

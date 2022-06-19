@@ -9,6 +9,7 @@ import logo from "@logos/jada-logo.png";
 import Cart from "./svg-components/Cart";
 import List from "./svg-components/List";
 import "@styles/header.scss";
+import colors from "@constants/colors";
 
 const Header = () => {
   const [toggle, setToggle] = useState(false);
@@ -38,9 +39,9 @@ const Header = () => {
         justifyContent="center"
         gap="0 16px"
         wrap="wrap"
-        color="#000"
+        color={colors.black}
       />
-      <Nav justifyContent="center" gap="14px" wrap="nowrap" color="#000" mobile>
+      <Nav justifyContent="center" gap="14px" wrap="nowrap" color={colors.black} mobile>
         {isLoggedIn ? (
           <>
             <a href="/profile">Profile</a>

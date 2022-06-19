@@ -4,6 +4,7 @@ import CheckoutItem from "@components/CheckoutItem";
 import Title from "@components/micro-components/Title";
 import Input from "@components/micro-components/Input";
 import Button from "@components/micro-components/Button";
+import colors from "@constants/colors";
 
 const SummaryContainer = (props) => {
   const cart = useSelector(state => state.cart);
@@ -15,7 +16,7 @@ const SummaryContainer = (props) => {
   const tax = props.tax || costs.tax;
   return (
     <div className="checkout-summary-container">
-      <Title size="xxxlarge" color="#000">Summary</Title>
+      <Title size="xxxlarge" color={colors.black}>Summary</Title>
       <div className="checkout-summary-items">
         <div className="checkout-summary">
           {cart.map((product) => (
@@ -24,7 +25,7 @@ const SummaryContainer = (props) => {
         </div>
         <div className="discount-code-container">
           <Input marginBottom="0" type="text" id="discountCode" placeholder="Discount code" />
-          <Button primary icon>Apply</Button>
+          <Button primary icon add={colors.main}>Apply</Button>
         </div>
         <div className="checkout-summary-prices">
           <div className="checkout-summary-prices-item">
