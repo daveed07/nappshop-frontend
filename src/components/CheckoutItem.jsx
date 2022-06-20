@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import Image from '@components/micro-components/Image';
-import "@styles/checkout-item.scss";
+import Title from '@components/micro-components/Title';
+import SubTitle from '@components/micro-components/SubTitle';
+import StyledCheckoutItem from '@styles/styledCheckoutItem';
+import colors from '@constants/colors';
 
 const CheckoutItem = ({ product }) => {
   const [isLoading, setIsLoading] = useState(true);
@@ -13,15 +16,15 @@ const CheckoutItem = ({ product }) => {
   }, []);
 
   return (
-    <div className="checkout-item">
-      <Image checkout src={product.images[0]} alt={product.name} id={product.id} loading={isLoading}>
-        <span className='checkout-item-quantity'>{product.quantity}</span>
+    <StyledCheckoutItem>
+      <Image checkout src={product.images[0]} alt={product.title} id={product.id} loading={isLoading}>
+        <span className='quantity'>{product.quantity}</span>
       </Image>
-      <div className="checkout-item-info">
-        <h3 className='title'>{product.title}</h3>
-        <p className='price'>${product.price * product.quantity}</p>
+      <div className="info">
+        <Title size="medium" color={colors.black}>{product.title}</Title>
+        <SubTitle size="medium" color={colors.black}>${product.price * product.quantity}</SubTitle>
       </div>
-    </div>
+    </StyledCheckoutItem>
   );
 }
 

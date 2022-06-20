@@ -6,7 +6,7 @@ import Title from "@components/micro-components/Title";
 import SubTitle from "@components/micro-components/SubTitle";
 import Button from "@components/micro-components/Button";
 import Cart from "./svg-components/Cart";
-import "@styles/product-item.scss";
+import StyledProductItem from "@styles/styledProductItem";
 import colors from "@constants/colors";
 
 const ProductItem = ({ product }) => {
@@ -33,8 +33,8 @@ const ProductItem = ({ product }) => {
   }
 
   return (
-    <div className="product-item">
-        <Image loading={loading} src={product.images[0]} alt={product.title} id={product.id} />
+    <StyledProductItem>
+      <Image loading={loading} src={product.images[0]} alt={product.title} id={product.id} />
       <div className="text-container">
         <a href={`/product/${product.id}`}>
           <Title size="medium" color={colors.main}>{product.title}</Title>
@@ -47,7 +47,7 @@ const ProductItem = ({ product }) => {
           </Button>
         </div>
       </div>
-    </div>
+    </StyledProductItem>
   );
 };
 

@@ -1,13 +1,13 @@
 import React from 'react';
 import Title from '@components/micro-components/Title';
 import Nav from '@components/micro-components/Nav';
-import '@styles/mobile-menu.scss';
+import StyledMenu from '@styles/styledMenu';
 import colors from '@constants/colors';
 
 const MobileMenu = () => {
   return (
-    <div className="mobile-menu">
-      <div className='menu-container'>
+    <StyledMenu>
+      <div>
         <Title size="xxxlarge" color={colors.black}>Categories</Title>
         <Nav
         items={[
@@ -25,7 +25,7 @@ const MobileMenu = () => {
         mobile
       />
       </div>
-    </div>
+    </StyledMenu>
   );
 }
 

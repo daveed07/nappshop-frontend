@@ -8,7 +8,7 @@ import Button from "@components/micro-components/Button";
 import logo from "@logos/jada-logo.png";
 import Cart from "./svg-components/Cart";
 import List from "./svg-components/List";
-import "@styles/header.scss";
+import StyledHeader from "@styles/styledHeader";
 import colors from "@constants/colors";
 
 const Header = () => {
@@ -22,7 +22,7 @@ const Header = () => {
   };
 
   return (
-    <header className="header">
+    <StyledHeader>
       <Image logo src={logo} alt="Jada Logo" />
       <Nav
         items={[
@@ -57,16 +57,16 @@ const Header = () => {
           <div className="cart-container">
             <Cart width={24} height={24} />
             {cart.length > 0 ? (
-              <span className="cart-quantity">{cart.length}</span>
+              <span className="quantity">{cart.length}</span>
             ) : null}
           </div>
         </a>
-        <div className="menu-icon-container">
+        <div className="menu-container">
           <List width={24} height={24} onClick={() => setToggle(!toggle)} />
         </div>
         {toggle && <MobileMenu />}
       </Nav>
-    </header>
+    </StyledHeader>
   );
 };
 

@@ -5,7 +5,7 @@ import colors from '@constants/colors';
 
 const SubTitle = (props) => {
   return (
-    <StyledSubTitle size={props.size} color={props.color}>
+    <StyledSubTitle className={props.className} size={props.size} color={props.color}>
       {props.children}
     </StyledSubTitle>
   );

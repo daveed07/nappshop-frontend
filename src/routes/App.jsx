@@ -11,7 +11,6 @@ import Cart from '@pages/Cart';
 import CheckOut from '@pages/CheckOut';
 import Payment from '@pages/Payment';
 import Profile from '@pages/Profile';
-import '@styles/global.css';
 
 const App = () => {
   return (
