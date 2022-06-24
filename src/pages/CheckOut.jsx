@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { store } from "@redux/store";
-import ReactLoading from "react-loading";
 import SummaryContainer from "@containers/SummaryContainer";
 import Button from "@components/micro-components/Button";
 import Title from "@components/micro-components/Title";
 import SubTitle from "@components/micro-components/SubTitle";
 import Form from "@components/micro-components/Form";
 import Input from "@components/micro-components/Input";
-import "@styles/checkout.scss";
+import StyledLoading from "@styles/styledLoading";
+import StyledCheckout from "@styles/styledCheckout";
 
 const CheckOut = () => {
   const cart = useSelector((state) => state.cart);
@@ -25,7 +25,6 @@ const CheckOut = () => {
   }, []);
 
   const [address, setAddress] = useState(false);
-
   const [shipping, setShipping] = useState(0);
 
   const subtotal = cart.reduce(
@@ -137,7 +136,7 @@ const CheckOut = () => {
 
   if (isLoading) {
     return (
-      <ReactLoading
+      <StyledLoading
         className="react-loader"
         type="spin"
         color="#425acd"
@@ -147,7 +146,7 @@ const CheckOut = () => {
     );
   } else {
     return (
-      <div className="checkout" onLoad={() => handleShipping()}>
+      <StyledCheckout>
         <div className="checkout-container">
           <div className="checkout-form-container">
             <Title size="xxxlarge" color="#000">
@@ -312,7 +311,7 @@ const CheckOut = () => {
             shipping={shipping}
           />
         </div>
-      </div>
+      </StyledCheckout>
     );
   }
 };

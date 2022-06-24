@@ -7,7 +7,7 @@ import SubTitle from "@components/micro-components/SubTitle";
 import Form from "@components/micro-components/Form";
 import Input from "@components/micro-components/Input";
 import Button from "@components/micro-components/Button";
-import "@styles/login.scss";
+import StyledLogin from "@styles/styledLogin";
 import colors from "@constants/colors";
 
 const Login = () => {
@@ -32,8 +32,8 @@ const Login = () => {
   return (
     <>
       <Header />
-      <div className="login">
-      <Title size="xxxlarge" color={colors.black}>Log In</Title>
+      <StyledLogin login>
+        <Title size="xxxlarge" color={colors.black}>Log In</Title>
         <SubTitle size="medium" color={colors.greyDark}>
           Welcome back! Please type in your details
         </SubTitle>
@@ -45,7 +45,7 @@ const Login = () => {
         </Form>
         <a href="/">Forgot my password</a>
         <a href="signup">Sign up</a>
-      </div>
+      </StyledLogin>
     </>
   );
 }

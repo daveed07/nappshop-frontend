@@ -14,6 +14,10 @@ const StyledButton = styled.button`
   height: 48px;
   width: 100%;
   min-width: 84px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
   margin: 24px 0;
   padding: 8px;
   border: none;

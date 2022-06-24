@@ -1,13 +1,13 @@
 import React from "react";
 import styled, { css } from "styled-components";
-import ReactLoading from "react-loading";
+import StyledLoading from "@styles/styledLoading";
 import colors from "@constants/colors";
 
 const Image = (props) => {
   return (
     <StyledFigure {...props}>
       {props.loading ? (
-        <ReactLoading
+        <StyledLoading
           className="react-loader"
           type="bubbles"
           color={colors.main}
@@ -15,13 +15,17 @@ const Image = (props) => {
           width={50}
         />
       ) : (
-        <a href={`${props.logo ? "/" : "/products/" + props.id}`}>
+        <a href={
+          `${props.logo ? "/" : "/products/" + props.id}` ||
+          `${props.profile ? "/profile" : "/products/" + props.id}`
+        }>
           <StyledImage
             src={props.src}
             alt={props.alt}
             display={props.display}
             cart={props.cart}
             checkout={props.checkout}
+            profile={props.profile}
           />
           {props.children}
         </a>
@@ -67,6 +71,17 @@ const StyledFigure = styled.figure`
         height: 84px;
       }
     `}
+  ${(props) =>
+    props.profile &&
+    css`
+      height: 200px;
+      width: 200px;
+      border-radius: 100px;
+
+      @media (max-width: 768px) {
+        height: auto;
+      }
+    `}
 `;
 
 const StyledImage = styled.img`
@@ -98,6 +113,13 @@ const StyledImage = styled.img`
     css`
       height: 84px;
       width: 84px;
+    `}
+  ${(props) =>
+    props.profile &&
+    css`
+      width: 200px;
+      height: 200px;
+      border-radius: 100px;
     `}
 `;
 

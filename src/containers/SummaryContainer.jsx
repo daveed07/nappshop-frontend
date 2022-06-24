@@ -4,6 +4,7 @@ import CheckoutItem from "@components/CheckoutItem";
 import Title from "@components/micro-components/Title";
 import Input from "@components/micro-components/Input";
 import Button from "@components/micro-components/Button";
+import StyledSummary from "@styles/styledSummary";
 import colors from "@constants/colors";
 
 const SummaryContainer = (props) => {
@@ -15,7 +16,7 @@ const SummaryContainer = (props) => {
   const shipping = props.shipping || costs.shipping;
   const tax = props.tax || costs.tax;
   return (
-    <div className="checkout-summary-container">
+    <StyledSummary>
       <Title size="xxxlarge" color={colors.black}>Summary</Title>
       <div className="checkout-summary-items">
         <div className="checkout-summary">
@@ -50,7 +51,7 @@ const SummaryContainer = (props) => {
           </p>
         </div>
       </div>
-    </div>
+    </StyledSummary>
   );
 };
 

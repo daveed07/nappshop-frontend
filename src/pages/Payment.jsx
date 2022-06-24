@@ -3,12 +3,12 @@ import SummaryContainer from "../containers/SummaryContainer";
 import Title from "@components/micro-components/Title";
 import SubTitle from "@components/micro-components/SubTitle";
 import Button from "@components/micro-components/Button";
-import "@styles/payment.scss";
+import StyledPayment from "@styles/styledPayment";
 import colors from "@constants/colors";
 
 const Payment = () => {
   return (
-    <div className="payment">
+    <StyledPayment>
       <div className="payment-container">
         <div className="payment-form-container">
           <Title size="xxxlarge" color={colors.black}>
@@ -56,7 +56,7 @@ const Payment = () => {
         </div>
         <SummaryContainer />
       </div>
-    </div>
+    </StyledPayment>
   );
 };
 

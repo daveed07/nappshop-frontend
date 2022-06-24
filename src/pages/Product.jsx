@@ -13,7 +13,7 @@ import CartFill from "@components/svg-components/CartFill";
 import BagFill from "@components/svg-components/BagFill";
 import Truck from "@components/svg-components/Truck";
 import useGetProducts from '@hooks/useGetProducts';
-import "@styles/product.scss";
+import StyledProduct from "@styles/styledProduct";
 import colors from "@constants/colors";
 
 const API = 'https://api.escuelajs.co/api/v1/products';
@@ -61,7 +61,7 @@ const Product = () => {
       {loadingPage ? (
         <ReactLoading className="react-loader" type="spin" color={colors.main} height={50} width={50} />
       ) : (
-        <div className="product">
+        <StyledProduct>
           <div className="product-container">
             <section className="product-section">
               <Image display loading={loadingImage} src={product.images} alt={product.name} id={product.id} />
@@ -97,7 +97,7 @@ const Product = () => {
               </div>
             </section>
           </div>
-        </div>
+        </StyledProduct>
       )}
     </>
   );
