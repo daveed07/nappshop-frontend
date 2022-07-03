@@ -98,7 +98,7 @@ const Product = () => {
                     </p>
                     <p className="previous-price">
                       (<span>$</span>
-                      {product.compare_at_price})
+                      {product.previousPrice})
                     </p>
                   </p>
                   <div className="product-shipping">
