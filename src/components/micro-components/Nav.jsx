@@ -17,7 +17,7 @@ const Nav = (props) => {
                 <StyledLi>
                   <StyledA
                     color={props.color}
-                    href={`/categories/${item.id}/products?Limit=100&offset=100`}
+                    href={`/products/filterByBrand${item.text}`}
                   >
                     {item.text}
                   </StyledA>

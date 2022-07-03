@@ -16,7 +16,7 @@ import useGetProducts from '@hooks/useGetProducts';
 import StyledProduct from "@styles/styledProduct";
 import colors from "@constants/colors";
 
-const API = 'https://api.escuelajs.co/api/v1/products';
+const API = process.env.REACT_APP_API;
 
 const Product = () => {
   const { id } = useParams();
@@ -64,14 +64,14 @@ const Product = () => {
         <StyledProduct>
           <div className="product-container">
             <section className="product-section">
-              <Image display loading={loadingImage} src={product.images} alt={product.name} id={product.id} />
+              <Image display loading={loadingImage} src={product.image} alt={product.name} id={product.id} />
               <div className="product-info">
-                <Title size="xxxxlarge" color={colors.black}>{product.title}</Title>
-                <SubTitle size="large" color={colors.black}>Vacuum cleaner</SubTitle>
+                <Title size="xxxxlarge" color={colors.black}>{product.name}</Title>
+                <SubTitle size="large" color={colors.black}>{product.type}</SubTitle>
                 <div className="price-container">
                   <p className="product-price">
                     <p className="current-price"><span>$</span>{product.price}</p>
-                    <p className="previous-price">(<span>$</span>1200)</p>
+                    <p className="previous-price">(<span>$</span>{product.compare_at_price})</p>
                   </p>
                   <div className="product-shipping">
                     <div>

@@ -34,10 +34,10 @@ const ProductItem = ({ product }) => {
 
   return (
     <StyledProductItem>
-      <Image loading={loading} src={product.images[0]} alt={product.title} id={product.id} />
+      <Image loading={loading} src={product.image} alt={product.name} id={product.id} />
       <div className="text-container">
         <a href={`/product/${product.id}`}>
-          <Title size="medium" color={colors.main}>{product.title}</Title>
+          <Title size="medium" color={colors.main}>{product.name}</Title>
         </a>
         <SubTitle size="small" color={colors.black}>{`${product.description.substring(0, 40)}...`}</SubTitle>
         <div className="product-bottom">

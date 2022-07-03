@@ -6,14 +6,14 @@ import StyledProductContainer from "@styles/styledProductContainer";
 import StyledLoading from "@styles/styledLoading";
 import colors from "@constants/colors";
 
-const API = "https://api.escuelajs.co/api/v1";
+const API = process.env.REACT_APP_API;
 
 const ProductContainer = () => {
-  const { category } = useParams();
+  const { brand } = useParams();
   const products = useGetProducts(
     `${API}${
-      category
-        ? `/categories/${category}/products?Limit=100&offset=100`
+      brand
+        ? `/products?filterByBrand=${brand}`
         : "/products"
     }`
   );
