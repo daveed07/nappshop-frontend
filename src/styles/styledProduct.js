@@ -4,6 +4,7 @@ import sizes from '@constants/fontSizes';
 
 const styledProduct = styled.div`
   padding: 64px 4%;
+  position: relative;
 
   @media (max-width: 768px) {
     width: 100%;
