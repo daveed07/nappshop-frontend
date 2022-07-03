@@ -69,6 +69,9 @@ module.exports = {
     new MiniCssExtractPlugin({
       filename: "styles.css",
     }),
+    new webpack.DefinePlugin({
+      "process.env.REACT_APP_API": JSON.stringify(process.env.REACT_APP_API),
+    }),
   ],
   devServer: {
     historyApiFallback: true,
