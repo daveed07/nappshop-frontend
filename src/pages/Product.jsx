@@ -20,7 +20,7 @@ const API = process.env.REACT_APP_API;
 
 const Product = () => {
   const { id } = useParams();
-  const product = useGetProducts(`${API}/${id}`);
+  const product = useGetProducts(`${API}/products/${id}`);
 
   const cart = useSelector((state) => state.cart);
   const [loadingPage, setLoadingPage] = useState(true);
