@@ -2,17 +2,17 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { store } from "@redux/store";
-import ReactLoading from 'react-loading';
 import Header from "@components/Header";
 import Image from "@components/micro-components/Image";
 import Title from "@components/micro-components/Title";
 import SubTitle from "@components/micro-components/SubTitle";
 import Button from "@components/micro-components/Button";
+import StyledLoading from "@styles/styledLoading";
 import Cart2 from "@components/svg-components/cart2";
 import CartFill from "@components/svg-components/CartFill";
 import BagFill from "@components/svg-components/BagFill";
 import Truck from "@components/svg-components/Truck";
-import useGetProducts from '@hooks/useGetProducts';
+import useGetProducts from "@hooks/useGetProducts";
 import StyledProduct from "@styles/styledProduct";
 import colors from "@constants/colors";
 
@@ -28,50 +28,78 @@ const Product = () => {
 
   useEffect(() => {
     const loadPage = async () => {
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      setLoadingPage(loading => !loading);
-    }
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+      setLoadingPage((loading) => !loading);
+    };
     loadPage();
   }, []);
 
   useEffect(() => {
     const loadImage = async () => {
-      await new Promise(resolve => setTimeout(resolve, 2000));
-      setLoadingImage(loading => !loading);
-    }
+      await new Promise((resolve) => setTimeout(resolve, 2000));
+      setLoadingImage((loading) => !loading);
+    };
     loadImage();
   }, []);
 
   const handleAddToCart = (article) => {
-    if (!cart.find(item => item.id === article.id)) {
-      store.dispatch({ type: "ADD_TO_CART", payload: { ...product, quantity: 1 } });
+    if (!cart.find((item) => item.id === article.id)) {
+      store.dispatch({
+        type: "ADD_TO_CART",
+        payload: { ...product, quantity: 1 },
+      });
       setCartIcon(addedToCartIcon);
     } else {
       store.dispatch({ type: "REMOVE_FROM_CART", payload: product });
       setCartIcon(addToCartIcon);
     }
-  }
+  };
   const handleBuyNow = (article) => {
-    store.dispatch({ type: "ADD_TO_CART", payload: { ...product, quantity: 1 } });
+    store.dispatch({
+      type: "ADD_TO_CART",
+      payload: { ...product, quantity: 1 },
+    });
     window.location.href = "/checkout";
-  }
+  };
   return (
     <>
       <Header />
       {loadingPage ? (
-        <ReactLoading className="react-loader" type="spin" color={colors.main} height={50} width={50} />
+        <StyledLoading
+          className="react-loader"
+          type="spin"
+          color={colors.main}
+          height={50}
+          width={50}
+        />
       ) : (
         <StyledProduct>
           <div className="product-container">
             <section className="product-section">
-              <Image display loading={loadingImage} src={product.image} alt={product.name} id={product.id} />
+              <Image
+                display
+                loading={loadingImage}
+                src={product.image}
+                alt={product.name}
+                id={product.id}
+              />
               <div className="product-info">
-                <Title size="xxxxlarge" color={colors.black}>{product.name}</Title>
-                <SubTitle size="large" color={colors.black}>{product.type}</SubTitle>
+                <Title size="xxxxlarge" color={colors.black}>
+                  {product.name}
+                </Title>
+                <SubTitle size="large" color={colors.black}>
+                  {product.type}
+                </SubTitle>
                 <div className="price-container">
                   <p className="product-price">
-                    <p className="current-price"><span>$</span>{product.price}</p>
-                    <p className="previous-price">(<span>$</span>{product.compare_at_price})</p>
+                    <p className="current-price">
+                      <span>$</span>
+                      {product.price}
+                    </p>
+                    <p className="previous-price">
+                      (<span>$</span>
+                      {product.compare_at_price})
+                    </p>
                   </p>
                   <div className="product-shipping">
                     <div>
@@ -82,18 +110,26 @@ const Product = () => {
                   </div>
                 </div>
                 <div className="button-container">
-                  <Button secondary buy onClick={() => handleAddToCart(product)}>
-                    {cart.find(item => item.id === product.id) ? <CartFill width={24} height={24} /> : <Cart2 width={24} height={24} />}
-                    {cart.find(item => item.id === product.id) ? "Added to cart" : "Add to cart"}
+                  <Button
+                    secondary
+                    buy
+                    onClick={() => handleAddToCart(product)}
+                  >
+                    {cart.find((item) => item.id === product.id) ? (
+                      <CartFill width={24} height={24} />
+                    ) : (
+                      <Cart2 width={24} height={24} />
+                    )}
+                    {cart.find((item) => item.id === product.id)
+                      ? "Added to cart"
+                      : "Add to cart"}
                   </Button>
                   <Button primary buy onClick={() => handleBuyNow()}>
                     <BagFill width={24} height={24} />
                     Buy now
                   </Button>
                 </div>
-                <p className="product-description">
-                  {product.description}
-                </p>
+                <p className="product-description">{product.description}</p>
               </div>
             </section>
           </div>
