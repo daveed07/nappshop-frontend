@@ -22,6 +22,8 @@ const Product = () => {
   const { id } = useParams();
   const product = useGetProducts(`${API}/products/${id}`);
 
+  console.log(product);
+
   const cart = useSelector((state) => state.cart);
   const [loadingPage, setLoadingPage] = useState(true);
   const [loadingImage, setLoadingImage] = useState(true);
@@ -97,8 +99,8 @@ const Product = () => {
                       {product.price}
                     </p>
                     <p className="previous-price">
-                      <span>$</span>
-                      {product.previousPrice}
+                      (<span>$</span>
+                      {product.previousPrice})
                     </p>
                   </p>
                   <div className="product-shipping">
