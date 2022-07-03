@@ -35,7 +35,7 @@ const Image = (props) => {
 };
 
 const StyledFigure = styled.figure`
-  height: 180px;
+  height: auto;
   @media (max-width: 768px) {
     height: 105px;
   }
