@@ -37,6 +37,10 @@ const styledProduct = styled.div`
     grid-template-columns: 1fr 1fr;
     align-items: center;
     margin-top: 24px;
+
+    @media (max-width: 768px) {
+      width: 100%;
+    }
   }
 
   .current-price {
