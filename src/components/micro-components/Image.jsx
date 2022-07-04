@@ -46,7 +46,7 @@ const StyledFigure = styled.figure`
       height: 375px;
       text-align: right;
       @media (max-width: 768px) {
-        height: 240px;
+        height: auto;
         text-align: center;
       }
     `}
