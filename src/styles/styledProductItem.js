@@ -14,7 +14,7 @@ const StyledProductItem = styled.div`
 
   @media (max-width: 768px) {
     figure {
-      height: 105px;
+      height: auto;
     }
   }
 `;
