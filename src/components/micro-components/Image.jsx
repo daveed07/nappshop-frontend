@@ -36,8 +36,10 @@ const Image = (props) => {
 
 const StyledFigure = styled.figure`
   height: auto;
+  min-height: 200px;
   @media (max-width: 768px) {
     height: auto;
+    min-height: 105px;
   }
   position: relative;
   ${(props) =>
@@ -47,6 +49,7 @@ const StyledFigure = styled.figure`
       text-align: right;
       @media (max-width: 768px) {
         height: auto;
+        min-height: 300px;
         text-align: center;
       }
     `}
