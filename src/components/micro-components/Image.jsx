@@ -70,6 +70,7 @@ const StyledFigure = styled.figure`
     css`
       height: 84px;
       width: 84px;
+      max-height: 84px;
       @media (max-width: 768px) {
         height: 84px;
       }
