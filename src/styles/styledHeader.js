@@ -7,6 +7,7 @@ const StyledHeader = styled.header`
   display: grid;
   grid-template-columns: 1fr 4fr 1fr;
   padding: 0 2%;
+  background: ${colors.white};
 
   .cart-container {
     position: relative;

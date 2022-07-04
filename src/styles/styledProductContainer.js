@@ -13,9 +13,8 @@ const StyledProductContainer = styled.div`
   }
 
   @media (max-width: 768px) {
-    .product-container {
-      padding: 96px 0;
-    }
+    padding: 96px 0;
+    
     .product-wrapper {
       grid-template-columns: repeat(auto-fill, 140px);
     }

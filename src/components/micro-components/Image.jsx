@@ -37,7 +37,7 @@ const Image = (props) => {
 const StyledFigure = styled.figure`
   height: auto;
   @media (max-width: 768px) {
-    height: 105px;
+    height: auto;
   }
   position: relative;
   ${(props) =>
