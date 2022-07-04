@@ -57,6 +57,7 @@ const StyledFigure = styled.figure`
     props.cart &&
     css`
       height: 100px;
+      min-height: 100px;
       width: 100px;
     `}
   ${(props) =>

@@ -33,7 +33,7 @@ const CartItem = ({ product }) => {
 
   return (
     <StyledCartItem>
-      <Image cart src={product.images[0]} alt={product.name} id={product.id} loading={isLoading} />
+      <Image cart src={product.image} alt={product.name} id={product.id} loading={isLoading} />
       <div className="info">
         <Title size="medium" color={colors.black}>{product.title}</Title>
         <SubTitle className="description" size="small" color={colors.greyDark}>{`${product.description.substring(0, 40)}...`}</SubTitle>
