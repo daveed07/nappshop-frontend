@@ -35,7 +35,7 @@ const CartItem = ({ product }) => {
     <StyledCartItem>
       <Image cart src={product.image} alt={product.name} id={product.id} loading={isLoading} />
       <div className="info">
-        <Title size="medium" color={colors.black}>{product.title}</Title>
+        <Title size="medium" color={colors.black}>{product.name}</Title>
         <SubTitle className="description" size="small" color={colors.greyDark}>{`${product.description.substring(0, 40)}...`}</SubTitle>
         <SubTitle size="medium" color={colors.black}>${product.price * product.quantity}</SubTitle>
       </div>
