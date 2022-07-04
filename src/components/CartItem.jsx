@@ -37,8 +37,7 @@ const CartItem = ({ product }) => {
       <div className="info">
         <Title size="medium" color={colors.black}>{product.name}</Title>
         <SubTitle className="description" size="small" color={colors.greyDark}>{`${product.description.substring(0, 40)}...`}</SubTitle>
-        <SubTitle size="medium" color={colors.black}>${product.price * product.quantity}</SubTitle>
-      </div>
+        <SubTitle size="medium" color={colors.black}>${parseFloat(product.price * product.quantity).toFixed(2)}</SubTitle>
       <div className="actions">
         <div className="quantity">
           <Button secondary icon onClick={() => {
