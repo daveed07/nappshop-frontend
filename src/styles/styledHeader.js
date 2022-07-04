@@ -41,7 +41,7 @@ const StyledHeader = styled.header`
     position: fixed;
     z-index: 1;
     grid-template-columns: 1fr 1fr;
-    background: var(--white);
+    background: ${colors.white};
 
     .menu-container {
       display: block;
