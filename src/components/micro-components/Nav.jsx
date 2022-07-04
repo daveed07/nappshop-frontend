@@ -33,7 +33,6 @@ const Nav = (props) => {
 const StyledNav = styled.nav`
   display: flex;
   justify-content: center;
-  align-items: center;
   @media (max-width: 768px) {
     display: ${(props) => (props.mobile ? "flex" : "none")};
   }
