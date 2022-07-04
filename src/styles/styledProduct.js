@@ -95,6 +95,10 @@ const styledProduct = styled.div`
     justify-content: start;
     gap: 16px;
     margin-top: 48px;
+
+    @media (max-width: 768px) {
+      width: 100%;
+    }
   }
 
   .product-description {
