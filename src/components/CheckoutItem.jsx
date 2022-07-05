@@ -22,7 +22,7 @@ const CheckoutItem = ({ product }) => {
       </Image>
       <div className="info">
         <Title size="medium" color={colors.black}>{product.name}</Title>
-        <SubTitle size="medium" color={colors.black}>${product.price * product.quantity}</SubTitle>
+        <SubTitle size="medium" color={colors.black}>${parseFloat(product.price * product.quantity).toFixed(2)}</SubTitle>
       </div>
     </StyledCheckoutItem>
   );
