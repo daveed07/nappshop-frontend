@@ -17,11 +17,11 @@ const CheckoutItem = ({ product }) => {
 
   return (
     <StyledCheckoutItem>
-      <Image checkout src={product.images[0]} alt={product.title} id={product.id} loading={isLoading}>
+      <Image checkout src={product.image} alt={product.name} id={product.id} loading={isLoading}>
         <span className='quantity'>{product.quantity}</span>
       </Image>
       <div className="info">
-        <Title size="medium" color={colors.black}>{product.title}</Title>
+        <Title size="medium" color={colors.black}>{product.name}</Title>
         <SubTitle size="medium" color={colors.black}>${product.price * product.quantity}</SubTitle>
       </div>
     </StyledCheckoutItem>
