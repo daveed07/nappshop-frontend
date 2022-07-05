@@ -39,7 +39,7 @@ const StyledFigure = styled.figure`
   min-height: 200px;
   @media (max-width: 768px) {
     height: auto;
-    min-height: 105px;
+    min-height: auto;
   }
   position: relative;
   ${(props) =>
@@ -66,10 +66,6 @@ const StyledFigure = styled.figure`
       height: 50px;
       min-height: 50px;
       width: 50px;
-      @media (max-width: 768px) {
-        height: 50px
-        min-height: 50px;
-      }
     `}
   ${(props) =>
     props.logo &&
