@@ -64,6 +64,7 @@ const StyledFigure = styled.figure`
     props.checkout &&
     css`
       height: 50px;
+      min-height: 50px;
       width: 50px;
     `}
   ${(props) =>
