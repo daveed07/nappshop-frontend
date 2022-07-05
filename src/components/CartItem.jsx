@@ -45,7 +45,7 @@ const CartItem = ({ product }) => {
             if (product.quantity > 1) {
               handleCartChange(product, product.quantity - 1);
             }
-          }}>
+          }} disabled={product.quantity === 1}>
             <Dash />
           </Button>
           <input type='number' placeholder={
@@ -56,10 +56,10 @@ const CartItem = ({ product }) => {
             }
           }} value={
             cart.find(item => item.id === product.id).quantity
-          }/>
+          } disabled={e.target.value >= product.stock} />
           <Button secondary icon onClick={() => {
             handleCartChange(product, product.quantity + 1);
-          }}>
+          }} disabled={product.quantity >= product.stock}>
             <Plus />
           </Button>
         </div>

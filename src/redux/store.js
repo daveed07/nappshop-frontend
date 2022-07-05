@@ -42,7 +42,7 @@ const reducer = (state = initialState, action) => {
       if (!state.cart.find(item => item.id === action.payload.id)) {
         return {
           ...state,
-          cart: [...state.cart, action.payload],
+          cart: [...state.cart, { ...action.payload, quantity: 1 }],
         };
       }
     case "CHANGE_PRODUCT_QUANTITY":
