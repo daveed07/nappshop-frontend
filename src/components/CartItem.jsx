@@ -56,7 +56,11 @@ const CartItem = ({ product }) => {
             }
           }} value={
             cart.find(item => item.id === product.id).quantity
-          } disabled={e.target.value >= product.stock} />
+          } disabled={e => {
+            if (e.target.value >= product.stock) {
+              return true;
+            }
+          }} />
           <Button secondary icon onClick={() => {
             handleCartChange(product, product.quantity + 1);
           }} disabled={product.quantity >= product.stock}>
