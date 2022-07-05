@@ -54,9 +54,13 @@ const CartItem = ({ product }) => {
             if (e.target.value >= 0) {
               handleCartChange(product, Number(e.target.value));
             }
-          }} value={
-            cart.find(item => item.id === product.id).quantity
-          } disabled={e => {
+          }} value={e => {
+            if (e.target.value > product.stock) {
+              return product.stock;
+            } else {
+              return cart.find(item => item.id === product.id).quantity;
+            }
+          }} disabled={e => {
             if (e.target.value >= product.stock) {
               return true;
             }
