@@ -1,6 +1,7 @@
 import React from "react";
 import { store } from "@redux/store";
 import Button from "@components/micro-components/Button";
+import Input from "@components/micro-components/Input";
 
 const ProfileEdit = ({ user, setEdit, edit }) => {
   const handleSubmit = () => {
@@ -16,12 +17,12 @@ const ProfileEdit = ({ user, setEdit, edit }) => {
   }
   return (
     <div className="profile-edit" >
-      <input className="profile-username-edit" id="username" type="text" placeholder={user.username} />
-      <input className="profile-name-edit" id="name" type="text" placeholder={user.name ? user.name : "Full name"} />
-      <input className="profile-email-edit" id="email" type="text" placeholder={user.email} />
-      <input className="profile-password-edit" id="password" type="text" placeholder={user.password} />
-      <input className="profile-address-edit" id="address" type="text" placeholder={user.address ? user.address : "Address"} />
-      <input className="profile-phone-edit" id="phone" type="text" placeholder={user.phone ? user.phone : "Phone"} />
+      <Input id="username" type="text" placeholder={user.username} />
+      <Input id="name" type="text" placeholder={user.name ? user.name : "Full name"} />
+      <Input id="email" type="email" placeholder={user.email} />
+      <Input id="password" type="password" placeholder={user.password} />
+      <Input id="address" type="text" placeholder={user.address ? user.address : "Address"} />
+      <Input id="phone" type="text" placeholder={user.phone ? user.phone : "Phone"} />
       <Button primary onClick={handleSubmit}>Save</Button>
     </div>
   );

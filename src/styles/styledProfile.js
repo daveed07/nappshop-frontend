@@ -8,6 +8,13 @@ const StyledProfile = styled.div`
   padding-top: 64px;
   text-align: center;
 
+  .profile-edit {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
   @media (max-width: 768px) {
     padding-top: 96px;
   }
