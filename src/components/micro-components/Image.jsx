@@ -66,6 +66,9 @@ const StyledFigure = styled.figure`
       height: 50px;
       min-height: 50px;
       width: 50px;
+      @media (max-width: 768px) {
+        min-height: 50px;
+      }
     `}
   ${(props) =>
     props.logo &&
