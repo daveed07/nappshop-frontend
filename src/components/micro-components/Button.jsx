@@ -51,7 +51,7 @@ const StyledButton = styled.button`
     background: ${props.add || colors.white};
     &:hover {
       border-color: ${colors.mainDark};
-      color: ${colors.mainDark};
+      color: ${colors.white};
     }
   `}
   ${props => props.disabled && css`

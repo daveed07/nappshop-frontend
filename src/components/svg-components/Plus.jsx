@@ -1,4 +1,5 @@
 import React from "react";
+import colors from "@constants/colors";
 
 const Plus = (props) => {
   return (
@@ -6,7 +7,7 @@ const Plus = (props) => {
       xmlns="http://www.w3.org/2000/svg"
       width="16"
       height="16"
-      fill="currentColor"
+      fill={colors.main}
       class="bi bi-plus"
       viewBox="0 0 16 16"
       {...props}

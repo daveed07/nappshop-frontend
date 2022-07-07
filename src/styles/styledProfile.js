@@ -15,6 +15,10 @@ const StyledProfile = styled.div`
     align-items: center;
   }
 
+  .profile-details p {
+    margin-top: 16px;
+  }
+
   @media (max-width: 768px) {
     padding-top: 96px;
   }

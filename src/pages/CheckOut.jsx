@@ -25,7 +25,8 @@ const CheckOut = () => {
   }, []);
 
   const [address, setAddress] = useState(false);
-  const [shipping, setShipping] = useState(0);
+  const [shipping, setShipping] = useState("Free");
+  const [discount, setDiscount] = useState(0);
 
   const subtotal = cart.reduce(
     (acc, curr) => acc + curr.price * curr.quantity,
@@ -67,7 +68,7 @@ const CheckOut = () => {
         });
         store.dispatch({
           type: "SET_COSTS",
-          payload: { subtotal, total, totalWithShipping, shipping, tax },
+          payload: { subtotal, total, totalWithShipping, shipping, tax, discount },
         });
         window.location.href = "/payment";
       }
@@ -133,6 +134,15 @@ const CheckOut = () => {
       setShipping("Free");
     }
   };
+
+  // if user goes back to the previous page, then reset the state.costs
+  useEffect(() => {
+    if (window.location.pathname === "/checkout" || window.location.pathname === "/payment") {
+      store.dispatch({
+        type: "RESET_COSTS",
+      });
+    }
+  }, [cart]);
 
   if (isLoading) {
     return (
@@ -309,6 +319,8 @@ const CheckOut = () => {
             total={total}
             totalWithShipping={totalWithShipping}
             shipping={shipping}
+            discount={discount}
+            setDiscount={setDiscount}
           />
         </div>
       </StyledCheckout>

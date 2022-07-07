@@ -31,15 +31,16 @@ const initialState = {
     subtotal: 0,
     total: 0,
     totalWithShipping: 0,
-    shipping: 0,
+    shipping: "Free",
     tax: 0,
-  }
+    discount: 0,
+  },
 };
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case "ADD_TO_CART":
-      if (!state.cart.find(item => item.id === action.payload.id)) {
+      if (!state.cart.find((item) => item.id === action.payload.id)) {
         return {
           ...state,
           cart: [...state.cart, { ...action.payload, quantity: 1 }],
@@ -63,11 +64,11 @@ const reducer = (state = initialState, action) => {
         ...state,
         cart: state.cart.filter((item) => item.id !== action.payload.id),
       };
-      case "DELETE_CART":
+    case "DELETE_CART":
       return {
         ...state,
         cart: [],
-      }
+      };
     case "SIGN_UP":
       return {
         ...state,
@@ -119,6 +120,18 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         costs: action.payload,
+      };
+    case "RESET_COSTS":
+      return {
+        ...state,
+        costs: {
+          subtotal: 0,
+          total: 0,
+          totalWithShipping: 0,
+          shipping: 0,
+          tax: 0,
+          discount: 0,
+        },
       };
     default:
       return state;
