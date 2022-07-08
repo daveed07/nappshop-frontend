@@ -27,8 +27,8 @@ const StyledCheckoutItem = styled.div`
 
   .info {
     width: 100%;
-    display: grid;
-    grid-template-columns: auto auto;
+    display: flex;
+    justify-content: space-between;
     gap: 24px;
     padding-top: 24px;
   }
