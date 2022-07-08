@@ -137,7 +137,7 @@ const CheckOut = () => {
 
   // if user goes back to the previous page, then reset the state.costs
   useEffect(() => {
-    if (window.location.pathname === "/checkout" || window.location.pathname === "/payment") {
+    if (window.location.pathname === "/cart") {
       store.dispatch({
         type: "RESET_COSTS",
       });
@@ -321,6 +321,7 @@ const CheckOut = () => {
             shipping={shipping}
             discount={discount}
             setDiscount={setDiscount}
+            codeInput
           />
         </div>
       </StyledCheckout>

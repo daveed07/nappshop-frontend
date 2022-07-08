@@ -30,20 +30,22 @@ const SummaryContainer = (props) => {
             <CheckoutItem key={product.id} product={product} />
           ))}
         </div>
-        <div className="discount-code-container">
-          <Input marginBottom="0" type="text" id="discountCode" placeholder="Discount code" />
-          <Button primary icon add={colors.main} onClick={
-            () => {
-              const discountCode = document.getElementById("discountCode").value;
-              const discount = discounts.find(discount => discount.name === discountCode);
-              if (discount) {
-                props.setDiscount(discount.discount);
-              } else {
-                props.setDiscount(0);
+        {props.codeInput && (
+          <div className="discount-code-container">
+            <Input marginBottom="0" type="text" id="discountCode" placeholder="Discount code" />
+            <Button primary icon add={colors.main} onClick={
+              () => {
+                const discountCode = document.getElementById("discountCode").value;
+                const discount = discounts.find(discount => discount.name === discountCode);
+                if (discount) {
+                  props.setDiscount(discount.discount);
+                } else {
+                  props.setDiscount(0);
+                }
               }
-            }
-          }>Apply</Button>
-        </div>
+            }>Apply</Button>
+          </div>
+        )}
         <div className="checkout-summary-prices">
           <div className="checkout-summary-prices-item">
             <p className="checkout-summary-prices-item-title">Subtotal</p>
