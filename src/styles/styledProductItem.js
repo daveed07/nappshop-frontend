@@ -1,10 +1,6 @@
 import styled from 'styled-components';
 
 const StyledProductItem = styled.div`
-  .text-container {
-    margin-top: 24px;
-  }
-
   .product-bottom {
     display: flex;
     justify-content: space-between;
