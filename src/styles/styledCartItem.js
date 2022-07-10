@@ -55,6 +55,7 @@ const StyledCartItem = styled.div`
   };
 
   @media (max-width: 768px) {
+    gap: 12px;
     .description {
       display: none;
     };

@@ -24,6 +24,7 @@ const styledProduct = styled.div`
     @media (max-width: 768px) {
       width: 100%;
       grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 0;
     }
   }
 
@@ -36,7 +37,7 @@ const styledProduct = styled.div`
     display: grid;
     grid-template-columns: 1fr 1fr;
     align-items: center;
-    margin-top: 24px;
+    margin-top: 16px;
 
     @media (max-width: 768px) {
       width: 100%;
@@ -98,7 +99,7 @@ const styledProduct = styled.div`
     display: flex;
     justify-content: start;
     gap: 16px;
-    margin-top: 48px;
+    margin-top: 32px;
 
     @media (max-width: 768px) {
       width: 100%;
@@ -109,7 +110,7 @@ const styledProduct = styled.div`
     width: 80%;
     min-width: 400px;
     font-size: ${sizes.medium};
-    margin-top: 48px;
+    margin-top: 42px;
     line-height: 1.6rem;
 
     @media (max-width: 768px) {

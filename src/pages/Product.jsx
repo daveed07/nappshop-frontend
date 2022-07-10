@@ -104,9 +104,9 @@ const Product = () => {
                   <div className="product-shipping">
                     <div>
                       <Truck width={18} height={18} />
-                      <p>Free shipping</p>
+                      <p>Starts at $4.50</p>
                     </div>
-                    <p>1-2 days delivery</p>
+                    <p>Next day delivery</p>
                   </div>
                 </div>
                 <div className="button-container">

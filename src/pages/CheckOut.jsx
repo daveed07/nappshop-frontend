@@ -27,6 +27,7 @@ const CheckOut = () => {
   const [address, setAddress] = useState(false);
   const [shipping, setShipping] = useState("Free");
   const [discount, setDiscount] = useState(0);
+  const [emptyFields, setEmptyFields] = useState(false);
 
   const subtotal = cart.reduce(
     (acc, curr) => acc + curr.price * curr.quantity,
@@ -57,10 +58,8 @@ const CheckOut = () => {
 
     if (!address) {
       if (firstName === "" || lastName === "" || email === "" || phone === "") {
-        document.getElementById("firstName").classList.add("red-outline");
-        document.getElementById("lastName").classList.add("red-outline");
-        document.getElementById("email").classList.add("red-outline");
-        document.getElementById("phone").classList.add("red-outline");
+        setEmptyFields(true);
+        return;
       } else {
         store.dispatch({
           type: "SET_CONTACT",
@@ -189,19 +188,19 @@ const CheckOut = () => {
                 <div className="checkout-form-input contact-info-form">
                   <div className="contact-info-form-top">
                     <Input type="text" id="firstName" placeholder="First name" onChange={() => {
-                      document.getElementById("firstName").classList.remove("red-outline");
-                    }} />
+                      setEmptyFields(false);
+                    }} emptyFields={emptyFields} />
                     <Input type="text" id="lastName" placeholder="Last name" onChange={() => {
-                      document.getElementById("lastName").classList.remove("red-outline");
-                    }} />
+                      setEmptyFields(false);
+                    }} emptyFields={emptyFields} />
                   </div>
                   <div className="contact-info-form-bottom">
                     <Input type="email" id="email" placeholder="Email" onChange={() => {
-                      document.getElementById("email").classList.remove("red-outline");
-                    }} />
+                      setEmptyFields(false);
+                    }} emptyFields={emptyFields} />
                     <Input type="tel" id="phone" placeholder="Phone" onChange={() => {
-                      document.getElementById("phone").classList.remove("red-outline");
-                    }} />
+                      setEmptyFields(false);
+                    }} emptyFields={emptyFields} />
                   </div>
                   <div className="marketing-checkbox">
                     <Input type="checkbox" id="marketing" />
@@ -258,15 +257,15 @@ const CheckOut = () => {
                       <option value="">Panama</option>
                     </select>
                     <Input type="text" id="address" placeholder="Address" onChange={() => {
-                      document.getElementById("address").classList.remove("red-outline");
-                    }} />
+                      setEmptyFields(false);
+                    }} emptyFields={emptyFields} />
                     <Input type="text" id="address2" placeholder="Street, apartment, etc" onChange={() => {
-                      document.getElementById("address2").classList.remove("red-outline");
-                    }} />
+                      setEmptyFields(false);
+                    }} emptyFields={emptyFields} />
                     <div className="address-form-bottom">
                       <Input type="text" id="city" placeholder="City" onChange={() => {
-                        document.getElementById("city").classList.remove("red-outline");
-                      }} />
+                        setEmptyFields(false);
+                      }} emptyFields={emptyFields} />
                       <select
                         id="region"
                         onChange={() => {

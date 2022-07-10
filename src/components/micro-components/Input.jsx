@@ -44,6 +44,9 @@ const StyledInput = styled.input`
       box-shadow: none;
     }
   `}
+  ${props => props.emptyFields && `
+    border: 2px solid red;
+  `}
 `;
 
 const StyledLabel = styled.label`
