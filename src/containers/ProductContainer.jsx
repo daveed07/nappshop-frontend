@@ -18,6 +18,8 @@ const ProductContainer = () => {
     }`
   );
 
+  console.log(brand);
+
   const [loading, setLoading] = useState(true);
   useEffect(() => {
     const loadData = async () => {
