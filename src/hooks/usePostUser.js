@@ -11,7 +11,14 @@ const usePostUser = (API, body) => {
       .post(API, body)
       .then((response) => {
         setResponse(response);
-        useGetUser(API, response.data.id);
+        axios.get(`${API}/${response.data.id}`).then((response) => {
+          store.dispatch({
+            type: 'SIGN_UP',
+            payload: response.data,
+          });
+        }).catch((error) => {
+          setResponse(error);
+        });
       })
       .catch((error) => {
         setResponse(error);
