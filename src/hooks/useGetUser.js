@@ -11,7 +11,7 @@ const useGetUser = (API, id) => {
       .get(`${API}/${id}`)
       .then((response) => {
         store.dispatch({
-          type: "SET_USER",
+          type: "SIGN_UP",
           payload: response.data,
         });
         setResponse(response);
