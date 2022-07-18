@@ -1,5 +1,6 @@
 import React from 'react';
 import { store } from "@redux/store";
+import axios from 'axios';
 import Header from '@components/Header';
 import Title from "@components/micro-components/Title";
 import SubTitle from "@components/micro-components/SubTitle";
@@ -8,7 +9,6 @@ import Input from "@components/micro-components/Input";
 import Button from '@components/micro-components/Button';
 import StyledLogin from '@styles/styledLogin';
 import colors from "@constants/colors";
-import usePostUser from '../hooks/usePostUser';
 
 const API = `${process.env.REACT_APP_API}/users`;
 
@@ -24,9 +24,25 @@ const Signup = () => {
               email,
               username,
               password,
+              role: 'user',
             }
-            usePostUser(API, body);
-            window.location.href = "/";
+            axios.post(API, body)
+              .then(response => {
+                store.dispatch({
+                  type: "SIGN_UP",
+                  payload: {
+                    id: response.data.id,
+                    username: response.data.user_name,
+                    name: response.data.name,
+                    email: response.data.email,
+                    password: response.data.password,
+                    role: response.data.role,
+                  },
+                });
+                window.location.href = '/';
+              }).catch(error => {
+                setAlert(error.response.data.message);
+              })
           } else {
             setAlert("Passwords do not match");
           }

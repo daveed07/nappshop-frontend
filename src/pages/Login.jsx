@@ -9,22 +9,37 @@ import Input from "@components/micro-components/Input";
 import Button from "@components/micro-components/Button";
 import StyledLogin from "@styles/styledLogin";
 import colors from "@constants/colors";
+import axios from "axios";
+
+const API = `${process.env.REACT_APP_API}/users/login`;
 
 const Login = () => {
   const [alert, setAlert] = useState('');
 
-  const userEmail = useSelector((state) => state.user.email);
-  const userPassword = useSelector((state) => state.user.password);
-
   const handleLogin = (email, password) => {
     if (email && password) {
-      if (email === userEmail && password === userPassword) {
-        store.dispatch({ type: "LOGIN", payload: { email, password } });
-        window.location.href = "/";
-      } else {
-        setAlert("Email or password is incorrect");
+      const body = {
+        email,
+        password,
       }
-    } else {
+      axios.post(API, body)
+        .then(response => {
+          store.dispatch({
+            type: "LOGIN",
+            payload: {
+              id: response.data.id,
+              username: response.data.user_name,
+              name: response.data.name,
+              email: response.data.email,
+              password: response.data.password,
+              role: response.data.role,
+            },
+          });
+          window.location.href = '/';
+        }).catch(error => {
+          setAlert(error.response.error);
+        })
+     } else {
       setAlert("Email and password cannot be empty");
     }
   };
@@ -41,7 +56,7 @@ const Login = () => {
         {alert && <p className="alert">{alert}</p>}
           <Input label type="text" id="email" name="Email" onChange={() => {setAlert('')}}/>
           <Input label type="password" id="password" name="Password" onChange={() => {setAlert('')}}/>
-          <Button primary onClick={() => handleLogin(userEmail, userPassword)}>Log in</Button>
+          <Button primary onClick={() => handleLogin(document.getElementById("email").value, document.getElementById("password").value)}>Log In</Button>
         </Form>
         <a href="/">Forgot my password</a>
         <a href="signup">Sign up</a>
