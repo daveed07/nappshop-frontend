@@ -8,6 +8,9 @@ import Input from "@components/micro-components/Input";
 import Button from '@components/micro-components/Button';
 import StyledLogin from '@styles/styledLogin';
 import colors from "@constants/colors";
+import usePostUser from '../hooks/usePostUser';
+
+const API = `${process.env.REACT_APP_API_URL}/users`;
 
 const Signup = () => {
   const [alert, setAlert] = React.useState('');
@@ -17,7 +20,12 @@ const Signup = () => {
       if (email.includes('@') && email.includes('.')) {
         if (password.length >= 8) {
           if (password === rePassword) {
-            store.dispatch({ type: "SIGN_UP", payload: { email, username, password } });
+            const body = {
+              email,
+              username,
+              password,
+            }
+            usePostUser(API, body);
             window.location.href = "/";
           } else {
             setAlert("Passwords do not match");
