@@ -10,7 +10,7 @@ import StyledLogin from '@styles/styledLogin';
 import colors from "@constants/colors";
 import usePostUser from '../hooks/usePostUser';
 
-const API = `${process.env.REACT_APP_API_URL}/users`;
+const API = `${process.env.REACT_APP_API}/users`;
 
 const Signup = () => {
   const [alert, setAlert] = React.useState('');
