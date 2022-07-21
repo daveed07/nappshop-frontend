@@ -37,7 +37,7 @@ const Login = () => {
           });
           window.location.href = '/';
         }).catch(error => {
-          setAlert(error.response.error);
+          setAlert(error.response.data.error);
         })
      } else {
       setAlert("Email and password cannot be empty");

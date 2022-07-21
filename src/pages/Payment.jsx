@@ -1,4 +1,6 @@
 import React from "react";
+import axios from "axios";
+import { useSelector } from "react-redux";
 import SummaryContainer from "../containers/SummaryContainer";
 import Title from "@components/micro-components/Title";
 import SubTitle from "@components/micro-components/SubTitle";
@@ -7,6 +9,31 @@ import StyledPayment from "@styles/styledPayment";
 import colors from "@constants/colors";
 
 const Payment = () => {
+  const { cart } = useSelector((state) => state.cart);
+  const { user } = useSelector((state) => state.user);
+  const { contact } = useSelector((state) => state.contact);
+  const { shipping } = useSelector((state) => state.shipping);
+  const { costs } = useSelector((state) => state.costs);
+
+  const submitOrder = async () => {
+    const order = {
+      user_id: user.id,
+      total: costs.totalWithShipping,
+      products: cart.map((product) => ({
+        product_id: product.id,
+        quantity: product.quantity,
+      })),
+      country: "panama",
+      city: shipping.city,
+      address1: shipping.address1,
+      address2: shipping.address2,
+      province: shipping.region,
+    };
+
+    const response = await axios.post("/api/orders", order);
+    console.log(response);
+  };
+
   return (
     <StyledPayment>
       <div className="payment-container">
@@ -42,7 +69,9 @@ const Payment = () => {
               </div>
             </div>
             <div className="payment-form-buttons">
-              <Button primary>Finish order</Button>
+              <Button primary onClick={submitOrder}>
+                Finish order
+              </Button>
               <Button
                 secondary
                 onClick={() => {
