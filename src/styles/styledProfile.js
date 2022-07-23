@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import colors from '@constants/colors';
 
 const StyledProfile = styled.div`
   display: grid;
@@ -7,6 +6,7 @@ const StyledProfile = styled.div`
   justify-content: center;
   padding: 0 4%;
   padding-top: 64px;
+  padding-bottom: 64px;
   gap: 48px;
   text-align: center;
 
