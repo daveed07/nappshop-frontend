@@ -7,6 +7,7 @@ const StyledOrderItem = styled.div`
   border: 1px solid ${colors.greyLight};
   border-radius: 4px;
   padding: 16px;
+  gap: 16px;
 
   .info {
     display: flex;
