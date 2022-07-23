@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Title from "@components/micro-components/Title";
 import SubTitle from "@components/micro-components/SubTitle";
 import Down from "@components/svg-components/Down";
+import Up from "@components/svg-components/Up"
 import OrderItem from "@components/OrderItem";
 import StyledOrder from "@styles/styledOrder";
 import colors from "@constants/colors";
@@ -24,7 +25,7 @@ const Order = ({ order }) => {
           <SubTitle size="medium" color={colors.black}>
             ${order.total}
           </SubTitle>
-          <Down onClick={() => setToggle(!toggle)} />
+          {toggle ? <Down onClick={() => setToggle(!toggle)}/> : <Up onClick={() => setToggle(!toggle)}/>}
         </div>
       </div>
       {toggle && (
