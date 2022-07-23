@@ -38,6 +38,7 @@ const StyledHeader = styled.header`
   }
 
   @media (max-width: 768px) {
+    width: 100%;
     position: fixed;
     z-index: 1;
     grid-template-columns: 1fr 1fr;

@@ -1,11 +1,13 @@
 import styled from 'styled-components';
+import colors from '@constants/colors';
 
 const StyledProfile = styled.div`
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
   justify-content: center;
-  align-items: center;
+  padding: 0 4%;
   padding-top: 64px;
+  gap: 48px;
   text-align: center;
 
   .profile-edit {
@@ -19,7 +21,13 @@ const StyledProfile = styled.div`
     margin-top: 16px;
   }
 
+  button {
+    max-width: 200px;
+  }
+
   @media (max-width: 768px) {
+    display: flex;
+    flex-wrap: wrap;
     padding-top: 96px;
   }
 
@@ -27,10 +35,9 @@ const StyledProfile = styled.div`
     margin-bottom: 24px;
   }
 
-  .container {
+  .profile-container {
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
   }
 

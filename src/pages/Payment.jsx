@@ -8,19 +8,21 @@ import Button from "@components/micro-components/Button";
 import StyledPayment from "@styles/styledPayment";
 import colors from "@constants/colors";
 
+const API = `${process.env.REACT_APP_API}/orders`;
+
 const Payment = () => {
-  const { cart } = useSelector((state) => state.cart);
-  const { user } = useSelector((state) => state.user);
-  const { contact } = useSelector((state) => state.contact);
-  const { shipping } = useSelector((state) => state.shipping);
-  const { costs } = useSelector((state) => state.costs);
+  const cart = useSelector((state) => state.cart);
+  const user = useSelector((state) => state.user);
+  const contact = useSelector((state) => state.contact);
+  const shipping = useSelector((state) => state.shipping);
+  const costs = useSelector((state) => state.costs);
 
   const submitOrder = async () => {
     const order = {
       user_id: user.id,
-      total: costs.totalWithShipping,
+      total: parseInt(costs.totalWithShipping),
       products: cart.map((product) => ({
-        product_id: product.id,
+        id: product.id,
         quantity: product.quantity,
       })),
       country: "panama",
@@ -30,7 +32,7 @@ const Payment = () => {
       province: shipping.region,
     };
 
-    const response = await axios.post("/api/orders", order);
+    const response = await axios.post(API, order);
     console.log(response);
   };
 
