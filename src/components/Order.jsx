@@ -9,6 +9,8 @@ import colors from "@constants/colors";
 const Order = ({ order }) => {
   const [toggle, setToggle] = useState(false);
 
+  const date = new Date (order.date_created).toLocaleDateString();
+
   return (
     <StyledOrder toggle={toggle}>
       <div className="order-header">
@@ -17,7 +19,7 @@ const Order = ({ order }) => {
         </Title>
         <div className="order-header-info">
           <SubTitle size="medium" color={colors.black}>
-            Placed on 12/12/2019
+            Placed on {date}
           </SubTitle>
           <SubTitle size="medium" color={colors.black}>
             ${order.total}
