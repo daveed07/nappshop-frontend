@@ -1,5 +1,6 @@
 import React from "react";
 import axios from "axios";
+import { store } from "@redux/store";
 import { useSelector } from "react-redux";
 import SummaryContainer from "../containers/SummaryContainer";
 import Title from "@components/micro-components/Title";
@@ -32,8 +33,14 @@ const Payment = () => {
       province: shipping.region,
     };
 
-    const response = await axios.post(API, order);
-    console.log(response);
+    const response = await axios.post(API, order)
+      .then((res) => {
+        store.dispatch({ type: "DELETE_CART" });
+        store.dispatch({ type: "RESET_COSTS" });
+        store.dispatch({ type: "RESET_SHIPPING" });
+        store.dispatch({ type: "RESET_CONTACT" });
+      })
+      .catch((err) => console.log(err));
   };
 
   return (

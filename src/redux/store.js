@@ -10,7 +10,10 @@ const initialState = {
     username: "",
     name: "",
     email: "",
-    address: "",
+    address1: "",
+    address2: "",
+    city: "",
+    region: "",
     phone: "",
     role: "",
   },
@@ -97,7 +100,7 @@ const reducer = (state = initialState, action) => {
           role: "",
         },
       };
-    case "EDIT_PROFILE":
+    case "SET_USER":
       return {
         ...state,
         user: {
@@ -130,6 +133,26 @@ const reducer = (state = initialState, action) => {
           shipping: 0,
           tax: 0,
           discount: 0,
+        },
+      };
+    case "RESET_SHIPPING":
+      return {
+        ...state,
+        shipping: {
+          address1: "",
+          address2: "",
+          city: "",
+          region: "",
+        },
+      };
+    case "RESET_CONTACT":
+      return {
+        ...state,
+        contact: {
+          firstName: "",
+          lastName: "",
+          email: "",
+          phone: "",
         },
       };
     default:
