@@ -17,6 +17,8 @@ const Payment = () => {
   const contact = useSelector((state) => state.contact);
   const shipping = useSelector((state) => state.shipping);
   const costs = useSelector((state) => state.costs);
+  // asign value of radio button that is checked
+  const [paymentMethod, setPaymentMethod] = React.useState("");
 
   const submitOrder = async () => {
     const order = {
@@ -31,6 +33,7 @@ const Payment = () => {
       address1: shipping.address1,
       address2: shipping.address2,
       province: shipping.region,
+      payment_method: paymentMethod,
     };
 
     const response = await axios.post(API, order)
@@ -64,15 +67,21 @@ const Payment = () => {
               <p className="payment-form-row-title">Payment method</p>
               <div className="payment-form-row-content-container">
                 <div className="payment-form-row-content">
-                  <input type="radio" name="payment-method" id="cash" />
+                  <input type="radio" name="payment-method" id="cash"
+                    onChange={(e) => setPaymentMethod(e.target.value)}
+                  />
                   <label htmlFor="cash">Cash</label>
                 </div>
                 <div className="payment-form-row-content">
-                  <input type="radio" name="payment-method" id="credit-card" />
+                  <input type="radio" name="payment-method" id="credit-card"
+                  onChange={(e) => setPaymentMethod(e.target.value)}
+                  />
                   <label htmlFor="credit-card">Credit card</label>
                 </div>
                 <div className="payment-form-row-content">
-                  <input type="radio" name="payment-method" id="yappy" />
+                  <input type="radio" name="payment-method" id="yappy"
+                  onChange={(e) => setPaymentMethod(e.target.value)}
+                  />
                   <label htmlFor="yappy">Yappy</label>
                 </div>
               </div>

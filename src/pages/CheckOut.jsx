@@ -42,11 +42,6 @@ const CheckOut = () => {
     document.getElementById("lastName").value = user.name.split(" ")[1] || "";
     document.getElementById("email").value = user.email;
     document.getElementById("phone").value = user.phone || "";
-
-    document.getElementById("firstName").disabled = true;
-    document.getElementById("lastName").disabled = true;
-    document.getElementById("email").disabled = true;
-    document.getElementById("phone").disabled = true;
   };
 
   const handlePayment = () => {

@@ -26,17 +26,12 @@ const Login = () => {
         .then(response => {
           store.dispatch({
             type: "LOGIN",
-            payload: {
-              id: response.data.id,
-              username: response.data.user_name,
-              name: response.data.name,
-              email: response.data.email,
-              role: response.data.role,
-            },
+            payload: response.data.user,
           });
+          console.log(response.data)
           window.location.href = '/';
         }).catch(error => {
-          setAlert(error.response.data.error);
+          setAlert(error.response.data);
         })
      } else {
       setAlert("Email and password cannot be empty");

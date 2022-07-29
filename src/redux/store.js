@@ -92,13 +92,22 @@ const reducer = (state = initialState, action) => {
         isLoggedIn: false,
         user: {
           id: "",
+          username: "",
           name: "",
           email: "",
-          password: "",
-          address: "",
+          address1: "",
+          address2: "",
+          city: "",
+          region: "",
           phone: "",
           role: "",
         },
+        contact: {
+          firstName: "",
+          lastName: "",
+          email: "",
+          phone: "",
+        }
       };
     case "SET_USER":
       return {

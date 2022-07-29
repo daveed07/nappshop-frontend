@@ -1,17 +1,16 @@
 import React from "react";
+import Title from "@components/micro-components/Title";
 import SubTitle from "@components/micro-components/SubTitle";
 
 const ProfileDetails = ({ user }) => {
   return (
     <div className="profile-details">
-      <SubTitle size="xxlarge" color="black">{user.username}</SubTitle>
-      <SubTitle size="medium" color="black">{user.name}</SubTitle>
-      <SubTitle size="medium" color="black">{user.address1}</SubTitle>
-      <SubTitle size="medium" color="black">{user.address2}</SubTitle>
-      <SubTitle size="medium" color="black">{user.city}</SubTitle>
-      <SubTitle size="medium" color="black">{user.region}</SubTitle>
-      <SubTitle size="medium" color="black">{user.phone}</SubTitle>
-      <SubTitle size="medium" color="black">{user.email}</SubTitle>
+      <Title size="xxlarge" color="black">{user.username}</Title>
+      <SubTitle size="medium" color="black">Name: <span>{user.name}</span></SubTitle>
+      <SubTitle size="medium" color="black">Email: <span>{user.email}</span></SubTitle>
+      <SubTitle size="medium" color="black">Address: <span>{user.address1}, {user.address2}</span></SubTitle>
+      <SubTitle size="medium" color="black">Region: <span>{user.city}, {user.region}</span></SubTitle>
+      <SubTitle size="medium" color="black">Phone: <span>{user.phone}</span></SubTitle>
     </div>
   );
 };

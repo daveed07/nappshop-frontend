@@ -17,8 +17,21 @@ const StyledProfile = styled.div`
     align-items: center;
   }
 
+  .profile-edit .button-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+  }
+
   .profile-details p {
     margin-top: 16px;
+    text-align: left;
+  }
+
+  span {
+    font-weight: 400;
   }
 
   button {

@@ -12,6 +12,7 @@ const ProfileEdit = ({ user, setEdit, edit }) => {
       username: document.getElementById("username").value,
       name: document.getElementById("name").value,
       email: document.getElementById("email").value,
+      phone: document.getElementById("phone").value,
       address1: document.getElementById("address1").value,
       address2: document.getElementById("address2").value,
       city: document.getElementById("city").value,
@@ -20,7 +21,8 @@ const ProfileEdit = ({ user, setEdit, edit }) => {
     axios.patch(`${API}/users/${user.id}`, userData)
       .then((res) => {
         alert(res.data.message);
-        store.dispatch({ type: "SET_USER", user: res.data.result });
+        store.dispatch({ type: "SET_USER", payload: res.data.user });
+        console.log(res.data.user);
         setEdit(!edit);
       })
       .catch((err) => alert(err));
@@ -35,7 +37,10 @@ const ProfileEdit = ({ user, setEdit, edit }) => {
       <Input id="city" type="text" placeholder={user.city ? user.city : "City"} />
       <Input id="region" type="text" placeholder={user.region ? user.region : "Province"} />
       <Input id="phone" type="text" placeholder={user.phone ? user.phone : "Phone"} />
-      <Button primary onClick={handleSubmit}>Save</Button>
+      <div className="button-container">
+        <Button secondary onClick={() => setEdit(!edit)}>Cancel</Button>
+        <Button primary onClick={handleSubmit}>Save</Button>
+      </div>
     </div>
   );
 }
