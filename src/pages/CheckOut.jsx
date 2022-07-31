@@ -45,7 +45,7 @@ const CheckOut = () => {
   };
 
   const handleUseShippingInfo = () => {
-    document.getElementById("address1").value = user.address1;
+    document.getElementById("address").value = user.address1;
     document.getElementById("address2").value = user.address2;
     document.getElementById("city").value = user.city;
     document.getElementById("region").value = user.region;
