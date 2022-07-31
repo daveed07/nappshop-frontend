@@ -44,6 +44,13 @@ const CheckOut = () => {
     document.getElementById("phone").value = user.phone || "";
   };
 
+  const handleUseShippingInfo = () => {
+    document.getElementById("address1").value = user.address1;
+    document.getElementById("address2").value = user.address2;
+    document.getElementById("city").value = user.city;
+    document.getElementById("region").value = user.region;
+  }
+
   const handlePayment = () => {
     // evaluate every single input individually and if it is empty, then return false
     const firstName = document.getElementById("firstName").value;
@@ -254,7 +261,14 @@ const CheckOut = () => {
             <Form width="auto">
             {address ? (
                 <div className="checkout-form-row">
+                  <div className="checkout-form-top-text">
                   <p className="checkout-form-row-title">Address</p>
+                  {isLoggedIn ? (
+                      <a href="#" onClick={() => handleUseShippingInfo()}>
+                        Use account information
+                      </a>
+                    ): null}
+                  </div>
                   <div className="checkout-form-input address-form">
                     <select>
                       <option value="">Panama</option>
