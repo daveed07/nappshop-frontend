@@ -103,7 +103,7 @@ const Product = () => {
                   </p>
                   <div className="product-shipping">
                     <div>
-                      <Truck width={18} height={18} />
+                      <Truck />
                       <p>Starts at $4.50</p>
                     </div>
                     <p>Next day delivery</p>

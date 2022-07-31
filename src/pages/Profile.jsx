@@ -27,17 +27,19 @@ const Profile = () => {
     <>
       <Header/>
       <StyledProfile toggle={toggle}>
-        <div className="profile-container">
-          <Title size="xxlarge" color={colors.black}>Profile</Title>
-          <Image profile src={user.avatar || image} alt="avatar" />
-            {edit ? (
-              <ProfileEdit user={user} setEdit={setEdit} edit={edit}/>
-            ) : (
-              <ProfileDetails user={user}/>
-            )}
-          {!edit && <Button primary onClick={handleEdit}>Edit profile</Button>}
+        <div className='wrapper'>
+          <div className="profile-container">
+            <Title size="xxlarge" color={colors.black}>Profile</Title>
+            <Image profile src={user.avatar || image} alt="avatar" />
+              {edit ? (
+                <ProfileEdit user={user} setEdit={setEdit} edit={edit}/>
+              ) : (
+                <ProfileDetails user={user}/>
+              )}
+            {!edit && <Button primary onClick={handleEdit}>Edit profile</Button>}
+          </div>
+          <OrdersContainer/>
         </div>
-        <OrdersContainer/>
       </StyledProfile>
     </>
   );

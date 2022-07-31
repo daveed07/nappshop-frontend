@@ -5,7 +5,6 @@ const StyledProductItem = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-top: 16px;
   }
 
   @media (max-width: 768px) {

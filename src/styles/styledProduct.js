@@ -18,8 +18,12 @@ const styledProduct = styled.div`
   .product-section {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 48px;
+    gap: 64px;
     justify-content: center;
+
+    @media (max-width: 992px) {
+      gap: 48px;
+    }
 
     @media (max-width: 768px) {
       width: 100%;
@@ -37,7 +41,7 @@ const styledProduct = styled.div`
     display: grid;
     grid-template-columns: 1fr 1fr;
     align-items: center;
-    margin-top: 16px;
+    margin-top: 24px;
 
     @media (max-width: 768px) {
       width: 100%;
@@ -68,19 +72,21 @@ const styledProduct = styled.div`
   }
 
   .product-shipping {
-    padding: 20px;
+    width: fit-content;
+    padding: 20px 24px;
     background: ${colors.greyLight};
     border-radius: 8px;
   }
 
   .product-shipping div {
-    display: grid;
-    grid-template-columns: auto auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
   }
 
   .product-shipping p {
     font-size: var(--md);
-    margin-left: 8px;
   }
 
   .product-shipping div p {
@@ -90,8 +96,7 @@ const styledProduct = styled.div`
   }
 
   .product-shipping > p {
-    margin-top: 8px;
-    margin-left: 24px
+    text-align: right;
   }
 
   .button-container {
@@ -99,7 +104,7 @@ const styledProduct = styled.div`
     display: flex;
     justify-content: start;
     gap: 16px;
-    margin-top: 32px;
+    margin-top: 48px;
 
     @media (max-width: 768px) {
       width: 100%;

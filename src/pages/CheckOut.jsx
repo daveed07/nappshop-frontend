@@ -101,6 +101,14 @@ const CheckOut = () => {
             region: region,
           },
         });
+        store.dispatch({
+          type: "SET_CONTACT",
+          payload: { firstName, lastName, email, phone },
+        });
+        store.dispatch({
+          type: "SET_COSTS",
+          payload: { subtotal, total, totalWithShipping, shipping, tax, discount },
+        });
         window.location.href = "/payment";
       }
     }

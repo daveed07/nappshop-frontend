@@ -68,19 +68,19 @@ const Payment = () => {
               <div className="payment-form-row-content-container">
                 <div className="payment-form-row-content">
                   <input type="radio" name="payment-method" id="cash"
-                    onChange={(e) => setPaymentMethod(e.target.value)}
+                    onChange={(e) => setPaymentMethod(e.target.id)}
                   />
                   <label htmlFor="cash">Cash</label>
                 </div>
                 <div className="payment-form-row-content">
                   <input type="radio" name="payment-method" id="credit-card"
-                  onChange={(e) => setPaymentMethod(e.target.value)}
+                  onChange={(e) => setPaymentMethod(e.target.id)}
                   />
                   <label htmlFor="credit-card">Credit card</label>
                 </div>
                 <div className="payment-form-row-content">
                   <input type="radio" name="payment-method" id="yappy"
-                  onChange={(e) => setPaymentMethod(e.target.value)}
+                  onChange={(e) => setPaymentMethod(e.target.id)}
                   />
                   <label htmlFor="yappy">Yappy</label>
                 </div>

@@ -5,6 +5,7 @@ import StyledMenu from '@styles/styledMenu';
 import colors from '@constants/colors';
 
 const MobileMenu = () => {
+
   return (
     <StyledMenu>
       <div>

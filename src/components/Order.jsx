@@ -25,16 +25,26 @@ const Order = ({ order }) => {
           <SubTitle size="medium" color={colors.black}>
             ${order.total}
           </SubTitle>
-          {toggle ? <Down onClick={() => setToggle(!toggle)}/> : <Up onClick={() => setToggle(!toggle)}/>}
+          {toggle ? <Up onClick={() => setToggle(!toggle)}/> : <Down onClick={() => setToggle(!toggle)}/>}
         </div>
       </div>
       {toggle && (
         <div className="order-body">
-          <div className="shipping-address">
-            <p>{order.shipping_address.country}</p>
-            <p>{order.shipping_address.address1}, {order.shipping_address.address2}</p>
-            <p>{order.shipping_address.city}</p>
-            <p>{order.shipping_address.province}</p>
+          <div className="order-body-info">
+            <div className="shipping-address">
+              {order.shipping_address.address1 ? (
+                <>
+                  <p>{order.shipping_address.address1}, {order.shipping_address.address2}</p>
+                  <p>{order.shipping_address.city}</p>
+                  <p>{order.shipping_address.province}</p>
+                </>
+              ) : (
+                <p>Store pickup</p>
+              )}
+            </div>
+            <div className="payment-method">
+              <p>{order.payment_method}</p>
+            </div>
           </div>
           <div className="order-items">
             {order.order_items.map((item) => (

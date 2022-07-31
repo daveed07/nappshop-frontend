@@ -8,6 +8,7 @@ const StyledHeader = styled.header`
   grid-template-columns: 1fr 4fr 1fr;
   padding: 0 2%;
   background: ${colors.white};
+  border-bottom: 1px solid ${colors.greyLight};
 
   .cart-container {
     position: relative;
@@ -36,6 +37,11 @@ const StyledHeader = styled.header`
   .menu-container {
     display: none;
   }
+
+  .cRFNmF {
+    justify-content: flex-end;
+  }
+
 
   @media (max-width: 768px) {
     width: 100%;

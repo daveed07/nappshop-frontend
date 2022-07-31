@@ -39,7 +39,7 @@ const StyledFigure = styled.figure`
   min-height: 200px;
   @media (max-width: 768px) {
     height: auto;
-    min-height: auto;
+    min-height: 140px;
   }
   position: relative;
   ${(props) =>
@@ -59,6 +59,12 @@ const StyledFigure = styled.figure`
       height: 100px;
       min-height: 100px;
       width: 100px;
+
+      @media (max-width: 768px) {
+        height: 100px;
+        min-height: 100px;
+        max-height: 100px;
+      }
     `}
   ${(props) =>
     props.checkout &&
@@ -66,6 +72,12 @@ const StyledFigure = styled.figure`
       height: 50px;
       min-height: 50px;
       width: 50px;
+
+      @media (max-width: 768px) {
+        height: 50px;
+        min-height: 50px;
+        max-height: 50px;
+      }
     `}
   ${(props) =>
     props.logo &&
@@ -73,8 +85,11 @@ const StyledFigure = styled.figure`
       height: 84px;
       width: 84px;
       min-height: 84px;
+
       @media (max-width: 768px) {
         height: 84px;
+        min-height: 84px;
+        max-height: 84px;
       }
     `}
   ${(props) =>

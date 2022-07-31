@@ -9,7 +9,7 @@ const StyledProductContainer = styled.div`
     display: grid;
     grid-template-columns: repeat(auto-fill, 240px);
     justify-content: center;
-    gap: 34px;
+    gap: 24px;
   }
 
   @media (max-width: 768px) {

@@ -8,16 +8,15 @@ import colors from "@constants/colors";
 const OrderItem = ({ item }) => {
   return (
     <StyledOrderItem>
-      <Image checkout src={item.product_image} alt="product_image" />
+      <Image checkout src={item.product_image} alt="product_image">
+        <span className='quantity'>{item.quantity}</span>
+      </Image>
       <div className="info">
         <Title size="medium" color={colors.black}>
           {item.product_name}
         </Title>
         <SubTitle size="medium" color={colors.black}>
           ${item.product_price}
-        </SubTitle>
-        <SubTitle size="medium" color={colors.black}>
-          quantity: {item.quantity}
         </SubTitle>
       </div>
     </StyledOrderItem>

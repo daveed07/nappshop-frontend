@@ -6,6 +6,8 @@ import Image from "@components/micro-components/Image";
 import Nav from "@components/micro-components/Nav";
 import Button from "@components/micro-components/Button";
 import logo from "@logos/jada-logo.png";
+import PersonFill from "./svg-components/PersonFill";
+import BoxArrowRight from "./svg-components/BoxArrowRight";
 import Cart from "./svg-components/Cart";
 import List from "./svg-components/List";
 import StyledHeader from "@styles/styledHeader";
@@ -18,7 +20,6 @@ const Header = () => {
 
   const handleLogout = () => {
     store.dispatch({ type: "LOGOUT" });
-    window.location.reload();
   };
 
   return (
@@ -41,11 +42,15 @@ const Header = () => {
         wrap="wrap"
         color={colors.black}
       />
-      <Nav justifyContent="center" gap="14px" wrap="nowrap" color={colors.black} mobile>
+      <Nav justifyContent="center" gap="24px" wrap="nowrap" color={colors.black} mobile>
         {isLoggedIn ? (
           <>
-            <a href="/profile">Profile</a>
-            <p onClick={handleLogout}>Logout</p>
+            <a href="/profile">
+              <PersonFill />
+            </a>
+            <a href="/">
+              <BoxArrowRight onClick={handleLogout} />
+            </a>
           </>
         ) : (
           <>
