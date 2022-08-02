@@ -1,6 +1,6 @@
 import React from "react";
 import axios from "axios";
-import * as yappy from "yappy-js-front-sdk"
+import * as yappy from "yappy-js-front-sdk.d.ts";
 import { store } from "@redux/store";
 import { useSelector } from "react-redux";
 import SummaryContainer from "../containers/SummaryContainer";
