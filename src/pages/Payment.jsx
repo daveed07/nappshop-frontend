@@ -1,6 +1,5 @@
 import React from "react";
 import axios from "axios";
-import * as yappy from "yappy-js-front-sdk/dist/index";
 import { store } from "@redux/store";
 import { useSelector } from "react-redux";
 import SummaryContainer from "../containers/SummaryContainer";
@@ -90,15 +89,9 @@ const Payment = () => {
               </div>
             </div>
             <div className="payment-form-buttons">
-              {paymentMethod === "yappy" ? (
-                <div id="Yappy_Checkout_Button">
-
-                </div>
-              ) : (
-                <Button primary onClick={submitOrder}>
-                  Finish order
-                </Button>
-              )}
+              <Button primary onClick={submitOrder}>
+                Finish order
+              </Button>
               <Button
                 secondary
                 onClick={() => {
