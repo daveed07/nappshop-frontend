@@ -1,5 +1,7 @@
 import React from "react";
 import axios from "axios";
+// import yappy module from yappy with ES6 syntax
+import * as yappy from "yappy-js-front-sdk/dist/index";
 import { store } from "@redux/store";
 import { useSelector } from "react-redux";
 import SummaryContainer from "../containers/SummaryContainer";
@@ -20,7 +22,7 @@ const Payment = () => {
   // asign value of radio button that is checked
   const [paymentMethod, setPaymentMethod] = React.useState("");
 
-  yappy.setButton(false, "Yappy_Checkout_Button", "brand")
+  yappy.setButton(false, "Yappy_Checkout_Button", "brand");
 
   const submitOrder = async () => {
     const order = {
