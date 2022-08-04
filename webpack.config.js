@@ -12,7 +12,7 @@ module.exports = {
   },
   mode: "development",
   resolve: {
-    extensions: [".js", ".jsx", ".ts"],
+    extensions: [".js", ".jsx", ".ts", ".tsx"],
     alias: {
       "@components": path.resolve(__dirname, "src/components"),
       "@containers": path.resolve(__dirname, "src/containers"),
@@ -31,7 +31,7 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.(js|jsx)$/,
+        test: /\.(js|jsx|ts|tsx)$/,
         exclude: /node_modules/,
         use: {
           loader: "babel-loader",
