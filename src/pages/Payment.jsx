@@ -32,7 +32,7 @@ const Payment = () => {
       subtotal: parseFloat(costs.subtotal),
       shipping: parseInt(costs.shipping) || 0,
       discount: parseInt(costs.discount),
-      taxes: parseInt(costs.tax),
+      taxes: parseFloat(costs.tax),
       products: cart.map((product) => ({
         id: product.id,
         quantity: product.quantity,
