@@ -1,11 +1,11 @@
 import React from "react";
 import axios from "axios";
-import * as yappy from "../../yappy-js-front-sdk-1.1.200/package/dist/index";
 import { store } from "@redux/store";
 import { useSelector } from "react-redux";
 import SummaryContainer from "../containers/SummaryContainer";
 import Title from "@components/micro-components/Title";
 import SubTitle from "@components/micro-components/SubTitle";
+import Input from "@components/micro-components/Input";
 import Button from "@components/micro-components/Button";
 import StyledPayment from "@styles/styledPayment";
 import colors from "@constants/colors";
@@ -21,12 +21,18 @@ const Payment = () => {
   // asign value of radio button that is checked
   const [paymentMethod, setPaymentMethod] = React.useState("");
 
-  yappy.setButton(false, "Yappy_Checkout_Button", "brand");
+  console.log(costs)
 
   const submitOrder = async () => {
+    const yappyPhone = document.getElementById("yappyPhone").value;
+
     const order = {
       user_id: user.id,
-      total: parseInt(costs.totalWithShipping),
+      total: parseFloat(costs.totalWithShipping),
+      subtotal: parseFloat(costs.subtotal),
+      shipping: parseInt(costs.shipping) || 0,
+      discount: parseInt(costs.discount),
+      taxes: parseInt(costs.tax),
       products: cart.map((product) => ({
         id: product.id,
         quantity: product.quantity,
@@ -38,6 +44,12 @@ const Payment = () => {
       province: shipping.region,
       payment_method: paymentMethod,
     };
+
+    if (yappyPhone !== "") {
+      order.yappyPhone = yappyPhone;
+    }
+
+    console.log(order);
 
     const response = await axios.post(API, order)
       .then((res) => {
@@ -70,27 +82,38 @@ const Payment = () => {
               <p className="payment-form-row-title">Payment method</p>
               <div className="payment-form-row-content-container">
                 <div className="payment-form-row-content">
-                  <input type="radio" name="payment-method" id="cash"
+                  <div className="payment-info-form">
+                    <input type="radio" name="payment-method" id="cash"
+                      onChange={(e) => setPaymentMethod(e.target.id)}
+                    />
+                    <label htmlFor="cash">Cash</label>
+                  </div>
+                </div>
+                <div className="payment-form-row-content">
+                  <div className="payment-info-form">
+                    <input type="radio" name="payment-method" id="credit-card"
                     onChange={(e) => setPaymentMethod(e.target.id)}
-                  />
-                  <label htmlFor="cash">Cash</label>
+                    />
+                    <label htmlFor="credit-card">Credit card</label>
+                  </div>
                 </div>
                 <div className="payment-form-row-content">
-                  <input type="radio" name="payment-method" id="credit-card"
-                  onChange={(e) => setPaymentMethod(e.target.id)}
-                  />
-                  <label htmlFor="credit-card">Credit card</label>
-                </div>
-                <div className="payment-form-row-content">
-                  <input type="radio" name="payment-method" id="yappy"
-                  onChange={(e) => setPaymentMethod(e.target.id)}
-                  />
-                  <label htmlFor="yappy">Yappy</label>
+                  <div className="payment-info-form">
+                    <input type="radio" name="payment-method" id="yappy"
+                    onChange={(e) => setPaymentMethod(e.target.id)}
+                    />
+                    <label htmlFor="yappy">Yappy</label>
+                  </div>
+                  {paymentMethod === "yappy" && (
+                    <div className="payment-info-form  yappy">
+                      <Input type="text" id="yappyPhone" placeholder="Phone Number" label name="Input your Yappy Phone Number" />
+                    </div>
+                  )}
                 </div>
               </div>
             </div>
             <div className="payment-form-buttons">
-              <Button primary onClick={submitOrder}>
+              <Button Button primary onClick={submitOrder}>
                 Finish order
               </Button>
               <Button

@@ -35,12 +35,23 @@ const StyledPayment = styled.div`
   }
 
   .payment-form-row-content {
+    border: 1px solid ${colors.grey};
+    border-radius: 8px;
+  }
+
+  .payment-info-form {
     display: flex;
     align-items: center;
     gap: 8px;
     padding: 16px;
-    border: 1px solid ${colors.grey};
-    border-radius: 8px;
+  }
+
+  .yappy {
+    display: block;
+  }
+
+  .yappy label {
+    color: ${colors.black};
   }
 
   .payment-form-row-content input {
@@ -51,6 +62,14 @@ const StyledPayment = styled.div`
     border: 1px solid;
     accent-color: var(--main-color);
     cursor: pointer;
+  }
+
+  .payment-info-form input[type=text] {
+    width: 100%;
+    height: 48px;
+    max-width: 320px;
+    border: 1px solid ${colors.grey};
+    border-radius: 8px;
   }
 
   .payment-form-row-content label {
