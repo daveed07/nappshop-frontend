@@ -6,7 +6,7 @@ import Input from "@components/micro-components/Input";
 
 const API = process.env.REACT_APP_API;
 
-const ProfileEdit = ({ user, setEdit, edit }) => {
+const ProfileEdit = ({ user, setEdit, edit, setOpen, setMessage }) => {
   const handleSubmit = () => {
     const userData = {
       username: document.getElementById("username").value,
@@ -20,12 +20,15 @@ const ProfileEdit = ({ user, setEdit, edit }) => {
     }
     axios.patch(`${API}/users/${user.id}`, userData)
       .then((res) => {
-        alert(res.data.message);
         store.dispatch({ type: "SET_USER", payload: res.data.user });
-        console.log(res.data.user);
         setEdit(!edit);
+        setOpen(true);
+        setMessage(res.data.message);
       })
-      .catch((err) => alert(err));
+      .catch((err) => {
+        setOpen(true);
+        setMessage(err.response.data.message);
+      });
   }
   return (
     <div className="profile-edit" >

@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import colors from '@constants/colors';
 
 const StyledProfile = styled.div`
+  position: relative;
   display: flex;
   justify-content: center;
   height: auto;

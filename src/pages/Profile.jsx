@@ -1,22 +1,23 @@
-import React, { useState } from 'react';
-import Header from '@components/Header';
+import React, { useState } from "react";
+import Header from "@components/Header";
 import { useSelector } from "react-redux";
-import ProfileEdit from '@components/ProfileEdit';
-import ProfileDetails from '@components/ProfileDetails';
+import ProfileEdit from "@components/ProfileEdit";
+import ProfileDetails from "@components/ProfileDetails";
 import Title from "@components/micro-components/Title";
-import SubTitle from "@components/micro-components/SubTitle";
 import Image from "@components/micro-components/Image";
-import Button from '@components/micro-components/Button';
-import Down from '@components/svg-components/Down';
-import OrdersContainer from '@containers/OrdersContainer';
-import StyledProfile from '@styles/styledProfile';
-import colors from '@constants/colors';
+import Button from "@components/micro-components/Button";
+import OrdersContainer from "@containers/OrdersContainer";
+import Modal from "@components/Modal";
+import StyledProfile from "@styles/styledProfile";
+import colors from "@constants/colors";
 
-const image = "https://images.unsplash.com/photo-1518791841217-8f162f1e1131?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60";
+const image =
+  "https://images.unsplash.com/photo-1518791841217-8f162f1e1131?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60";
 
 const Profile = () => {
   const [edit, setEdit] = useState(false);
-  const [toggle, setToggle] = useState(false);
+  const [open, setOpen] = useState(false);
+  const [message, setMessage] = useState("");
   const user = useSelector((state) => state.user);
 
   const handleEdit = () => {
@@ -25,24 +26,40 @@ const Profile = () => {
 
   return (
     <>
-      <Header/>
-      <StyledProfile toggle={toggle}>
-        <div className='wrapper'>
+      <Header />
+      <StyledProfile>
+        <Modal open={open} setOpen={setOpen}>
+          <p>{message}</p>
+        </Modal>
+        <div className="wrapper">
           <div className="profile-container">
-            <Title size="xxlarge" color={colors.black}>Profile</Title>
+            <Title size="xxlarge" color={colors.black}>
+              Profile
+            </Title>
             <Image profile src={user.avatar || image} alt="avatar" />
-              {edit ? (
-                <ProfileEdit user={user} setEdit={setEdit} edit={edit}/>
-              ) : (
-                <ProfileDetails user={user}/>
-              )}
-            {!edit && <Button primary onClick={handleEdit}>Edit profile</Button>}
+            {edit ? (
+              <ProfileEdit
+                user={user}
+                setEdit={setEdit}
+                edit={edit}
+                open={open}
+                setOpen={setOpen}
+                setMessage={setMessage}
+              />
+            ) : (
+              <ProfileDetails user={user} />
+            )}
+            {!edit && (
+              <Button primary onClick={handleEdit}>
+                Edit profile
+              </Button>
+            )}
           </div>
-          <OrdersContainer/>
+          <OrdersContainer />
         </div>
       </StyledProfile>
     </>
   );
-}
+};
 
 export default Profile;

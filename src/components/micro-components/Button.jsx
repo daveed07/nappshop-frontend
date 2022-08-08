@@ -54,17 +54,17 @@ const StyledButton = styled.button`
       color: ${colors.white};
     }
   `}
+  ${props => props.buy && css`
+    height: auto;
+    padding: 16px 24px;
+    margin: 0;
+  `}
   ${props => props.disabled && css`
     color: ${colors.main};
     background-color: ${colors.greyLight};
     &:hover {
       background-color: ${colors.greyLight};
     }
-  `}
-  ${props => props.buy && css`
-    height: auto;
-    padding: 16px 24px;
-    margin: 0;
   `}
 `
 

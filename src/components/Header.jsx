@@ -24,7 +24,7 @@ const Header = () => {
 
   return (
     <StyledHeader>
-      <Image logo src={logo} alt="Jada Logo" />
+      <Image logo src={logo} alt="logo" />
       <Nav
         items={[
           { id: 1, text: "iRobot" },
@@ -63,7 +63,7 @@ const Header = () => {
             <Cart width={24} height={24} />
             {cart.length > 0 ? (
               <span className="quantity">{cart.length}</span>
-            ) : null}
+            ) : false}
           </div>
         </a>
         <div className="menu-container">
