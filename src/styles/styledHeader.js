@@ -38,10 +38,9 @@ const StyledHeader = styled.header`
     display: none;
   }
 
-  .cRFNmF {
+  .cRFNmF, .klGUuZ {
     justify-content: flex-end;
   }
-
 
   @media (max-width: 768px) {
     width: 100%;

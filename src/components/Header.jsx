@@ -42,7 +42,7 @@ const Header = () => {
         wrap="wrap"
         color={colors.black}
       />
-      <Nav justifyContent="center" gap="24px" wrap="nowrap" color={colors.black} mobile>
+      <Nav justifyContent="center" gap="24px" wrap="nowrap" color={colors.black} mobile >
         {isLoggedIn ? (
           <>
             <a href="/profile">

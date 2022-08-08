@@ -28,7 +28,7 @@ const CartContainer = () => {
             Items: <span>{cart.length}</span>
           </p>
           <p>
-            Total: <span>${totalPrice}</span>
+            Total: <span>${parseFloat(totalPrice).toFixed(2)}</span>
           </p>
           <p className="clean-cart" onClick={() => handleDeleteCart()}>
             Clean cart
