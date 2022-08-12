@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import { store } from "@redux/store";
 import { useSelector } from "react-redux";
@@ -9,6 +9,7 @@ import Input from "@components/micro-components/Input";
 import Button from "@components/micro-components/Button";
 import StyledPayment from "@styles/styledPayment";
 import colors from "@constants/colors";
+import whatsappText from "../utils/whatsappText";
 
 const API = `${process.env.REACT_APP_API}/orders`;
 
@@ -19,9 +20,11 @@ const Payment = () => {
   const shipping = useSelector((state) => state.shipping);
   const costs = useSelector((state) => state.costs);
   // asign value of radio button that is checked
-  const [paymentMethod, setPaymentMethod] = React.useState("");
+  const [paymentMethod, setPaymentMethod] = useState("");
+  const [buttonText, setButtonText] = useState("Finish order");
 
   console.log(costs)
+  console.log(contact)
 
   const submitOrder = async () => {
     const yappyPhone = document.getElementById("yappyPhone").value;
@@ -84,7 +87,10 @@ const Payment = () => {
                 <div className="payment-form-row-content">
                   <div className="payment-info-form">
                     <input type="radio" name="payment-method" id="cash"
-                      onChange={(e) => setPaymentMethod(e.target.id)}
+                      onChange={(e) => {
+                        setPaymentMethod(e.target.id);
+                        setButtonText("Finish order");
+                      }}
                     />
                     <label htmlFor="cash">Cash</label>
                   </div>
@@ -92,7 +98,10 @@ const Payment = () => {
                 <div className="payment-form-row-content">
                   <div className="payment-info-form">
                     <input type="radio" name="payment-method" id="credit-card"
-                    onChange={(e) => setPaymentMethod(e.target.id)}
+                    onChange={(e) => {
+                      setPaymentMethod(e.target.id);
+                      setButtonText("Finish order");
+                    }}
                     />
                     <label htmlFor="credit-card">Credit card</label>
                   </div>
@@ -100,22 +109,33 @@ const Payment = () => {
                 <div className="payment-form-row-content">
                   <div className="payment-info-form">
                     <input type="radio" name="payment-method" id="yappy"
-                    onChange={(e) => setPaymentMethod(e.target.id)}
+                    onChange={(e) => {
+                      setPaymentMethod(e.target.id);
+                      setButtonText("Finish order on WhatsApp");
+                    }}
                     />
                     <label htmlFor="yappy">Yappy</label>
                   </div>
                   {paymentMethod === "yappy" && (
                     <div className="payment-info-form  yappy">
-                      <Input type="text" id="yappyPhone" placeholder="Phone Number" label name="Input your Yappy Phone Number" />
+                      <Input type="text" id="yappyPhone" placeholder="Phone Number" label name="Input your phone number ot finish order on Whatsapp" />
                     </div>
                   )}
                 </div>
               </div>
             </div>
             <div className="payment-form-buttons">
-              <Button Button primary onClick={submitOrder}>
-                Finish order
-              </Button>
+              {buttonText === "Finish order" ? (
+                <Button Button primary onClick={submitOrder}>
+                  {buttonText}
+                </Button>
+              ) : (
+                <a href={`https://wa.me/66748034?text=${whatsappText({cart, costs, shipping, contact})}`} target="_blank" rel="noopener noreferrer">
+                <Button Button primary onClick={submitOrder}>
+                  {buttonText}
+                </Button>
+                </a>
+              )}
               <Button
                 secondary
                 onClick={() => {

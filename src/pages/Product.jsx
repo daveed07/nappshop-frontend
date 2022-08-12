@@ -82,6 +82,7 @@ const Product = () => {
                 src={product.image}
                 alt={product.name}
                 id={product.id}
+                nohref
               />
               <div className="product-info">
                 <Title size="xxxxlarge" color={colors.black}>

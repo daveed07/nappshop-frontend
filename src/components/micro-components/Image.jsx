@@ -14,6 +14,18 @@ const Image = (props) => {
           height={50}
           width={50}
         />
+      ) : (props.nohref ? (
+          <>
+          <StyledImage
+            src={props.src}
+            alt={props.alt}
+            display={props.display}
+            cart={props.cart}
+            checkout={props.checkout}
+            profile={props.profile}
+          />
+          {props.children}
+          </>
       ) : (
         <a href={
           `${props.logo ? "/" : "/products/" + props.id}` ||
@@ -29,7 +41,7 @@ const Image = (props) => {
           />
           {props.children}
         </a>
-      )}
+      ))}
     </StyledFigure>
   );
 };

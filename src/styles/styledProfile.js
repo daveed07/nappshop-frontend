@@ -59,6 +59,33 @@ const StyledProfile = styled.div`
     max-width: 200px;
   }
 
+  figure {
+    position: relative;
+  }
+
+  .image-overlay {
+    display: none;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 50%;
+  }
+
+  label {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+  }
+
+  figure:hover .image-overlay {
+    display: block;
+  }
+
   @media (max-width: 992px) {
     .wrapper {
       width: 100%;

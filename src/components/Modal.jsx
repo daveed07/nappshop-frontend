@@ -1,6 +1,6 @@
-import React from 'react';
-import StyledModal from '@styles/styledModal';
-import X from './svg-components/X';
+import React from "react";
+import StyledModal from "@styles/styledModal";
+import X from "./svg-components/X";
 
 const Modal = ({ children, open, setOpen }) => {
   const handleClose = () => setOpen(false);
@@ -11,11 +11,11 @@ const Modal = ({ children, open, setOpen }) => {
           <div className="modal-header">
             <X onClick={handleClose} />
           </div>
-          {children}
+          <div className="modal-body">{children}</div>
         </div>
       </div>
     </StyledModal>
   );
-}
+};
 
 export default Modal;
