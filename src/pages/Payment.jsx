@@ -130,7 +130,7 @@ const Payment = () => {
                   {buttonText}
                 </Button>
               ) : (
-                <a href={`https://wa.me/66748034?text=${whatsappText({cart, costs, shipping, contact})}`} target="_blank" rel="noopener noreferrer">
+                <a href={`https://wa.me/+50766748034?text=${whatsappText({cart, costs, shipping, contact})}`} target="_blank" rel="noopener noreferrer">
                 <Button Button primary onClick={submitOrder}>
                   {buttonText}
                 </Button>
