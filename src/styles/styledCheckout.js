@@ -2,6 +2,11 @@ import styled from 'styled-components';
 import colors from '@constants/colors';``
 
 const StyledCheckout = styled.div`
+  .account-info {
+    color: ${colors.main};
+    font-weight: 500;
+    cursor: pointer;
+  }
   .checkout-container {
     width: 100%;
     height: 100vh;

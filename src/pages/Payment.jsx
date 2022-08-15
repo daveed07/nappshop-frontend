@@ -19,23 +19,16 @@ const Payment = () => {
   const contact = useSelector((state) => state.contact);
   const shipping = useSelector((state) => state.shipping);
   const costs = useSelector((state) => state.costs);
-  // asign value of radio button that is checked
   const [paymentMethod, setPaymentMethod] = useState("");
   const [buttonText, setButtonText] = useState("Finish order");
 
-  console.log(costs)
-  console.log(contact)
+  console.log(costs);
+  console.log(contact);
 
-  const submitOrder = async () => {
-    const yappyPhone = document.getElementById("yappyPhone").value;
-
+  const submitOrder = async (open) => {
     const order = {
       user_id: user.id,
       total: parseFloat(costs.totalWithShipping),
-      subtotal: parseFloat(costs.subtotal),
-      shipping: parseInt(costs.shipping) || 0,
-      discount: parseInt(costs.discount),
-      taxes: parseFloat(costs.tax),
       products: cart.map((product) => ({
         id: product.id,
         quantity: product.quantity,
@@ -48,18 +41,26 @@ const Payment = () => {
       payment_method: paymentMethod,
     };
 
-    if (yappyPhone !== "") {
-      order.yappyPhone = yappyPhone;
-    }
-
     console.log(order);
 
-    const response = await axios.post(API, order)
+    const response = await axios
+      .post(API, order)
       .then((res) => {
         store.dispatch({ type: "DELETE_CART" });
         store.dispatch({ type: "RESET_COSTS" });
         store.dispatch({ type: "RESET_SHIPPING" });
         store.dispatch({ type: "RESET_CONTACT" });
+        if (open) {
+          window.open(
+            `https://wa.me/+50766731685?text=${whatsappText({
+              cart,
+              costs,
+              shipping,
+              contact,
+              order_id: res.data.order_id,
+            })}`
+          );
+        }
       })
       .catch((err) => console.log(err));
   };
@@ -86,7 +87,10 @@ const Payment = () => {
               <div className="payment-form-row-content-container">
                 <div className="payment-form-row-content">
                   <div className="payment-info-form">
-                    <input type="radio" name="payment-method" id="cash"
+                    <input
+                      type="radio"
+                      name="payment-method"
+                      id="cash"
                       onChange={(e) => {
                         setPaymentMethod(e.target.id);
                         setButtonText("Finish order");
@@ -97,28 +101,40 @@ const Payment = () => {
                 </div>
                 <div className="payment-form-row-content">
                   <div className="payment-info-form">
-                    <input type="radio" name="payment-method" id="credit-card"
-                    onChange={(e) => {
-                      setPaymentMethod(e.target.id);
-                      setButtonText("Finish order");
-                    }}
+                    <input
+                      type="radio"
+                      name="payment-method"
+                      id="credit-card"
+                      onChange={(e) => {
+                        setPaymentMethod(e.target.id);
+                        setButtonText("Finish order");
+                      }}
                     />
                     <label htmlFor="credit-card">Credit card</label>
                   </div>
                 </div>
                 <div className="payment-form-row-content">
                   <div className="payment-info-form">
-                    <input type="radio" name="payment-method" id="yappy"
-                    onChange={(e) => {
-                      setPaymentMethod(e.target.id);
-                      setButtonText("Finish order on WhatsApp");
-                    }}
+                    <input
+                      type="radio"
+                      name="payment-method"
+                      id="yappy"
+                      onChange={(e) => {
+                        setPaymentMethod(e.target.id);
+                        setButtonText("Finish order on WhatsApp");
+                      }}
                     />
                     <label htmlFor="yappy">Yappy</label>
                   </div>
                   {paymentMethod === "yappy" && (
                     <div className="payment-info-form  yappy">
-                      <Input type="text" id="yappyPhone" placeholder="Phone Number" label name="Input your phone number ot finish order on Whatsapp" />
+                      <Input
+                        type="text"
+                        id="yappyPhone"
+                        placeholder="Phone Number"
+                        label
+                        name="Input your phone number ot finish order on Whatsapp"
+                      />
                     </div>
                   )}
                 </div>
@@ -126,15 +142,13 @@ const Payment = () => {
             </div>
             <div className="payment-form-buttons">
               {buttonText === "Finish order" ? (
-                <Button Button primary onClick={submitOrder}>
+                <Button Button primary onClick={() => submitOrder(false)}>
                   {buttonText}
                 </Button>
               ) : (
-                <a href={`https://wa.me/+50766748034?text=${whatsappText({cart, costs, shipping, contact})}`} target="_blank" rel="noopener noreferrer">
-                <Button Button primary onClick={submitOrder}>
+                <Button Button primary onClick={() => submitOrder(true)}>
                   {buttonText}
                 </Button>
-                </a>
               )}
               <Button
                 secondary

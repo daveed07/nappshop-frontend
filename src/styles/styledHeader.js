@@ -52,6 +52,8 @@ const StyledHeader = styled.header`
     .menu-container {
       display: block;
     }
+    .cRFNmF ul, .klGUuZ ul {
+      gap: 0 16px;
   }
 `;
 

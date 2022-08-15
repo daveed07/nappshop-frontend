@@ -31,7 +31,7 @@ const Login = () => {
           console.log(response.data)
           window.location.href = '/';
         }).catch(error => {
-          setAlert(error.response.data);
+          setAlert(error.response.data.message);
         })
      } else {
       setAlert("Email and password cannot be empty");

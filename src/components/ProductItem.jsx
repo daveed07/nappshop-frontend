@@ -12,9 +12,7 @@ import colors from "@constants/colors";
 const ProductItem = ({ product }) => {
   const cart = useSelector((state) => state.cart);
   const [add, setAdd] = useState(
-    cart.find((item) => item.id === product.id)
-      ? colors.white
-      : colors.main
+    cart.find((item) => item.id === product.id) ? colors.white : colors.main
   );
   const [loading, setLoading] = useState(true);
 
@@ -26,7 +24,7 @@ const ProductItem = ({ product }) => {
     loadData();
   }, []);
 
-  const handleAddToCart = article => {
+  const handleAddToCart = (article) => {
     if (!cart.find((item) => item.id === article.id)) {
       store.dispatch({
         type: "ADD_TO_CART",
@@ -61,16 +59,27 @@ const ProductItem = ({ product }) => {
           <SubTitle size="medium" color={colors.main}>
             ${product.price}
           </SubTitle>
-          <Button
-            secondary
-            icon
-            add={add === colors.main
-              ? colors.white
-              : colors.main}
-            onClick={() => handleAddToCart(product)}
-          >
-            <Cart width={18} height={18} fill={add} />
-          </Button>
+          {product.stock <= 0 ? (
+            <Button
+              secondary
+              disabled
+              borderColor="transparent"
+              icon
+              add={add === colors.main ? colors.white : colors.main}
+              onClick={() => handleAddToCart(product)}
+            >
+              <Cart width={18} height={18} fill={add} />
+            </Button>
+          ) : (
+            <Button
+              secondary
+              icon
+              add={add === colors.main ? colors.white : colors.main}
+              onClick={() => handleAddToCart(product)}
+            >
+              <Cart width={18} height={18} fill={add} />
+            </Button>
+          )}
         </div>
       </div>
     </StyledProductItem>

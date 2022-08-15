@@ -48,7 +48,13 @@ const CheckOut = () => {
     document.getElementById("address").value = user.address1;
     document.getElementById("address2").value = user.address2;
     document.getElementById("city").value = user.city;
-    document.getElementById("region").value = user.region;
+    // change region select to match user's region
+    const regionSelect = document.getElementById("region");
+    regionSelect.options.map((option) => {
+      if (option.value === user.region) {
+        option.selected = true;
+      }
+    })
   }
 
   const handlePayment = () => {
@@ -189,9 +195,9 @@ const CheckOut = () => {
                       <a href="/signup">Create an account</a>
                     )}
                     {isLoggedIn ? (
-                      <a href="#" onClick={() => handleUseAccountInfo()}>
+                      <p className="account-info" onClick={() => handleUseAccountInfo()}>
                         Use account information
-                      </a>
+                      </p>
                     ): null}
                   </div>
                 </div>
@@ -264,9 +270,9 @@ const CheckOut = () => {
                   <div className="checkout-form-top-text">
                   <p className="checkout-form-row-title">Address</p>
                   {isLoggedIn ? (
-                      <a href="#" onClick={() => handleUseShippingInfo()}>
+                      <p className="account-info" onClick={() => handleUseShippingInfo()}>
                         Use account information
-                      </a>
+                      </p>
                     ): null}
                   </div>
                   <div className="checkout-form-input address-form">

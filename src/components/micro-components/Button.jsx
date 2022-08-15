@@ -62,8 +62,10 @@ const StyledButton = styled.button`
   ${props => props.disabled && css`
     color: ${colors.main};
     background-color: ${colors.greyLight};
+    border: ${props.borderColor ? `2px solid ${props.borderColor}` : `none`};
     &:hover {
       background-color: ${colors.greyLight};
+      border: ${props.borderColor ? `2px solid ${props.borderColor}` : `none`};
     }
   `}
 `

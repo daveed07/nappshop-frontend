@@ -14,6 +14,15 @@ const StyledBanner = styled.div`
       height: auto;
     }
   }
+
+  @media (max-width: 768px) {
+    img {
+      width: 100%;
+      height: 320px;
+      object-fit: cover;
+      padding-top: 84px
+    }
+  }
 `;
 
 export default StyledBanner;

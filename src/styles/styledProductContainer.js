@@ -13,10 +13,10 @@ const StyledProductContainer = styled.div`
   }
 
   @media (max-width: 768px) {
-    padding: 96px 0;
+    padding-top: 32px;
     
     .product-wrapper {
-      grid-template-columns: repeat(auto-fill, 140px);
+      grid-template-columns: repeat(auto-fill, 160px);
     }
   }
 `;
