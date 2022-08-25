@@ -10,6 +10,9 @@ import Button from "@components/micro-components/Button";
 import StyledPayment from "@styles/styledPayment";
 import colors from "@constants/colors";
 import whatsappText from "../utils/whatsappText";
+import visa from "@logos/visa.svg";
+import mastercard from "@logos/mastercard.svg";
+import yappy from "@logos/yappy-logo.png";
 
 const API = `${process.env.REACT_APP_API}/orders`;
 
@@ -24,10 +27,14 @@ const Payment = () => {
 
   console.log(costs);
   console.log(contact);
+  console.log(shipping);
 
   const submitOrder = async (open) => {
     const order = {
       user_id: user.id,
+      subtotal: parseFloat(costs.subtotal),
+      discount: parseFloat(costs.discount),
+      shipping: parseFloat(costs.shipping) || "free",
       total: parseFloat(costs.totalWithShipping),
       products: cart.map((product) => ({
         id: product.id,
@@ -39,6 +46,9 @@ const Payment = () => {
       address2: shipping.address2,
       province: shipping.region,
       payment_method: paymentMethod,
+      name: `${contact.firstName} ${contact.lastName}`,
+      email: contact.email,
+      phone: contact.phone,
     };
 
     console.log(order);
@@ -50,6 +60,10 @@ const Payment = () => {
         store.dispatch({ type: "RESET_COSTS" });
         store.dispatch({ type: "RESET_SHIPPING" });
         store.dispatch({ type: "RESET_CONTACT" });
+        console.log(res);
+        window.location.href(
+          `/${res.status === 201 ? "success" : "failure"}/${res.data.order_id}`
+        );
         if (open) {
           window.open(
             `https://wa.me/+50766731685?text=${whatsappText({
@@ -63,6 +77,47 @@ const Payment = () => {
         }
       })
       .catch((err) => console.log(err));
+  };
+
+  // create function that adds spaces every 4 digits
+  const formatNumber = (number) => {
+    if (/\S{5}/.test(number)) {
+      return number.replace(/\s/g, "").replace(/(\d{4})/g, "$1 ");
+    }
+  };
+
+  // turn code above into modern js code
+  const formatCreditCard = (number) => {
+    const regex = /^(\d{0,4})(\d{0,4})(\d{0,4})(\d{0,4})$/g;
+    const onlyNumbers = number.replace(/[^\d]/g, "");
+
+    return onlyNumbers.replace(regex, (regex, $1, $2, $3, $4) =>
+      [$1, $2, $3, $4].filter((group) => !!group).join(" ")
+    );
+  };
+
+  const formatExpirationDate = (date) => {
+    return date
+      .replace(
+        /[^0-9]/g,
+        "" // To allow only numbers
+      )
+      .replace(
+        /^([2-9])$/g,
+        "0$1" // To handle 3 > 03
+      )
+      .replace(
+        /^(1{1})([3-9]{1})$/g,
+        "0$1/$2" // 13 > 01/3
+      )
+      .replace(
+        /^0{1,}/g,
+        "0" // To handle 00 > 0
+      )
+      .replace(
+        /^([0-1]{1}[0-9]{1})([0-9]{1,2}).*/g,
+        "$1/$2" // To handle 113 > 11/3
+      );
   };
 
   return (
@@ -101,17 +156,77 @@ const Payment = () => {
                 </div>
                 <div className="payment-form-row-content">
                   <div className="payment-info-form">
-                    <input
-                      type="radio"
-                      name="payment-method"
-                      id="credit-card"
-                      onChange={(e) => {
-                        setPaymentMethod(e.target.id);
-                        setButtonText("Finish order");
-                      }}
-                    />
-                    <label htmlFor="credit-card">Credit card</label>
+                    <div className="payment-info-form-wrapper">
+                      <div className="payment-info-form-left">
+                        <input
+                          type="radio"
+                          name="payment-method"
+                          id="credit-card"
+                          onChange={(e) => {
+                            setPaymentMethod(e.target.id);
+                            setButtonText("Finish order");
+                          }}
+                        />
+                        <label htmlFor="credit-card">Credit card</label>
+                      </div>
+                      <div className="payment-info-form-wrapper-right">
+                        <div className="payment-icons">
+                          <img src={visa} />
+                          <img src={mastercard} />
+                        </div>
+                      </div>
+                    </div>
                   </div>
+                  {paymentMethod === "credit-card" && (
+                    <div className="payment-info-form  card">
+                      <div className="card-top">
+                        <Input
+                          type="text"
+                          id="card-number"
+                          placeholder="Card number"
+                          label
+                          maxLength="19"
+                          onkeypress={(e) => {
+                            e.target.value = formatCreditCard(e.target.value);
+                          }}
+                          onChange={(e) => {
+                            e.target.value = formatCreditCard(e.target.value);
+                          }}
+                        />
+                        <Input
+                          type="text"
+                          id="card-name"
+                          placeholder="Name on card"
+                          label
+                        />
+                      </div>
+                      <div className="card-bottom">
+                        <Input
+                          type="text"
+                          id="card-date"
+                          placeholder="Expiration date (MM / YY)"
+                          label
+                          onkeypress={(e) => {
+                            e.target.value = formatExpirationDate(
+                              e.target.value
+                            );
+                          }}
+                          onChange={(e) => {
+                            e.target.value = formatExpirationDate(
+                              e.target.value
+                            );
+                          }}
+                        />
+                        <Input
+                          type="number"
+                          id="card-code"
+                          placeholder="Security code"
+                          label
+                          maxLength="4"
+                        />
+                      </div>
+                    </div>
+                  )}
                 </div>
                 <div className="payment-form-row-content">
                   <div className="payment-info-form">
@@ -124,7 +239,9 @@ const Payment = () => {
                         setButtonText("Finish order on WhatsApp");
                       }}
                     />
-                    <label htmlFor="yappy">Yappy</label>
+                    <label htmlFor="yappy">
+                      <img src={yappy} id="yappy-logo" />
+                    </label>
                   </div>
                   {paymentMethod === "yappy" && (
                     <div className="payment-info-form  yappy">

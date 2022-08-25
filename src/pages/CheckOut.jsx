@@ -70,6 +70,10 @@ const CheckOut = () => {
         return;
       } else {
         store.dispatch({
+          type: "SET_SHIPPING",
+          payload: {address1: false, address2: false, city: false, region: false}
+        })
+        store.dispatch({
           type: "SET_CONTACT",
           payload: { firstName, lastName, email, phone },
         });
