@@ -35,8 +35,8 @@ const submitPayment = ({
   function startMerchantForm(merchantSetup) {
     let paymentInfo = {
       amount: parseFloat(getUrlParam("monto")),
-      discount: 0.0,
-      taxAmount: 0.0,
+      discount: 1.0,
+      taxAmount: 1.0,
       description: getUrlParam("descripcion"),
     };
     console.log(paymentInfo);
