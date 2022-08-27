@@ -27,25 +27,14 @@ const App = () => {
             <Route path="/products/:id" element={<Product />} />
             <Route path="/brands/:brand" element={<Home />} />
             <Route path="/cart" element={<Cart />} />
-            {cart.length > 0 ? (
-              <>
-                <Route path="/checkout" element={<CheckOut />} />
-                <Route path="payment" element={<Payment />} />
-              </>
-            ) : (
-              <>
-                <Route path="/checkout" element={<Cart />} />
-                <Route path="payment" element={<Cart />} />
-              </>
-            )}
-            // if user is logged in, show profile page, otherwise show login
-            page with Navigate
+            <Route path="/checkout" element={<CheckOut />} />
+            <Route path="payment" element={<Payment />} />
             {isLoggedIn ? (
               <Route path="/profile" element={<Profile />} />
             ) : (
               <Route path="/profile" element={<Navigate to="/login" />} />
             )}
-            <Route path="/success/:order_id" element={<Success/>} />
+            <Route path="/success/:order_id" element={<Success />} />
             <Route path="*" element={<div>404</div>} />
           </Routes>
         </>

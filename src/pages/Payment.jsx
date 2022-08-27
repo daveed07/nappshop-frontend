@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { store } from "@redux/store";
 import { useSelector } from "react-redux";
+import useScript from "@hooks/useScript";
 import SummaryContainer from "../containers/SummaryContainer";
 import Title from "@components/micro-components/Title";
 import SubTitle from "@components/micro-components/SubTitle";
@@ -10,11 +11,16 @@ import Button from "@components/micro-components/Button";
 import StyledPayment from "@styles/styledPayment";
 import colors from "@constants/colors";
 import whatsappText from "../utils/whatsappText";
+import submitPayment from "../utils/submitPayment";
 import visa from "@logos/visa.svg";
 import mastercard from "@logos/mastercard.svg";
 import yappy from "@logos/yappy-logo.png";
 
 const API = `${process.env.REACT_APP_API}/orders`;
+const PAGUELOFACIL_API_KEY =
+  "SlLmEttBcJBgyYjIq4CasgIEsOtrFaZm|DIRowBMVESxE7PY47FUzsvoHg";
+const CCLW =
+  "407A94F66A9D73EA9BB9C898716896E519A2C26112242B20675F88F2EBA5682D8D971B55C3962C25519C4A38AF18CE64C56F2788EF2CE35B343124FD5A7AB257";
 
 const Payment = () => {
   const cart = useSelector((state) => state.cart);
@@ -25,6 +31,10 @@ const Payment = () => {
   const [paymentMethod, setPaymentMethod] = useState("");
   const [buttonText, setButtonText] = useState("Finish order");
 
+  const { isLoaded } = useScript(
+    "https://secure.paguelofacil.com/HostedFields/vendor/scripts/WALLET/PFScript.js"
+  );
+
   console.log(costs);
   console.log(contact);
   console.log(shipping);
@@ -34,7 +44,7 @@ const Payment = () => {
       user_id: user.id,
       subtotal: parseFloat(costs.subtotal),
       discount: parseFloat(costs.discount),
-      shipping: parseFloat(costs.shipping) || "free",
+      shipping: parseFloat(costs.shipping) || 0,
       total: parseFloat(costs.totalWithShipping),
       products: cart.map((product) => ({
         id: product.id,
@@ -56,14 +66,30 @@ const Payment = () => {
     const response = await axios
       .post(API, order)
       .then((res) => {
-        store.dispatch({ type: "DELETE_CART" });
-        store.dispatch({ type: "RESET_COSTS" });
-        store.dispatch({ type: "RESET_SHIPPING" });
-        store.dispatch({ type: "RESET_CONTACT" });
+        // store.dispatch({ type: "DELETE_CART" });
+        // store.dispatch({ type: "RESET_COSTS" });
+        // store.dispatch({ type: "RESET_SHIPPING" });
+        // store.dispatch({ type: "RESET_CONTACT" });
         console.log(res);
-        window.location.href(
-          `/${res.status === 201 ? "success" : "failure"}/${res.data.order_id}`
-        );
+        if (paymentMethod === "credit-card") {
+          if (isLoaded) {
+            window.history.pushState(
+              null,
+              "",
+              `${window.location.href}?monto=${costs.totalWithShipping}&descripcion=${res.data.order_id}`
+            );
+            setTimeout(() => {
+              submitPayment({
+                pfWallet,
+                PAGUELOFACIL_API_KEY,
+                CCLW,
+                amount: costs.totalWithShipping,
+                description: res.data.order_id,
+                boton: "pay",
+              });
+            }, 100);
+          }
+        }
         if (open) {
           window.open(
             `https://wa.me/+50766731685?text=${whatsappText({
@@ -178,7 +204,10 @@ const Payment = () => {
                     </div>
                   </div>
                   {paymentMethod === "credit-card" && (
-                    <div className="payment-info-form  card">
+                    <div
+                      id="container-form"
+                      className="payment-info-form  card"
+                    >
                       <div className="card-top">
                         <Input
                           type="text"
@@ -259,7 +288,12 @@ const Payment = () => {
             </div>
             <div className="payment-form-buttons">
               {buttonText === "Finish order" ? (
-                <Button Button primary onClick={() => submitOrder(false)}>
+                <Button
+                  id="pay"
+                  Button
+                  primary
+                  onClick={() => submitOrder(false)}
+                >
                   {buttonText}
                 </Button>
               ) : (
