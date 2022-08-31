@@ -10,6 +10,7 @@ import OrderItem from "@components/OrderItem";
 import Check from "@components/svg-components/Check"
 
 const API = process.env.REACT_APP_API;
+const WA_NUMBER = process.env.WA_NUMBER;
 
 const Success = () => {
   const { order_id } = useParams() || 88;
@@ -23,7 +24,7 @@ const Success = () => {
           <SubTitle>
             Your shop is on the way. Please check your email for order
             confirmation and detailed delivery information or contact us at
-            WhatsApp <a href="https://wa.me/+50766731685">66731685</a> to have
+            WhatsApp <a href={`https://wa.me/${WA_NUMBER}`}>{WA_NUMBER}</a> to have
             more information about your order
           </SubTitle>
           <div className="button-container">

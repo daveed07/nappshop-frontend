@@ -17,6 +17,7 @@ import mastercard from "@logos/mastercard.svg";
 import yappy from "@logos/yappy-logo.png";
 
 const API = `${process.env.REACT_APP_API}/orders`;
+const WA_NUMBER = process.env.WA_NUMBER;
 const PAGUELOFACIL_API_KEY =
   "SlLmEttBcJBgyYjIq4CasgIEsOtrFaZm|DIRowBMVESxE7PY47FUzsvoHg";
 const CCLW =
@@ -67,10 +68,10 @@ const Payment = () => {
     const response = await axios
       .post(API, order)
       .then((res) => {
-        // store.dispatch({ type: "DELETE_CART" });
-        // store.dispatch({ type: "RESET_COSTS" });
-        // store.dispatch({ type: "RESET_SHIPPING" });
-        // store.dispatch({ type: "RESET_CONTACT" });
+        store.dispatch({ type: "DELETE_CART" });
+        store.dispatch({ type: "RESET_COSTS" });
+        store.dispatch({ type: "RESET_SHIPPING" });
+        store.dispatch({ type: "RESET_CONTACT" });
         console.log(res);
         if (paymentMethod === "credit-card") {
           if (isLoaded) {
@@ -94,7 +95,7 @@ const Payment = () => {
         }
         if (open) {
           window.open(
-            `https://wa.me/+50766731685?text=${whatsappText({
+            `https://wa.me/${WA_NUMBER}?text=${whatsappText({
               cart,
               costs,
               shipping,
