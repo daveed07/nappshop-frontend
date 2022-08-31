@@ -7,13 +7,12 @@ import colors from "@constants/colors";
 import useGetProducts from "@hooks/useGetProducts";
 
 const API = process.env.REACT_APP_API;
+const productImage = "https://images.unsplash.com/photo-1518791841217-8f162f1e1131?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60";
 
 const OrderItem = ({ item }) => {
-  const product = useGetProducts(`${API}/products/${item.product_id}`);
-
   return (
     <StyledOrderItem className="order-item">
-      <Image checkout src={item.product_image || product.image} alt="product_image">
+      <Image checkout src={item.product_image || productImage} alt="product_image">
         <span className='quantity'>{item.quantity}</span>
       </Image>
       <div className="info">
@@ -21,7 +20,7 @@ const OrderItem = ({ item }) => {
           {item.product_name}
         </Title>
         <SubTitle size="medium" color={colors.black}>
-          ${item.product_price || product.price}
+          ${item.product_price}
         </SubTitle>
       </div>
     </StyledOrderItem>

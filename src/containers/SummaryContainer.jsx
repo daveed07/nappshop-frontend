@@ -71,7 +71,8 @@ const SummaryContainer = (props) => {
         <div className="checkout-summary-total">
           <p className="checkout-summary-total-title">Total</p>
           <p className="checkout-summary-total-price">
-            ${typeof shipping === "string" ? parseFloat(total - discountAmount(total)).toFixed(2) : parseFloat(totalWithShipping - discountAmount(totalWithShipping)).toFixed(2)}
+            {/* ${typeof shipping === "string" ? parseFloat(total - discountAmount(total)).toFixed(2) : parseFloat(totalWithShipping - discountAmount(totalWithShipping)).toFixed(2)} */}
+            {totalWithShipping}
           </p>
         </div>
       </div>

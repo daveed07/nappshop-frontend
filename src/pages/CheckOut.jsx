@@ -35,7 +35,7 @@ const CheckOut = () => {
   );
   const tax = parseFloat(subtotal * 0.07).toFixed(2);
   const total = parseFloat(subtotal + parseFloat(tax)).toFixed(2);
-  const totalWithShipping = parseFloat(total + shipping).toFixed(2);
+  const totalWithShipping = shipping === "Free" ? total : parseFloat(Number(total) + Number(shipping)).toFixed(2);
 
   const handleUseAccountInfo = () => {
     document.getElementById("firstName").value = user.name.split(" ")[0] || "";

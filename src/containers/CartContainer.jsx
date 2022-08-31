@@ -15,6 +15,7 @@ const CartContainer = () => {
 
   const handleDeleteCart = () => {
     store.dispatch({ type: "DELETE_CART" });
+    store.dispatch({ type: "RESET_COSTS" });
   };
 
   return (

@@ -2,11 +2,10 @@ const submitPayment = ({
   pfWallet,
   PAGUELOFACIL_API_KEY,
   CCLW,
-  amount,
-  description,
-  boton,
+  orderId,
 }) => {
-  const getUrlParam = (key) => new URLSearchParams(window.location.search).get(key);
+  const getUrlParam = (key) =>
+    new URLSearchParams(window.location.search).get(key);
 
   pfWallet = pfWallet || {};
   let apiKey = "";
@@ -35,27 +34,28 @@ const submitPayment = ({
   function startMerchantForm(merchantSetup) {
     let paymentInfo = {
       amount: parseFloat(getUrlParam("monto")),
-      discount: 1.0,
-      taxAmount: 1.0,
+      discount: 0.0,
+      taxAmount: 0.0,
       description: getUrlParam("descripcion"),
     };
     console.log(paymentInfo);
     console.log("merchantSetup", merchantSetup);
     let setup = {
       lang: "es",
-      embedded: boton == "false",
-      type: "lk",
-      code: "LK-MAIMLMD1FKSQKCHU",
+      embedded: getUrlParam("boton") == "false",
+      // type: "lk",
+      // code: "LK-MAIMLMD1FKSQKCHU",
       container: "container-form",
       onError: function (data) {
         console.error("errors", data);
       },
       onTxSuccess: function (data) {
         console.log("onTxSuccess", data);
-        window.location.href =
-          pfWallet.pfHostViews + `/pf/default-receipt/${data?.Oper}`;
+        window.open(pfWallet.pfHostViews + `/pf/default-receipt/${data?.Oper}`);
+        window.location.href = `/success/${orderId}`;
       },
       onTxError: function (data) {
+        window.location.href = `/failure/${data.orderId}`;
         console.error("when the onTxError, in other process", data);
       },
       onClose: function () {

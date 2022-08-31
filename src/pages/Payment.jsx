@@ -30,6 +30,7 @@ const Payment = () => {
   const costs = useSelector((state) => state.costs);
   const [paymentMethod, setPaymentMethod] = useState("");
   const [buttonText, setButtonText] = useState("Finish order");
+  const [paymentBottom, setPaymentBottom] = useState(false);
 
   const { isLoaded } = useScript(
     "https://secure.paguelofacil.com/HostedFields/vendor/scripts/WALLET/PFScript.js"
@@ -73,19 +74,20 @@ const Payment = () => {
         console.log(res);
         if (paymentMethod === "credit-card") {
           if (isLoaded) {
-            window.history.pushState(
-              null,
-              "",
-              `${window.location.href}?monto=${costs.totalWithShipping}&descripcion=${res.data.order_id}`
-            );
+            setPaymentBottom(true);
+            const currentUrl =
+              window.location.protocol +
+              "//" +
+              window.location.host +
+              window.location.pathname +
+              `?monto=${res.data.total}&descripcion=${res.data.order_id}&boton=pay`;
+            window.history.pushState({ path: currentUrl }, "", currentUrl);
             setTimeout(() => {
               submitPayment({
                 pfWallet,
                 PAGUELOFACIL_API_KEY,
                 CCLW,
-                amount: costs.totalWithShipping,
-                description: res.data.order_id,
-                boton: "pay",
+                orderId: res.data.order_id,
               });
             }, 100);
           }
@@ -203,59 +205,6 @@ const Payment = () => {
                       </div>
                     </div>
                   </div>
-                  {paymentMethod === "credit-card" && (
-                    <div
-                      id="container-form"
-                      className="payment-info-form  card"
-                    >
-                      <div className="card-top">
-                        <Input
-                          type="text"
-                          id="card-number"
-                          placeholder="Card number"
-                          label
-                          maxLength="19"
-                          onkeypress={(e) => {
-                            e.target.value = formatCreditCard(e.target.value);
-                          }}
-                          onChange={(e) => {
-                            e.target.value = formatCreditCard(e.target.value);
-                          }}
-                        />
-                        <Input
-                          type="text"
-                          id="card-name"
-                          placeholder="Name on card"
-                          label
-                        />
-                      </div>
-                      <div className="card-bottom">
-                        <Input
-                          type="text"
-                          id="card-date"
-                          placeholder="Expiration date (MM / YY)"
-                          label
-                          onkeypress={(e) => {
-                            e.target.value = formatExpirationDate(
-                              e.target.value
-                            );
-                          }}
-                          onChange={(e) => {
-                            e.target.value = formatExpirationDate(
-                              e.target.value
-                            );
-                          }}
-                        />
-                        <Input
-                          type="number"
-                          id="card-code"
-                          placeholder="Security code"
-                          label
-                          maxLength="4"
-                        />
-                      </div>
-                    </div>
-                  )}
                 </div>
                 <div className="payment-form-row-content">
                   <div className="payment-info-form">
@@ -288,14 +237,18 @@ const Payment = () => {
             </div>
             <div className="payment-form-buttons">
               {buttonText === "Finish order" ? (
-                <Button
-                  id="pay"
-                  Button
-                  primary
-                  onClick={() => submitOrder(false)}
-                >
-                  {buttonText}
-                </Button>
+                paymentBottom ? (
+                  <div id="container-form"></div>
+                ) : (
+                  <Button
+                    id="pay"
+                    Button
+                    primary
+                    onClick={() => submitOrder(false)}
+                  >
+                    {buttonText}
+                  </Button>
+                )
               ) : (
                 <Button Button primary onClick={() => submitOrder(true)}>
                   {buttonText}
