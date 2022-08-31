@@ -74,6 +74,7 @@ module.exports = {
     }),
     new webpack.DefinePlugin({
       "process.env.REACT_APP_API": JSON.stringify(process.env.REACT_APP_API),
+      "process.env.WA_NUMBER": JSON.stringify(process.env.WA_NUMBER),
     }),
   ],
   devServer: {
