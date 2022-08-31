@@ -3,7 +3,7 @@ import colors from "@constants/colors";
 import sizes from "@constants/fontSizes";
 
 const StyledSuccess = styled.div`
-  padding: 64px 4%;
+  padding: 64px 2%;
 
   @media (max-width: 768px) {
     width: 100%;
