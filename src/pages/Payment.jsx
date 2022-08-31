@@ -93,6 +93,9 @@ const Payment = () => {
             }, 100);
           }
         }
+        if (paymentMethod === "cash") {
+          window.location.href = `/success/${res.data.order_id}`;
+        }
         if (open) {
           window.open(
             `https://wa.me/${WA_NUMBER}?text=${whatsappText({
