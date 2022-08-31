@@ -103,6 +103,7 @@ const Payment = () => {
               order_id: res.data.order_id,
             })}`
           );
+          window.location.href = `/success/${res.data.order_id}`;
         }
       })
       .catch((err) => console.log(err));
