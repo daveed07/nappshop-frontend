@@ -27,7 +27,8 @@ module.exports = {
       "@redux": path.resolve(__dirname, "src/redux"),
       "@routes": path.resolve(__dirname, "src/routes"),
       "@styles": path.resolve(__dirname, "src/styles"),
-      "svg-components": path.resolve(__dirname, "src/components/svg-components"),
+      "@svg-components": path.resolve(__dirname, "src/components/svg-components"),
+      "@utils": path.resolve(__dirname, "src/utils"),
     },
   },
   module: {
@@ -75,6 +76,8 @@ module.exports = {
     new webpack.DefinePlugin({
       "process.env.REACT_APP_API": JSON.stringify(process.env.REACT_APP_API),
       "process.env.WA_NUMBER": JSON.stringify(process.env.WA_NUMBER),
+      "process.env.PAGUELOFACIL_API_KEY": JSON.stringify(process.env.PAGUELOFACIL_API_KEY),
+      "process.env.CCLW": JSON.stringify(process.env.CCLW),
     }),
   ],
   devServer: {

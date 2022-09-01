@@ -1,10 +1,9 @@
 import React from "react";
 import axios from "axios";
 import { store } from "@redux/store";
-import Button from "@components/micro-components/Button";
-import Input from "@components/micro-components/Input";
-
-const API = process.env.REACT_APP_API;
+import Button from "@micro-components/Button";
+import Input from "@micro-components/Input";
+import { env } from "@constants/env";
 
 const ProfileEdit = ({ user, setEdit, edit, setOpen, setMessage }) => {
   const handleSubmit = () => {
@@ -18,7 +17,7 @@ const ProfileEdit = ({ user, setEdit, edit, setOpen, setMessage }) => {
       city: document.getElementById("city").value,
       province: document.getElementById("region").value,
     }
-    axios.patch(`${API}/users/${user.id}`, userData)
+    axios.patch(`${env.API}/users/${user.id}`, userData)
       .then((res) => {
         store.dispatch({ type: "SET_USER", payload: res.data.user });
         setEdit(!edit);

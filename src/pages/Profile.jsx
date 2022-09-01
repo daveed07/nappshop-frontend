@@ -4,16 +4,16 @@ import Header from "@components/Header";
 import { useSelector } from "react-redux";
 import ProfileEdit from "@components/ProfileEdit";
 import ProfileDetails from "@components/ProfileDetails";
-import Title from "@components/micro-components/Title";
-import Image from "@components/micro-components/Image";
-import Input from "@components/micro-components/Input";
-import Button from "@components/micro-components/Button";
+import Title from "@micro-components/Title";
+import Image from "@micro-components/Image";
+import Input from "@micro-components/Input";
+import Button from "@micro-components/Button";
 import OrdersContainer from "@containers/OrdersContainer";
 import Modal from "@components/Modal";
 import StyledProfile from "@styles/styledProfile";
-import Upload from "@components/svg-components/Upload";
+import Upload from "@svg-components/Upload";
 import colors from "@constants/colors";
-import image from "@logos/default_profile.jpg";
+import { assets } from "@constants/assets";
 
 const API = process.env.REACT_APP_API;
 
@@ -56,7 +56,7 @@ const Profile = () => {
             <Title size="xxlarge" color={colors.black}>
               Profile
             </Title>
-            <Image profile nohref src={user.avatar || image} alt="avatar">
+            <Image profile nohref src={user.avatar || assets.default_profile} alt="avatar">
               <div className="image-overlay">
                 <Input
                   id="avatar"

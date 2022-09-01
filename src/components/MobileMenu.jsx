@@ -1,6 +1,6 @@
 import React from 'react';
-import Title from '@components/micro-components/Title';
-import Nav from '@components/micro-components/Nav';
+import Title from '@micro-components/Title';
+import Nav from '@micro-components/Nav';
 import StyledMenu from '@styles/styledMenu';
 import colors from '@constants/colors';
 

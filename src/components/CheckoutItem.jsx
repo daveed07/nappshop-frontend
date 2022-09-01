@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import Image from '@components/micro-components/Image';
-import Title from '@components/micro-components/Title';
-import SubTitle from '@components/micro-components/SubTitle';
+import Image from '@micro-components/Image';
+import Title from '@micro-components/Title';
+import SubTitle from '@micro-components/SubTitle';
 import StyledCheckoutItem from '@styles/styledCheckoutItem';
 import colors from '@constants/colors';
+import { assets } from '@constants/assets';
 
 const CheckoutItem = ({ product }) => {
   const [isLoading, setIsLoading] = useState(true);
@@ -17,7 +18,7 @@ const CheckoutItem = ({ product }) => {
 
   return (
     <StyledCheckoutItem>
-      <Image checkout src={product.image} alt={product.name} id={product.id} loading={isLoading}>
+      <Image checkout src={product.image || assets.product_placeholder} alt={product.name} id={product.id} loading={isLoading}>
         <span className='quantity'>{product.quantity}</span>
       </Image>
       <div className="info">

@@ -2,11 +2,11 @@ import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { store } from "@redux/store";
 import SummaryContainer from "@containers/SummaryContainer";
-import Button from "@components/micro-components/Button";
-import Title from "@components/micro-components/Title";
-import SubTitle from "@components/micro-components/SubTitle";
-import Form from "@components/micro-components/Form";
-import Input from "@components/micro-components/Input";
+import Button from "@micro-components/Button";
+import Title from "@micro-components/Title";
+import SubTitle from "@micro-components/SubTitle";
+import Form from "@micro-components/Form";
+import Input from "@micro-components/Input";
 import StyledLoading from "@styles/styledLoading";
 import StyledCheckout from "@styles/styledCheckout";
 

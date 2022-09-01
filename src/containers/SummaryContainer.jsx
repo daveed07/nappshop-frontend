@@ -1,16 +1,16 @@
 import React, { useState } from "react";
-import { useSelector } from 'react-redux';
+import { useSelector } from "react-redux";
 import CheckoutItem from "@components/CheckoutItem";
-import Title from "@components/micro-components/Title";
-import Input from "@components/micro-components/Input";
-import Button from "@components/micro-components/Button";
+import Title from "@micro-components/Title";
+import Input from "@micro-components/Input";
+import Button from "@micro-components/Button";
 import StyledSummary from "@styles/styledSummary";
 import colors from "@constants/colors";
 import { discounts } from "@constants/discounts";
 
 const SummaryContainer = (props) => {
-  const cart = useSelector(state => state.cart);
-  const costs = useSelector(state => state.costs);
+  const cart = useSelector((state) => state.cart);
+  const costs = useSelector((state) => state.costs);
   const subtotal = props.subtotal || costs.subtotal;
   const total = props.total || costs.total;
   const totalWithShipping = props.totalWithShipping || costs.totalWithShipping;
@@ -19,11 +19,13 @@ const SummaryContainer = (props) => {
   const discount = props.discount || costs.discount || 0;
   const discountAmount = (tot) => {
     return parseFloat((tot * discount) / 100).toFixed(2);
-  }
+  };
 
   return (
     <StyledSummary>
-      <Title size="xxxlarge" color={colors.black}>Summary</Title>
+      <Title size="xxxlarge" color={colors.black}>
+        Summary
+      </Title>
       <div className="checkout-summary-items">
         <div className="checkout-summary">
           {cart.map((product) => (
@@ -32,18 +34,31 @@ const SummaryContainer = (props) => {
         </div>
         {props.codeInput && (
           <div className="discount-code-container">
-            <Input marginBottom="0" type="text" id="discountCode" placeholder="Discount code" />
-            <Button primary icon add={colors.main} onClick={
-              () => {
-                const discountCode = document.getElementById("discountCode").value;
-                const discount = discounts.find(discount => discount.name === discountCode);
+            <Input
+              marginBottom="0"
+              type="text"
+              id="discountCode"
+              placeholder="Discount code"
+            />
+            <Button
+              primary
+              icon
+              add={colors.main}
+              onClick={() => {
+                const discountCode =
+                  document.getElementById("discountCode").value;
+                const discount = discounts.find(
+                  (discount) => discount.name === discountCode
+                );
                 if (discount) {
                   props.setDiscount(discount.discount);
                 } else {
                   props.setDiscount(0);
                 }
-              }
-            }>Apply</Button>
+              }}
+            >
+              Apply
+            </Button>
           </div>
         )}
         <div className="checkout-summary-prices">
@@ -58,7 +73,12 @@ const SummaryContainer = (props) => {
           {discount > 0 && (
             <div className="checkout-summary-prices-item">
               <p className="checkout-summary-prices-item-title">Discount</p>
-              <p className="checkout-summary-prices-item-price">-${typeof shipping === "string" ? discountAmount(total) : discountAmount(totalWithShipping)}</p>
+              <p className="checkout-summary-prices-item-price">
+                -$
+                {typeof shipping === "string"
+                  ? discountAmount(total)
+                  : discountAmount(totalWithShipping)}
+              </p>
             </div>
           )}
           <div className="checkout-summary-prices-item">
@@ -70,10 +90,7 @@ const SummaryContainer = (props) => {
         </div>
         <div className="checkout-summary-total">
           <p className="checkout-summary-total-title">Total</p>
-          <p className="checkout-summary-total-price">
-            {/* ${typeof shipping === "string" ? parseFloat(total - discountAmount(total)).toFixed(2) : parseFloat(totalWithShipping - discountAmount(totalWithShipping)).toFixed(2)} */}
-            {totalWithShipping}
-          </p>
+          <p className="checkout-summary-total-price">{totalWithShipping}</p>
         </div>
       </div>
     </StyledSummary>

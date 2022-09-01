@@ -1,15 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { store } from "@redux/store";
-import Image from "@components/micro-components/Image";
-import Title from "@components/micro-components/Title";
-import SubTitle from "@components/micro-components/SubTitle";
-import Button from "@components/micro-components/Button";
-import Dash from "./svg-components/Dash";
-import Plus from "./svg-components/Plus";
-import Trash from "./svg-components/Trash";
+import Image from "@micro-components/Image";
+import Title from "@micro-components/Title";
+import SubTitle from "@micro-components/SubTitle";
+import Button from "@micro-components/Button";
+import Dash from "@svg-components/Dash";
+import Plus from "@svg-components/Plus";
+import Trash from "@svg-components/Trash";
 import StyledCartItem from "@styles/styledCartItem";
 import colors from "@constants/colors";
+import { assets } from "@constants/assets";
 
 const CartItem = ({ product }) => {
   const cart = useSelector((state) => state.cart);
@@ -38,7 +39,7 @@ const CartItem = ({ product }) => {
     <StyledCartItem>
       <Image
         cart
-        src={product.image}
+        src={product.image || assets.product_placeholder}
         alt={product.name}
         id={product.id}
         loading={isLoading}

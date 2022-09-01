@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import image from '../assets/logos/Nappshop Banner.png';
+import { assets } from '@constants/assets';
 import StyledBanner from '@styles/styledBanner';
 
 const Banner = () => {
@@ -19,7 +19,7 @@ const Banner = () => {
   return (
     <StyledBanner>
       <figure>
-        <img src={image} alt="Nappshop Banner" />
+        <img src={assets.banner} alt="Nappshop Banner" />
       </figure>
     </StyledBanner>
   );

@@ -1,17 +1,17 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { store } from "@redux/store";
-import MobileMenu from "./MobileMenu";
-import Image from "@components/micro-components/Image";
-import Nav from "@components/micro-components/Nav";
-import Button from "@components/micro-components/Button";
-import logo from "@logos/jada-logo.png";
-import PersonFill from "./svg-components/PersonFill";
-import BoxArrowRight from "./svg-components/BoxArrowRight";
-import Cart from "./svg-components/Cart";
-import List from "./svg-components/List";
+import MobileMenu from "@components/MobileMenu";
+import Image from "@micro-components/Image";
+import Nav from "@micro-components/Nav";
+import Button from "@micro-components/Button";
+import PersonFill from "@svg-components/PersonFill";
+import BoxArrowRight from "@svg-components/BoxArrowRight";
+import Cart from "@svg-components/Cart";
+import List from "@svg-components/List";
 import StyledHeader from "@styles/styledHeader";
 import colors from "@constants/colors";
+import { assets } from "@constants/assets";
 
 const Header = () => {
   const [toggle, setToggle] = useState(false);
@@ -24,7 +24,7 @@ const Header = () => {
 
   return (
     <StyledHeader>
-      <Image logo src={logo} alt="logo" />
+      <Image logo src={assets.logo} alt="logo" />
       <Nav
         items={[
           { id: 1, text: "iRobot" },

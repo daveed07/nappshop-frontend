@@ -5,13 +5,12 @@ import ProductItem from "@components/ProductItem";
 import StyledProductContainer from "@styles/styledProductContainer";
 import StyledLoading from "@styles/styledLoading";
 import colors from "@constants/colors";
-
-const API = process.env.REACT_APP_API;
+import { env } from "@constants/env";
 
 const ProductContainer = () => {
   const { brand } = useParams();
   const products = useGetProducts(
-    `${API}${
+    `${env.API}${
       brand
         ? `/products?filterByBrand=${brand}`
         : "/products"

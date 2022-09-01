@@ -3,18 +3,19 @@ import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { store } from "@redux/store";
 import Header from "@components/Header";
-import Image from "@components/micro-components/Image";
-import Title from "@components/micro-components/Title";
-import SubTitle from "@components/micro-components/SubTitle";
+import Image from "@micro-components/Image";
+import Title from "@micro-components/Title";
+import SubTitle from "@micro-components/SubTitle";
 import Button from "@components/micro-components/Button";
 import StyledLoading from "@styles/styledLoading";
-import Cart2 from "@components/svg-components/cart2";
-import CartFill from "@components/svg-components/CartFill";
-import BagFill from "@components/svg-components/BagFill";
-import Truck from "@components/svg-components/Truck";
+import Cart2 from "@svg-components/cart2";
+import CartFill from "@svg-components/CartFill";
+import BagFill from "@svg-components/BagFill";
+import Truck from "@svg-components/Truck";
 import useGetProducts from "@hooks/useGetProducts";
 import StyledProduct from "@styles/styledProduct";
 import colors from "@constants/colors";
+import { assets } from "@constants/assets";
 
 const API = process.env.REACT_APP_API;
 
@@ -79,7 +80,7 @@ const Product = () => {
               <Image
                 display
                 loading={loadingImage}
-                src={product.image}
+                src={product.image || assets.product_placeholder}
                 alt={product.name}
                 id={product.id}
                 nohref

@@ -1,6 +1,6 @@
 import React from "react";
 import StyledModal from "@styles/styledModal";
-import X from "./svg-components/X";
+import X from "@svg-components/X";
 
 const Modal = ({ children, open, setOpen }) => {
   const handleClose = () => setOpen(false);

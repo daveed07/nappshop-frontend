@@ -1,27 +1,19 @@
 import React, { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
 import axios from "axios";
 import { store } from "@redux/store";
-import { useSelector } from "react-redux";
 import useScript from "@hooks/useScript";
-import SummaryContainer from "../containers/SummaryContainer";
-import Title from "@components/micro-components/Title";
-import SubTitle from "@components/micro-components/SubTitle";
-import Input from "@components/micro-components/Input";
-import Button from "@components/micro-components/Button";
+import SummaryContainer from "@containers/SummaryContainer";
+import Title from "@micro-components/Title";
+import SubTitle from "@micro-components/SubTitle";
+import Input from "@micro-components/Input";
+import Button from "@micro-components/Button";
 import StyledPayment from "@styles/styledPayment";
 import colors from "@constants/colors";
-import whatsappText from "../utils/whatsappText";
-import submitPayment from "../utils/submitPayment";
-import visa from "@logos/visa.svg";
-import mastercard from "@logos/mastercard.svg";
-import yappy from "@logos/yappy-logo.png";
-
-const API = `${process.env.REACT_APP_API}/orders`;
-const WA_NUMBER = process.env.WA_NUMBER;
-const PAGUELOFACIL_API_KEY =
-  "SlLmEttBcJBgyYjIq4CasgIEsOtrFaZm|DIRowBMVESxE7PY47FUzsvoHg";
-const CCLW =
-  "407A94F66A9D73EA9BB9C898716896E519A2C26112242B20675F88F2EBA5682D8D971B55C3962C25519C4A38AF18CE64C56F2788EF2CE35B343124FD5A7AB257";
+import whatsappText from "@utils/whatsappText";
+import submitPayment from "@utils/submitPayment";
+import { assets } from "@constants/assets";
+import { env } from "@constants/env";
 
 const Payment = () => {
   const cart = useSelector((state) => state.cart);
@@ -66,7 +58,7 @@ const Payment = () => {
     console.log(order);
 
     const response = await axios
-      .post(API, order)
+      .post(`${env.API}/orders`, order)
       .then((res) => {
         store.dispatch({ type: "DELETE_CART" });
         store.dispatch({ type: "RESET_COSTS" });
@@ -86,8 +78,8 @@ const Payment = () => {
             setTimeout(() => {
               submitPayment({
                 pfWallet,
-                PAGUELOFACIL_API_KEY,
-                CCLW,
+                PAGUELOFACIL_API_KEY: env.PAGUELOFACIL_API_KEY,
+                CCLW: env.CCLW,
                 orderId: res.data.order_id,
               });
             }, 100);
@@ -98,7 +90,7 @@ const Payment = () => {
         }
         if (open) {
           window.open(
-            `https://wa.me/${WA_NUMBER}?text=${whatsappText({
+            `https://wa.me/${env.WA_NUMBER}?text=${whatsappText({
               cart,
               costs,
               shipping,
@@ -204,8 +196,8 @@ const Payment = () => {
                       </div>
                       <div className="payment-info-form-wrapper-right">
                         <div className="payment-icons">
-                          <img src={visa} />
-                          <img src={mastercard} />
+                          <img src={assets.visa} />
+                          <img src={assets.mastercard} />
                         </div>
                       </div>
                     </div>
@@ -223,7 +215,7 @@ const Payment = () => {
                       }}
                     />
                     <label htmlFor="yappy">
-                      <img src={yappy} id="yappy-logo" />
+                      <img src={assets.yappy} id="yappy-logo" />
                     </label>
                   </div>
                   {paymentMethod === "yappy" && (

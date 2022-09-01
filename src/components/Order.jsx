@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import Title from "@components/micro-components/Title";
-import SubTitle from "@components/micro-components/SubTitle";
-import Down from "@components/svg-components/Down";
-import Up from "@components/svg-components/Up";
+import Title from "@micro-components/Title";
+import SubTitle from "@micro-components/SubTitle";
+import Down from "@svg-components/Down";
+import Up from "@svg-components/Up";
 import OrderItem from "@components/OrderItem";
 import StyledOrder from "@styles/styledOrder";
 import colors from "@constants/colors";

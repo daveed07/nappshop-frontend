@@ -2,8 +2,8 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { store } from "@redux/store";
 import CartItem from "@components/CartItem";
-import Title from "@components/micro-components/Title";
-import Button from "@components/micro-components/Button";
+import Title from "@micro-components/Title";
+import Button from "@micro-components/Button";
 import colors from "@constants/colors";
 
 const CartContainer = () => {

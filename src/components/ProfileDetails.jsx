@@ -1,6 +1,6 @@
 import React from "react";
-import Title from "@components/micro-components/Title";
-import SubTitle from "@components/micro-components/SubTitle";
+import Title from "@micro-components/Title";
+import SubTitle from "@micro-components/SubTitle";
 
 const ProfileDetails = ({ user }) => {
   return (

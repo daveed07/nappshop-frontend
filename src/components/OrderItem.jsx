@@ -1,16 +1,15 @@
 import React from "react";
-import Title from "@components/micro-components/Title";
-import SubTitle from "@components/micro-components/SubTitle";
-import Image from "@components/micro-components/Image";
+import Title from "@micro-components/Title";
+import SubTitle from "@micro-components/SubTitle";
+import Image from "@micro-components/Image";
 import StyledOrderItem from "@styles/styledOrderItem";
 import colors from "@constants/colors";
-
-const productImage = "https://images.unsplash.com/photo-1518791841217-8f162f1e1131?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60";
+import { assets } from "@constants/assets";
 
 const OrderItem = ({ item }) => {
   return (
     <StyledOrderItem className="order-item">
-      <Image checkout src={item.product_image || productImage} id={item.product_id} alt="product_image">
+      <Image checkout src={item.product_image || assets.product_placeholder} id={item.product_id} alt="product_image">
         <span className='quantity'>{item.product_quantity}</span>
       </Image>
       <div className="info">

@@ -2,19 +2,17 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import useGetOrders from "@hooks/useGetOrders";
 import StyledSuccess from "@styles/styledSuccess";
-import Title from "@components/micro-components/Title";
-import SubTitle from "@components/micro-components/SubTitle";
-import Button from "@components/micro-components/Button";
+import Title from "@micro-components/Title";
+import SubTitle from "@micro-components/SubTitle";
+import Button from "@micro-components/Button";
 import ProductContainer from "@containers/ProductContainer";
 import OrderItem from "@components/OrderItem";
-import Check from "@components/svg-components/Check"
-
-const API = process.env.REACT_APP_API;
-const WA_NUMBER = process.env.WA_NUMBER;
+import Check from "@svg-components/Check"
+import { env } from "@constants/env";
 
 const Success = () => {
   const { order_id } = useParams() || 88;
-  const order = useGetOrders(`${API}/orders/${order_id}`);
+  const order = useGetOrders(`${env.API}/orders/${order_id}`);
   return (
     <StyledSuccess>
       <div className="wrapper">
@@ -24,7 +22,7 @@ const Success = () => {
           <SubTitle>
             Your shop is on the way. Please check your email for order
             confirmation and detailed delivery information or contact us at
-            WhatsApp <a href={`https://wa.me/${WA_NUMBER}`}>{WA_NUMBER}</a> to have
+            WhatsApp <a href={`https://wa.me/${env.WA_NUMBER}`}>{env.WA_NUMBER.replace("+507", "")}</a> to have
             more information about your order
           </SubTitle>
           <div className="button-container">

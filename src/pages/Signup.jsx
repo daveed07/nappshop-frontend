@@ -2,15 +2,14 @@ import React from 'react';
 import { store } from "@redux/store";
 import axios from 'axios';
 import Header from '@components/Header';
-import Title from "@components/micro-components/Title";
-import SubTitle from "@components/micro-components/SubTitle";
-import Form from "@components/micro-components/Form";
-import Input from "@components/micro-components/Input";
-import Button from '@components/micro-components/Button';
+import Title from "@micro-components/Title";
+import SubTitle from "@micro-components/SubTitle";
+import Form from "@micro-components/Form";
+import Input from "@micro-components/Input";
+import Button from '@micro-components/Button';
 import StyledLogin from '@styles/styledLogin';
 import colors from "@constants/colors";
-
-const API = `${process.env.REACT_APP_API}/users`;
+import { env } from "@constants/env";
 
 const Signup = () => {
   const [alert, setAlert] = React.useState('');
@@ -26,7 +25,7 @@ const Signup = () => {
               password,
               role: 'user',
             }
-            axios.post(API, body)
+            axios.post(`${env.API}/users`, body)
               .then(response => {
                 store.dispatch({
                   type: "SIGN_UP",

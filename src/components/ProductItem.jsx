@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { store } from "@redux/store";
-import Image from "@components/micro-components/Image";
-import Title from "@components/micro-components/Title";
-import SubTitle from "@components/micro-components/SubTitle";
-import Button from "@components/micro-components/Button";
-import Cart from "./svg-components/Cart";
+import Image from "@micro-components/Image";
+import Title from "@micro-components/Title";
+import SubTitle from "@micro-components/SubTitle";
+import Button from "@micro-components/Button";
+import Cart from "@svg-components/Cart";
 import StyledProductItem from "@styles/styledProductItem";
 import colors from "@constants/colors";
+import { assets } from "@constants/assets";
 
 const ProductItem = ({ product }) => {
   const cart = useSelector((state) => state.cart);
@@ -41,7 +42,7 @@ const ProductItem = ({ product }) => {
     <StyledProductItem>
       <Image
         loading={loading}
-        src={product.image}
+        src={product.image || assets.product_placeholder}
         alt={product.name}
         id={product.id}
       />
