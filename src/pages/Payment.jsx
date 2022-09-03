@@ -225,7 +225,7 @@ const Payment = () => {
                         id="yappyPhone"
                         placeholder="Phone Number"
                         label
-                        name="Input your phone number ot finish order on Whatsapp"
+                        name="Input your phone number ot finish order on WhatsApp"
                       />
                     </div>
                   )}
@@ -241,6 +241,7 @@ const Payment = () => {
                     id="pay"
                     Button
                     primary
+                    disabled={!paymentMethod}
                     onClick={() => submitOrder(false)}
                   >
                     {buttonText}

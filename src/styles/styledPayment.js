@@ -147,6 +147,10 @@ const StyledPayment = styled.div`
     margin-top: 48px;
   }
 
+  #container-form {
+    padding-top: 15px;
+  }
+
   @media (max-width: 948px) {
     .payment-container {
       height: auto;
