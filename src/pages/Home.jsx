@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import Header from "@components/Header";
 import ProductContainer from "@containers/ProductContainer";
 import Title from "@micro-components/Title";
@@ -26,6 +27,8 @@ const Home = () => {
     loadData();
   }, []);
 
+  const { brand } = useParams();
+
   if (loadPage) {
     return (
       <StyledLoading
@@ -49,6 +52,11 @@ const Home = () => {
             height={50}
             width={50}
           />
+        ) : brand ? (
+          <StyledSection>
+            <Title size="xxxlarge">{brand}</Title>
+            <ProductContainer />
+          </StyledSection>
         ) : (
           <>
             <StyledSection>
