@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 const StyledProductContainer = styled.div`
-  padding: 32px 4% 64px;
+  padding: 32px 4%;
   margin: 0 auto;
 
   .product-wrapper {
