@@ -9,7 +9,7 @@ import { assets } from "@constants/assets";
 const OrderItem = ({ item }) => {
   return (
     <StyledOrderItem className="order-item">
-      <Image checkout src={item.product_image || assets.product_placeholder} id={item.product_id} alt="product_image">
+      <Image checkout src={item.product_images[0] || assets.product_placeholder} id={item.product_id} alt="product_image">
         <span className='quantity'>{item.product_quantity}</span>
       </Image>
       <div className="info">

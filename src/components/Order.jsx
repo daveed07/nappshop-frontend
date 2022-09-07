@@ -9,7 +9,7 @@ import colors from "@constants/colors";
 
 const Order = ({ order }) => {
   const [toggle, setToggle] = useState(false);
-  const date = new Date(order.date_created).toLocaleDateString();
+  const date = new Date(order.created_date).toLocaleDateString();
 
   return (
     <StyledOrder toggle={toggle}>
@@ -35,7 +35,7 @@ const Order = ({ order }) => {
         <div className="order-body">
           <div className="order-body-info">
             <div className="shipping-address">
-              {order.shipping_address.address1 ? (
+              {order.shipping_address.address1 !== "false" ? (
                 <>
                   <p>
                     {order.shipping_address.address1},{" "}

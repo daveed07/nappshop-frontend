@@ -45,7 +45,7 @@ const StyledInput = styled.input`
     }
   `}
   ${props => props.emptyFields && `
-    border: 2px solid red;
+    border: 2px solid ${colors.red};
   `}
 `;
 

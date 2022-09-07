@@ -80,7 +80,7 @@ const Product = () => {
               <Image
                 display
                 loading={loadingImage}
-                src={product.image || assets.product_placeholder}
+                src={product.images[0] || assets.product_placeholder}
                 alt={product.name}
                 id={product.id}
                 nohref
@@ -100,13 +100,17 @@ const Product = () => {
                     </p>
                     <p className="previous-price">
                       (<span>$</span>
-                      {product.previous_price})
+                      {product.compare_at_price})
                     </p>
                   </p>
                   <div className="product-shipping">
                     <div>
                       <Truck />
-                      <p>Starts at $4.50</p>
+                      <p>
+                        {product.brand === "iRobot"
+                          ? "Free shipping"
+                          : "Starts at $4.50"}
+                      </p>
                     </div>
                     <p>Next day delivery</p>
                   </div>

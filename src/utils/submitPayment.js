@@ -1,3 +1,5 @@
+import resetStore from "./resetStore";
+
 const submitPayment = ({
   pfWallet,
   PAGUELOFACIL_API_KEY,
@@ -51,6 +53,7 @@ const submitPayment = ({
       },
       onTxSuccess: function (data) {
         console.log("onTxSuccess", data);
+        resetStore();
         window.open(pfWallet.pfHostViews + `/pf/default-receipt/${data?.Oper}`);
         window.location.href = `/success/${orderId}`;
       },

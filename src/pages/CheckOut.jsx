@@ -14,6 +14,8 @@ const CheckOut = () => {
   const cart = useSelector((state) => state.cart);
   const isLoggedIn = useSelector((state) => state.isLoggedIn);
   const user = useSelector((state) => state.user);
+  const shippingState = useSelector((state) => state.shipping);
+  const contactState = useSelector((state) => state.contact);
 
   const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
@@ -35,7 +37,10 @@ const CheckOut = () => {
   );
   const tax = parseFloat(subtotal * 0.07).toFixed(2);
   const total = parseFloat(subtotal + parseFloat(tax)).toFixed(2);
-  const totalWithShipping = shipping === "Free" ? total : parseFloat(Number(total) + Number(shipping)).toFixed(2);
+  const totalWithShipping =
+    shipping === "Free"
+      ? total
+      : parseFloat(Number(total) + Number(shipping)).toFixed(2);
 
   const handleUseAccountInfo = () => {
     document.getElementById("firstName").value = user.name.split(" ")[0] || "";
@@ -54,8 +59,8 @@ const CheckOut = () => {
       if (option.value === user.region) {
         option.selected = true;
       }
-    })
-  }
+    });
+  };
 
   const handlePayment = () => {
     // evaluate every single input individually and if it is empty, then return false
@@ -71,15 +76,27 @@ const CheckOut = () => {
       } else {
         store.dispatch({
           type: "SET_SHIPPING",
-          payload: {address1: false, address2: false, city: false, region: false}
-        })
+          payload: {
+            address1: false,
+            address2: false,
+            city: false,
+            region: false,
+          },
+        });
         store.dispatch({
           type: "SET_CONTACT",
           payload: { firstName, lastName, email, phone },
         });
         store.dispatch({
           type: "SET_COSTS",
-          payload: { subtotal, total, totalWithShipping, shipping, tax, discount },
+          payload: {
+            subtotal,
+            total,
+            totalWithShipping,
+            shipping,
+            tax,
+            discount,
+          },
         });
         window.location.href = "/payment";
       }
@@ -124,7 +141,14 @@ const CheckOut = () => {
         });
         store.dispatch({
           type: "SET_COSTS",
-          payload: { subtotal, total, totalWithShipping, shipping, tax, discount },
+          payload: {
+            subtotal,
+            total,
+            totalWithShipping,
+            shipping,
+            tax,
+            discount,
+          },
         });
         window.location.href = "/payment";
       }
@@ -199,28 +223,59 @@ const CheckOut = () => {
                       <a href="/signup">Create an account</a>
                     )}
                     {isLoggedIn ? (
-                      <p className="account-info" onClick={() => handleUseAccountInfo()}>
+                      <p
+                        className="account-info"
+                        onClick={() => handleUseAccountInfo()}
+                      >
                         Use account information
                       </p>
-                    ): null}
+                    ) : null}
                   </div>
                 </div>
                 <div className="checkout-form-input contact-info-form">
                   <div className="contact-info-form-top">
-                    <Input type="text" id="firstName" placeholder="First name" onChange={() => {
-                      setEmptyFields(false);
-                    }} emptyFields={emptyFields} />
-                    <Input type="text" id="lastName" placeholder="Last name" onChange={() => {
-                      setEmptyFields(false);
-                    }} emptyFields={emptyFields} />
+                    <Input
+                      type="text"
+                      id="firstName"
+                      placeholder="First name"
+                      defaultValue={contactState.firstName || ""}
+                      onChange={() => {
+                        setEmptyFields(false);
+                      }}
+                      emptyFields={emptyFields}
+                    />
+                    <Input
+                      type="text"
+                      id="lastName"
+                      placeholder="Last name"
+                      defaultValue={contactState.lastName || ""}
+                      onChange={(e) => {
+                        setEmptyFields(false);
+                      }}
+                      emptyFields={emptyFields}
+                    />
                   </div>
                   <div className="contact-info-form-bottom">
-                    <Input type="email" id="email" placeholder="Email" onChange={() => {
-                      setEmptyFields(false);
-                    }} emptyFields={emptyFields} />
-                    <Input type="tel" id="phone" placeholder="Phone" onChange={() => {
-                      setEmptyFields(false);
-                    }} emptyFields={emptyFields} />
+                    <Input
+                      type="email"
+                      id="email"
+                      placeholder="Email"
+                      defaultValue={contactState.email || ""}
+                      onChange={() => {
+                        setEmptyFields(false);
+                      }}
+                      emptyFields={emptyFields}
+                    />
+                    <Input
+                      type="tel"
+                      id="phone"
+                      placeholder="Phone"
+                      defaultValue={contactState.phone || ""}
+                      onChange={() => {
+                        setEmptyFields(false);
+                      }}
+                      emptyFields={emptyFields}
+                    />
                   </div>
                   <div className="marketing-checkbox">
                     <Input type="checkbox" id="marketing" />
@@ -232,16 +287,23 @@ const CheckOut = () => {
               </div>
             </Form>
             <Form width="auto">
-            <div className="checkout-form-row">
+              <div className="checkout-form-row">
                 <p className="checkout-form-row-title">Shipping</p>
                 <div className="shipping-form-container">
                   <div className="checkout-form-input shipping-form">
                     <div>
-                      <Input type="radio" id="pickup" name="pickup" value="pickup" defaultChecked onChange={() => {
-                        document.getElementById("delivery").checked = false;
-                        setAddress(false);
-                        setShipping("Free");
-                      }} />
+                      <Input
+                        type="radio"
+                        id="pickup"
+                        name="pickup"
+                        value="pickup"
+                        defaultChecked
+                        onChange={() => {
+                          document.getElementById("delivery").checked = false;
+                          setAddress(false);
+                          setShipping("Free");
+                        }}
+                      />
                       <label className="shipping-label" htmlFor="pickup">
                         Pickup in store (inmediate delivery)
                       </label>
@@ -252,49 +314,84 @@ const CheckOut = () => {
                   </div>
                   <div className="checkout-form-input shipping-form">
                     <div>
-                      <Input type="radio" id="delivery" name="delivery" value="delivery" onChange={() => {
-                        document.getElementById("pickup").checked = false;
-                        setAddress(true);
-                        setShipping("4.50");
-                      }} />
+                      <Input
+                        type="radio"
+                        id="delivery"
+                        name="delivery"
+                        value="delivery"
+                        onChange={() => {
+                          document.getElementById("pickup").checked = false;
+                          setAddress(true);
+                          cart.some((item) => item.brand === "iRobot") ? setShipping("Free") : setShipping(4.50);
+                        }}
+                      />
                       <label className="shipping-label" htmlFor="delivery">
                         Delivery RedServi (1-2 days)
                       </label>
                     </div>
                     <div>
-                      <p className="shipping-price">Starting on $4.50</p>
+                      <p className="shipping-price">
+                        {cart.some((item) => item.brand === "iRobot")
+                          ? "Free"
+                          : "Starting on $4.50"}
+                      </p>
                     </div>
                   </div>
                 </div>
               </div>
             </Form>
             <Form width="auto">
-            {address ? (
+              {address ? (
                 <div className="checkout-form-row">
                   <div className="checkout-form-top-text">
-                  <p className="checkout-form-row-title">Address</p>
-                  {isLoggedIn ? (
-                      <p className="account-info" onClick={() => handleUseShippingInfo()}>
+                    <p className="checkout-form-row-title">Address</p>
+                    {isLoggedIn ? (
+                      <p
+                        className="account-info"
+                        onClick={() => handleUseShippingInfo()}
+                      >
                         Use account information
                       </p>
-                    ): null}
+                    ) : null}
                   </div>
                   <div className="checkout-form-input address-form">
                     <select>
                       <option value="">Panama</option>
                     </select>
-                    <Input type="text" id="address" placeholder="Address" onChange={() => {
-                      setEmptyFields(false);
-                    }} emptyFields={emptyFields} />
-                    <Input type="text" id="address2" placeholder="Street, apartment, etc" onChange={() => {
-                      setEmptyFields(false);
-                    }} emptyFields={emptyFields} />
-                    <div className="address-form-bottom">
-                      <Input type="text" id="city" placeholder="City" onChange={() => {
+                    <Input
+                      type="text"
+                      id="address"
+                      placeholder="Address"
+                      defaultValue={shippingState.address1 || ""}
+                      onChange={() => {
                         setEmptyFields(false);
-                      }} emptyFields={emptyFields} />
+                      }}
+                      emptyFields={emptyFields}
+                    />
+                    <Input
+                      type="text"
+                      id="address2"
+                      placeholder="Street, apartment, etc"
+                      defaultValue={shippingState.address2 || ""}
+                      onChange={() => {
+                        setEmptyFields(false);
+                      }}
+                      emptyFields={emptyFields}
+                    />
+                    <div className="address-form-bottom">
+                      <Input
+                        type="text"
+                        id="city"
+                        placeholder="City"
+                        defaultValue={shippingState.city || ""}
+                        onChange={() => {
+                          setEmptyFields(false);
+                        }}
+                        emptyFields={emptyFields}
+                      />
                       <select
                         id="region"
+                        defaultValue={shippingState.region || ""}
                         onChange={() => {
                           document
                             .getElementById("region")

@@ -11,6 +11,7 @@ import Button from "@micro-components/Button";
 import StyledPayment from "@styles/styledPayment";
 import colors from "@constants/colors";
 import whatsappText from "@utils/whatsappText";
+import resetStore from "@utils/resetStore";
 import submitPayment from "@utils/submitPayment";
 import { assets } from "@constants/assets";
 import { env } from "@constants/env";
@@ -41,8 +42,8 @@ const Payment = () => {
       shipping: parseFloat(costs.shipping) || 0,
       total: parseFloat(costs.totalWithShipping),
       products: cart.map((product) => ({
-        id: product.id,
-        quantity: product.quantity,
+        product_id: product.id,
+        product_quantity: product.quantity,
       })),
       country: "panama",
       city: shipping.city,
@@ -60,10 +61,6 @@ const Payment = () => {
     const response = await axios
       .post(`${env.API}/orders`, order)
       .then((res) => {
-        store.dispatch({ type: "DELETE_CART" });
-        store.dispatch({ type: "RESET_COSTS" });
-        store.dispatch({ type: "RESET_SHIPPING" });
-        store.dispatch({ type: "RESET_CONTACT" });
         console.log(res);
         if (paymentMethod === "credit-card") {
           if (isLoaded) {
@@ -86,6 +83,7 @@ const Payment = () => {
           }
         }
         if (paymentMethod === "cash") {
+          resetStore();
           window.location.href = `/success/${res.data.order_id}`;
         }
         if (open) {
@@ -98,6 +96,7 @@ const Payment = () => {
               order_id: res.data.order_id,
             })}`
           );
+          resetStore();
           window.location.href = `/success/${res.data.order_id}`;
         }
       })

@@ -11,7 +11,7 @@ import Check from "@svg-components/Check"
 import { env } from "@constants/env";
 
 const Success = () => {
-  const { order_id } = useParams() || 88;
+  const { order_id } = useParams();
   const order = useGetOrders(`${env.API}/orders/${order_id}`);
   return (
     <StyledSuccess>

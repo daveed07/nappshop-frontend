@@ -12,6 +12,7 @@ import CheckOut from "@pages/CheckOut";
 import Payment from "@pages/Payment";
 import Profile from "@pages/Profile";
 import Success from "@pages/Success";
+import Failure from "@pages/Failure";
 
 const App = () => {
   const isLoggedIn = useSelector((state) => state.isLoggedIn);
@@ -34,6 +35,7 @@ const App = () => {
               <Route path="/profile" element={<Navigate to="/login" />} />
             )}
             <Route path="/success/:order_id" element={<Success />} />
+            <Route path="/failure" element={<Failure />} />
             <Route path="*" element={<div>404</div>} />
           </Routes>
         </>

@@ -54,21 +54,21 @@ const Home = () => {
           />
         ) : brand ? (
           <StyledSection>
-            <Title size="xxxlarge">{brand}</Title>
+            <Title size="xxxlarge" className="section-title">{brand}</Title>
             <ProductContainer />
           </StyledSection>
         ) : (
           <>
             <StyledSection>
-              <Title size="xxxlarge">What's New</Title>
+              <Title size="xxxlarge" className="section-title">What's New</Title>
               <ProductContainer category="accesories" />
             </StyledSection>
             <StyledSection>
-              <Title size="xxxlarge">IRobot Roombas are back!</Title>
+              <Title size="xxxlarge" className="section-title">IRobot Roombas are back!</Title>
               <ProductContainer category="products" brand="iRobot" />
             </StyledSection>
             <StyledSection>
-              <Title size="xxxlarge">Delonghi Collections</Title>
+              <Title size="xxxlarge" className="section-title">Delonghi Collections</Title>
               <ProductContainer category="accesories" brand="DeLonghi" />
             </StyledSection>
           </>

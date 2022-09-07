@@ -39,7 +39,7 @@ const CartItem = ({ product }) => {
     <StyledCartItem>
       <Image
         cart
-        src={product.image || assets.product_placeholder}
+        src={product.images[0] || assets.product_placeholder}
         alt={product.name}
         id={product.id}
         loading={isLoading}

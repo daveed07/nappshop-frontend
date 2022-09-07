@@ -5,7 +5,8 @@ const StyledSection = styled.section`;
   padding: 64px 0 0;
   margin: 0 auto;
 
-  h1 {
+  
+  > h1 {
     margin-left: 16px;
   }
 `

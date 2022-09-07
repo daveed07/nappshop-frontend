@@ -18,7 +18,7 @@ const CheckoutItem = ({ product }) => {
 
   return (
     <StyledCheckoutItem>
-      <Image checkout src={product.image || assets.product_placeholder} alt={product.name} id={product.id} loading={isLoading}>
+      <Image checkout src={product.images[0] || assets.product_placeholder} alt={product.name} id={product.id} loading={isLoading}>
         <span className='quantity'>{product.quantity}</span>
       </Image>
       <div className="info">
