@@ -43,6 +43,8 @@ const Payment = () => {
       total: parseFloat(costs.totalWithShipping),
       products: cart.map((product) => ({
         product_id: product.id,
+        product_name: product.name,
+        product_price: product.price,
         product_quantity: product.quantity,
       })),
       country: "panama",
