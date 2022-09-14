@@ -21,7 +21,7 @@ ${bold('Shipping method:')}  ${shipping.address1 !== "" ? "Delivery" : "Store Pi
 %0A%0A
 ${bold('Phone:')}  ${contact.phone}
 %0A
-${bold('Shipping address:')}  ${shipping.address1 !== "" ? `${shipping.address1} ${shipping.address2} ${shipping.city} ${shipping.region} ${shipping.postalCode}` : storeAddress}
+${bold('Shipping address:')}  ${!shipping.address1 ? `${shipping.address1} ${shipping.address2} ${shipping.city} ${shipping.region}` : storeAddress}
 %0A%0A
 Thanks!
 %0A%0A

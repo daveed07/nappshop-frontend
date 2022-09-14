@@ -59,14 +59,21 @@ const Success = () => {
             </p>
             <p>
               <span>Shipping</span>
-              <span>${parseFloat(order.shipping).toFixed(2)}</span>
+              <span>{
+                order.shipping === 0
+                  ? "Free"
+                  : `$${parseFloat(order.shipping).toFixed(2)}`
+              }</span>
             </p>
             <p>
               <span>Tax</span>
               <span>${parseFloat(order.subtotal * 0.07).toFixed(2)}</span>
             </p>
-            {order.discount !== "0" ? (
-              <p>Discount: -${order.discount}</p>
+            {order.discount !== 0 ? (
+              <p>
+                <span>Discount</span>
+                <span>-${parseFloat(order.discount).toFixed(2)}</span>
+              </p>
             ) : null}
             <p id="total">
               <span>Total</span>
