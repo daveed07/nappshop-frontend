@@ -1,6 +1,6 @@
-import styled from 'styled-components';
-import colors from '@constants/colors';
-import sizes from '@constants/fontSizes';
+import styled from "styled-components";
+import colors from "@constants/colors";
+import sizes from "@constants/fontSizes";
 
 const styledProduct = styled.div`
   padding: 64px 4%;
@@ -12,7 +12,9 @@ const styledProduct = styled.div`
 
   .product-container {
     margin: 0 auto;
-    padding: 32px 0;
+    @media (max-width: 768px) {
+      padding: 32px 0;
+    }
   }
 
   .product-section {
@@ -23,6 +25,34 @@ const styledProduct = styled.div`
 
     @media (max-width: 992px) {
       gap: 48px;
+    }
+
+    .product-images {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-end;
+    }
+
+    .display-images {
+      position: relative;
+      width: 100%;
+      max-width: 500px;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 32px;
+      margin-top: 16px;
+      overflow: hidden;
+
+      @media (max-width: 768px) {
+        margin: 8px 0 32px 0;
+      }
+    }
+
+    .image-container {
+      padding: 4px;
     }
 
     @media (max-width: 768px) {

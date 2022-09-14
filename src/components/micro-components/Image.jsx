@@ -47,17 +47,19 @@ const Image = (props) => {
 };
 
 const StyledFigure = styled.figure`
+  position: relative;
   height: auto;
   min-height: 200px;
   @media (max-width: 768px) {
     height: auto;
     min-height: 140px;
   }
-  position: relative;
   ${(props) =>
     props.display &&
     css`
-      height: 375px;
+      min-height: 375px;
+      width: 100%;
+      max-width: 500px;
       text-align: right;
       @media (max-width: 768px) {
         height: auto;

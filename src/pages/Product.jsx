@@ -26,6 +26,7 @@ const Product = () => {
   const cart = useSelector((state) => state.cart);
   const [loadingPage, setLoadingPage] = useState(true);
   const [loadingImage, setLoadingImage] = useState(true);
+  const [image, setImage] = useState(null);
 
   useEffect(() => {
     const loadPage = async () => {
@@ -77,14 +78,54 @@ const Product = () => {
         <StyledProduct>
           <div className="product-container">
             <section className="product-section">
-              <Image
-                display
-                loading={loadingImage}
-                src={product.images[0] || assets.product_placeholder}
-                alt={product.name}
-                id={product.id}
-                nohref
-              />
+              <div className="product-images">
+                <Image
+                  display
+                  loading={loadingImage}
+                  src={image || product.images[0] || assets.product_placeholder}
+                  alt={product.name}
+                  id={product.id}
+                  nohref
+                />
+                <div className="display-images">
+                  {product.images.map((i, index) =>
+                    loadingImage ? (
+                      <StyledLoading
+                        className="react-loader"
+                        type="bubbles"
+                        color={colors.main}
+                        height={50}
+                        width={50}
+                      />
+                    ) : (
+                      <div
+                        key={index}
+                        className="image-container"
+                        // if image is selected, add border
+                        style={
+                          image === i
+                            ? {
+                                border: `2px solid ${colors.greyDark}`,
+                                borderRadius: "8px",
+                              }
+                            : null
+                        }
+                      >
+                        <Image
+                          cart
+                          key={index}
+                          src={i}
+                          loading={loadingImage}
+                          alt={product.name}
+                          id={product.id}
+                          nohref
+                          onClick={() => setImage(i)}
+                        />
+                      </div>
+                    )
+                  )}
+                </div>
+              </div>
               <div className="product-info">
                 <Title size="xxxxlarge" color={colors.black}>
                   {product.name}
