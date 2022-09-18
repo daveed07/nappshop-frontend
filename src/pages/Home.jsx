@@ -6,6 +6,7 @@ import Title from "@micro-components/Title";
 import Banner from "@components/Banner";
 import StyledSection from "@styles/styledSection";
 import StyledLoading from "@styles/styledLoading";
+import Skeleton from "react-loading-skeleton";
 import colors from "@constants/colors";
 
 const Home = () => {
@@ -52,7 +53,7 @@ const Home = () => {
         <>
           <StyledSection>
             <Title size="xxxlarge" className="section-title">
-              What's New
+              What's New || <Skeleton />
             </Title>
             <ProductContainer category="accesories" />
           </StyledSection>
