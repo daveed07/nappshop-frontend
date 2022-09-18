@@ -23,13 +23,13 @@ const Banner = () => {
         width={50}
       />
     );
+  } else {
+    return (
+      <StyledBanner>
+        <img src={assets.banner} alt="banner" />
+      </StyledBanner>
+    );
   }
-
-  <StyledBanner>
-    <figure>
-      <img src={assets.banner} alt="Nappshop Banner" />
-    </figure>
-  </StyledBanner>;
 };
 
 export default Banner;
