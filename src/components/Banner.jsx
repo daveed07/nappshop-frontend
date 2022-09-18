@@ -8,7 +8,7 @@ const Banner = () => {
   const [loading, setLoading] = useState(true);
   useEffect(() => {
     const loadData = async () => {
-      await new Promise((resolve) => setTimeout(resolve, 5000));
+      await new Promise((resolve) => setTimeout(resolve, 2000));
       setLoading((loading) => !loading);
     };
     loadData();
@@ -19,7 +19,7 @@ const Banner = () => {
       {loading ? (
         <StyledLoading
           className="react-loader"
-          type="spin"
+          type="bubble"
           color={colors.main}
           height={50}
           width={50}
