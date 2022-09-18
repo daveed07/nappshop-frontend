@@ -17,10 +17,8 @@ const Banner = () => {
 
   return (
     <StyledBanner>
-      {loading && (
-        <Skeleton height={450} width="100%" />
-      )}
-      <img src={assets.banner} alt="banner" />
+      {loading && <Skeleton height={450} />}
+      {!loading && <img src={assets.banner} alt="banner" />}
     </StyledBanner>
   );
 };
