@@ -7,6 +7,7 @@ import Banner from "@components/Banner";
 import StyledSection from "@styles/styledSection";
 import StyledLoading from "@styles/styledLoading";
 import Skeleton from "react-loading-skeleton";
+import 'react-loading-skeleton/dist/skeleton.css';
 import colors from "@constants/colors";
 
 const Home = () => {
