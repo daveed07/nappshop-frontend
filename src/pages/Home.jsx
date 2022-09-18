@@ -53,7 +53,7 @@ const Home = () => {
         <>
           <StyledSection>
             <Title size="xxxlarge" className="section-title">
-              What's New || <Skeleton />
+              <Skeleton />
             </Title>
             <ProductContainer category="accesories" />
           </StyledSection>
