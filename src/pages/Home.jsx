@@ -54,7 +54,7 @@ const Home = () => {
         <>
           <StyledSection>
             <Title size="xxxlarge" className="section-title">
-              <Skeleton width={200} />
+              <Skeleton width={240} />
             </Title>
             <ProductContainer category="accesories" />
           </StyledSection>
