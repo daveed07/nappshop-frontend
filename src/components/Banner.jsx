@@ -19,7 +19,7 @@ const Banner = () => {
       {loading ? (
         <StyledLoading
           className="react-loader"
-          type="bubble"
+          type="bubbles"
           color={colors.main}
           height={50}
           width={50}
