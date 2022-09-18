@@ -14,24 +14,21 @@ const Banner = () => {
     loadData();
   }, []);
 
-  if (loading) {
-    console.log("loading");
-    return (
-      <StyledLoading
-        className="react-loader"
-        type="spin"
-        color={colors.main}
-        height={50}
-        width={50}
-      />
-    );
-  } else {
-    return (
-      <StyledBanner>
+  return (
+    <StyledBanner>
+      {loading ? (
+        <StyledLoading
+          className="react-loader"
+          type="spin"
+          color={colors.main}
+          height={50}
+          width={50}
+        />
+      ) : (
         <img src={assets.banner} alt="banner" />
-      </StyledBanner>
-    );
-  }
+      )}
+    </StyledBanner>
+  );
 };
 
 export default Banner;
