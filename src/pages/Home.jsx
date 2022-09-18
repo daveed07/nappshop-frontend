@@ -29,53 +29,49 @@ const Home = () => {
 
   const { brand } = useParams();
 
-  if (loadPage) {
-    return (
-      <StyledLoading
-        className="react-loader"
-        type="spin"
-        color={colors.main}
-        height={50}
-        width={50}
-      />
-    );
-  } else {
-    return (
-      <>
-        <Header />
-        <Banner />
-        {loadSection ? (
-          <StyledLoading
-            className="react-loader"
-            type="spin"
-            color={colors.main}
-            height={50}
-            width={50}
-          />
-        ) : brand ? (
+  return (
+    <>
+      <Header />
+      <Banner />
+      {loadSection ? (
+        <StyledLoading
+          className="react-loader"
+          type="spin"
+          color={colors.main}
+          height={50}
+          width={50}
+        />
+      ) : brand ? (
+        <StyledSection>
+          <Title size="xxxlarge" className="section-title">
+            {brand}
+          </Title>
+          <ProductContainer />
+        </StyledSection>
+      ) : (
+        <>
           <StyledSection>
-            <Title size="xxxlarge" className="section-title">{brand}</Title>
-            <ProductContainer />
+            <Title size="xxxlarge" className="section-title">
+              What's New
+            </Title>
+            <ProductContainer category="accesories" />
           </StyledSection>
-        ) : (
-          <>
-            <StyledSection>
-              <Title size="xxxlarge" className="section-title">What's New</Title>
-              <ProductContainer category="accesories" />
-            </StyledSection>
-            <StyledSection>
-              <Title size="xxxlarge" className="section-title">IRobot Roombas are back!</Title>
-              <ProductContainer category="products" brand="iRobot" />
-            </StyledSection>
-            <StyledSection>
-              <Title size="xxxlarge" className="section-title">Delonghi Collections</Title>
-              <ProductContainer category="accesories" brand="DeLonghi" />
-            </StyledSection>
-          </>
-        )}
-      </>
-    );
-  }
+          <StyledSection>
+            <Title size="xxxlarge" className="section-title">
+              IRobot Roombas are back!
+            </Title>
+            <ProductContainer category="products" brand="iRobot" />
+          </StyledSection>
+          <StyledSection>
+            <Title size="xxxlarge" className="section-title">
+              Delonghi Collections
+            </Title>
+            <ProductContainer category="accesories" brand="DeLonghi" />
+          </StyledSection>
+        </>
+      )}
+    </>
+  );
 };
 
 export default Home;

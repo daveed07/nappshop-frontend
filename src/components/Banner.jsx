@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from 'react';
-import { assets } from '@constants/assets';
-import StyledBanner from '@styles/styledBanner';
+import React, { useEffect, useState } from "react";
+import { assets } from "@constants/assets";
+import StyledBanner from "@styles/styledBanner";
+import StyledLoading from "@styles/styledLoading";
 
 const Banner = () => {
   const [loading, setLoading] = useState(true);
@@ -13,16 +14,22 @@ const Banner = () => {
   }, []);
 
   if (loading) {
-    return;
+    return (
+      <StyledLoading
+        className="react-loader"
+        type="spin"
+        color="#000"
+        height={50}
+        width={50}
+      />
+    );
   }
 
-  return (
-    <StyledBanner>
-      <figure>
-        <img src={assets.banner} alt="Nappshop Banner" />
-      </figure>
-    </StyledBanner>
-  );
-}
+  <StyledBanner>
+    <figure>
+      <img src={assets.banner} alt="Nappshop Banner" />
+    </figure>
+  </StyledBanner>;
+};
 
 export default Banner;
