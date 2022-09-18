@@ -14,6 +14,7 @@ const Banner = () => {
   }, []);
 
   if (loading) {
+    console.log("loading");
     return (
       <StyledLoading
         className="react-loader"
