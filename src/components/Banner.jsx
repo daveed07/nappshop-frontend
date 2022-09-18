@@ -18,7 +18,9 @@ const Banner = () => {
   return (
     <StyledBanner>
       {loading ? (
-        <Skeleton duration={2} height={450} />
+        <div>
+          <Skeleton duration={2} height={450} />
+        </div>
       ) : (
         <img src={assets.banner} alt="banner" />
       )}
