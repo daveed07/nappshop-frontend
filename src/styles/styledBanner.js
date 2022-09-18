@@ -1,6 +1,8 @@
 import styled from 'styled-components';
 
 const StyledBanner = styled.div`
+  height: 450px;
+  position: relative;
   padding-top: 32px;
   text-align: center;
 
