@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 const StyledBanner = styled.div`
   height: 450px;
@@ -18,11 +18,11 @@ const StyledBanner = styled.div`
   }
 
   @media (max-width: 768px) {
+    padding-top: 84px;
     img {
       width: 100%;
       height: 320px;
       object-fit: cover;
-      padding-top: 84px
     }
   }
 `;

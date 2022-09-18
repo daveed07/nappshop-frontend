@@ -17,7 +17,7 @@ const Banner = () => {
 
   return (
     <StyledBanner>
-      <Skeleton width={100} height={320} />
+      <Skeleton width="100%" height={320} />
     </StyledBanner>
   );
 };
