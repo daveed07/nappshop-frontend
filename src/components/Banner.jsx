@@ -9,7 +9,7 @@ const Banner = () => {
   const [loading, setLoading] = useState(true);
   useEffect(() => {
     const loadData = async () => {
-      await new Promise((resolve) => setTimeout(resolve, 2000));
+      await new Promise((resolve) => setTimeout(resolve, 1000));
       setLoading((loading) => !loading);
     };
     loadData();
@@ -17,7 +17,8 @@ const Banner = () => {
 
   return (
     <StyledBanner>
-      <Skeleton width="100%" height={320} />
+      {loading && <Skeleton className="banner-skeleton" />}
+      {!loading && <img src={assets.banner} alt="banner" />}
     </StyledBanner>
   );
 };

@@ -23,7 +23,10 @@ const StyledCart = styled.div`
     margin-bottom: 34px;
   }
   .cart-info {
-    text-align: end;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 4px;
   }
   .clean-cart {
     color: ${colors.mainDark};
@@ -33,6 +36,10 @@ const StyledCart = styled.div`
   .cart-body {
     display: grid;
     grid-gap: 24px;
+  }
+
+  .buttton-skeleton-container {
+    margin-top: 18px;
   }
 `;
 

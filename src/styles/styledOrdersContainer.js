@@ -3,6 +3,7 @@ import colors from '@constants/colors';
 
 const StyledOrdersContainer = styled.div`
   min-width: 320px;
+  max-width: 768px;
   height: fit-content;
   display: block;
   padding: 42px;

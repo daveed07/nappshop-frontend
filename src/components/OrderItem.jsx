@@ -3,21 +3,31 @@ import Title from "@micro-components/Title";
 import SubTitle from "@micro-components/SubTitle";
 import Image from "@micro-components/Image";
 import StyledOrderItem from "@styles/styledOrderItem";
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
 import colors from "@constants/colors";
 import { assets } from "@constants/assets";
 
-const OrderItem = ({ item }) => {
+const OrderItem = ({ item, loading }) => {
   return (
     <StyledOrderItem className="order-item">
-      <Image checkout src={item.product_images[0] || assets.product_placeholder} id={item.product_id} alt="product_image">
-        <span className='quantity'>{item.product_quantity}</span>
+      <Image
+        checkout
+        src={item.product_images[0] || assets.product_placeholder}
+        id={item.product_id}
+        alt="product_image"
+        loading={loading}
+      >
+        <span className="quantity">{item.product_quantity}</span>
       </Image>
       <div className="info">
         <Title size="medium" color={colors.black}>
-          {item.product_name}
+          {loading && <Skeleton width={160} height={18} />}
+          {!loading && item.product_name}
         </Title>
         <SubTitle size="medium" color={colors.black}>
-          ${item.product_price}
+          {loading && <Skeleton width={60} height={18} />}
+          {!loading && `$${item.product_price}`}
         </SubTitle>
       </div>
     </StyledOrderItem>

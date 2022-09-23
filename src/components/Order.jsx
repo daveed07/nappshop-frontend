@@ -1,28 +1,43 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Title from "@micro-components/Title";
 import SubTitle from "@micro-components/SubTitle";
 import Down from "@svg-components/Down";
 import Up from "@svg-components/Up";
 import OrderItem from "@components/OrderItem";
 import StyledOrder from "@styles/styledOrder";
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
 import colors from "@constants/colors";
 
-const Order = ({ order }) => {
+const Order = ({ order, loading }) => {
   const [toggle, setToggle] = useState(false);
   const date = new Date(order.created_date).toLocaleDateString();
+
+  const [loadOrder, setLoadOrder] = useState(false);
+
+  useEffect(() => {
+    const loadData = async () => {
+      await new Promise((resolve) => setTimeout(resolve, 500));
+      setLoadOrder((loadOrder) => !loadOrder);
+    };
+    loadData();
+  }, [toggle]);
 
   return (
     <StyledOrder toggle={toggle}>
       <div className="order-header">
         <Title size="medium" color={colors.black}>
-          Order #{order.order_id}
+          {loading && <Skeleton width={80} height={18} />}
+          {!loading && `Order #${order.order_id}`}
         </Title>
         <div className="order-header-info">
           <SubTitle size="medium" color={colors.black}>
-            Placed on {date}
+            {loading && <Skeleton width={150} height={18} />}
+            {!loading && `Placed on ${date}`}
           </SubTitle>
           <SubTitle size="medium" color={colors.black}>
-            ${order.total}
+            {loading && <Skeleton width={60} height={18} />}
+            {!loading && `${order.total}`}
           </SubTitle>
           {toggle ? (
             <Up onClick={() => setToggle(!toggle)} />
@@ -35,26 +50,44 @@ const Order = ({ order }) => {
         <div className="order-body">
           <div className="order-body-info">
             <div className="shipping-address">
-              {order.shipping_address.address1 !== "false" ? (
+              {order.shipping_address.address1 ? (
                 <>
                   <p>
-                    {order.shipping_address.address1},{" "}
-                    {order.shipping_address.address2}
+                    {loadOrder && (
+                      <div className="skeleton-container">
+                        <Skeleton width={200} height={18} />
+                        <Skeleton width={200} height={18} />
+                      </div>
+                    )}
+                    {!loadOrder && order.shipping_address.address1}
+                    {!loadOrder && order.shipping_address.address2}
                   </p>
-                  <p>{order.shipping_address.city}</p>
-                  <p>{order.shipping_address.province}</p>
+                  <p>
+                    {loadOrder && <Skeleton className="skeleton-address" width={160} height={18} />}
+                    {!loadOrder && order.shipping_address.city}
+                  </p>
+                  <p>
+                    {loadOrder && <Skeleton className="skeleton-address" width={160} height={18} />}
+                    {!loadOrder && order.shipping_address.province}
+                  </p>
                 </>
               ) : (
-                <p>Store pickup</p>
+                <p>
+                  {loadOrder && <Skeleton width={160} height={18} />}
+                  {!loadOrder && "store pickup"}
+                </p>
               )}
             </div>
             <div className="payment-method">
-              <p>{order.payment_method}</p>
+              <p>
+                {loadOrder && <Skeleton width={80} height={18} />}
+                {!loadOrder && order.payment_method}
+              </p>
             </div>
           </div>
           <div className="order-items">
             {order.order_items.map((item) => (
-              <OrderItem key={item.product_id} item={item} />
+              <OrderItem key={item.product_id} item={item} loading={loadOrder} />
             ))}
           </div>
         </div>

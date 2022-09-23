@@ -1,12 +1,24 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { store } from "@redux/store";
 import CartItem from "@components/CartItem";
 import Title from "@micro-components/Title";
 import Button from "@micro-components/Button";
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
 import colors from "@constants/colors";
 
 const CartContainer = () => {
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const loadData = async () => {
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+      setIsLoading((isLoading) => !isLoading);
+    };
+    loadData();
+  }, []);
+
   const cart = useSelector((state) => state.cart);
   const totalPrice = cart.reduce(
     (acc, item) => acc + item.price * item.quantity,
@@ -22,17 +34,22 @@ const CartContainer = () => {
     <div className="cart-container">
       <div className="cart-header">
         <Title size="xxxlarge" color={colors.black}>
-          Cart
+          {isLoading && <Skeleton width={100} height={40} />}
+          {!isLoading && "Cart"}
         </Title>
         <div className="cart-info">
           <p>
-            Items: <span>{cart.length}</span>
+            {isLoading && <Skeleton width={60} height={20} />}
+            {!isLoading &&
+              `${cart.length} ${cart.length > 1 ? "items" : "item"}`}
           </p>
           <p>
-            Total: <span>${parseFloat(totalPrice).toFixed(2)}</span>
+            {isLoading && <Skeleton width={100} height={20} />}
+            {!isLoading && `Total: $${totalPrice}`}
           </p>
           <p className="clean-cart" onClick={() => handleDeleteCart()}>
-            Clean cart
+            {isLoading && <Skeleton width={80} height={20} />}
+            {!isLoading && "Clean cart"}
           </p>
         </div>
       </div>
@@ -42,15 +59,22 @@ const CartContainer = () => {
         ))}
       </div>
       <div className="cart-footer">
-        <Button
-          primary
-          disabled={cart.length === 0}
-          onClick={() => {
-            window.location.href = "/checkout";
-          }}
-        >
-          Checkout
-        </Button>
+        {isLoading && (
+          <div className="buttton-skeleton-container">
+            <Skeleton width="100%" height={48} />
+          </div>
+        )}
+        {!isLoading && (
+          <Button
+            primary
+            disabled={cart.length === 0}
+            onClick={() => {
+              window.location.href = "/checkout";
+            }}
+          >
+            Checkout
+          </Button>
+        )}
       </div>
     </div>
   );

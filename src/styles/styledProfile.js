@@ -48,7 +48,6 @@ const StyledProfile = styled.div`
 
   .profile-details p {
     margin-top: 16px;
-    text-align: left;
   }
 
   span {
@@ -120,6 +119,20 @@ const StyledProfile = styled.div`
   }
 
   .profile-edit, .profile-details {
+    margin-top: 24px;
+  }
+
+  .skeleton-container {
+    width: 100%;
+  }
+
+  .skeleton-container span {
+    min-width: 260px;
+    max-width: 340px;
+    margin-top: 4px;
+  }
+
+  .button-skeleton-container {
     margin-top: 24px;
   }
 `;

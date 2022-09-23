@@ -2,24 +2,32 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import useGetProducts from "@hooks/useGetProducts";
 import ProductItem from "@components/ProductItem";
+import SkeletonItem from "@components/SkeletonItem";
 import StyledProductContainer from "@styles/styledProductContainer";
 import { env } from "@constants/env";
 
-const ProductContainer = (props) => {
-  // filter by category or brand, if send by props or by url
-  const { category, brand } = useParams();
-  const products = useGetProducts(
-    `${env.API}/products?filterByCategory=${category || props.category || ""}&filterByBrand=${brand || props.brand || ""}`
-  )
+const ProductContainer = ({ filter, loading }) => {
+  const { brand } = useParams();
+  const queryUrl = `${env.API}/products?${
+    brand
+      ? `filterByBrand=${brand}`
+      : filter.brand !== "all"
+      ? `filterByBrand=${filter.brand}`
+      : ""
+  }${
+    filter.category !== "all" ? `&filterByCategory=${filter.category}` : ""
+  }${filter.type !== "all" ? `&filterByType=${filter.type}&` : ""}`;
 
-  console.log(brand);
+  const products = useGetProducts(queryUrl);
 
   return (
     <StyledProductContainer>
       <div className="product-wrapper">
-        {products.map((product) => (
-          <ProductItem key={product.id} product={product} />
-        ))}
+        {products.length > 0
+          ? products.map((product) => (
+              <ProductItem key={product.id} product={product} loading={loading} />
+            ))
+          : [1, 2, 3, 4, 5].map((product) => <SkeletonItem key={product} />)}
       </div>
     </StyledProductContainer>
   );

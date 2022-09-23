@@ -9,6 +9,14 @@ const StyledSection = styled.section`;
   > h1 {
     margin-left: 16px;
   }
+
+  .title-skeleton {
+    width: 420px;
+
+    @media (max-width: 768px) {
+      width: 80%;
+    }
+  }
 `
 
 export default StyledSection;

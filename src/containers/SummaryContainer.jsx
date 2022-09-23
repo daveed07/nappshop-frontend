@@ -1,14 +1,26 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import CheckoutItem from "@components/CheckoutItem";
 import Title from "@micro-components/Title";
 import Input from "@micro-components/Input";
 import Button from "@micro-components/Button";
 import StyledSummary from "@styles/styledSummary";
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
 import colors from "@constants/colors";
 import { discounts } from "@constants/discounts";
 
 const SummaryContainer = (props) => {
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const loadData = async () => {
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+      setLoading((loading) => !loading);
+    };
+    loadData();
+  }, []);
+
   const cart = useSelector((state) => state.cart);
   const costs = useSelector((state) => state.costs);
   const subtotal = props.subtotal || costs.subtotal;
@@ -29,7 +41,11 @@ const SummaryContainer = (props) => {
       <div className="checkout-summary-items">
         <div className="checkout-summary">
           {cart.map((product) => (
-            <CheckoutItem key={product.id} product={product} />
+            <CheckoutItem
+              key={product.id}
+              product={product}
+              loading={loading}
+            />
           ))}
         </div>
         {props.codeInput && (
@@ -63,18 +79,32 @@ const SummaryContainer = (props) => {
         )}
         <div className="checkout-summary-prices">
           <div className="checkout-summary-prices-item">
-            <p className="checkout-summary-prices-item-title">Subtotal</p>
-            <p className="checkout-summary-prices-item-price">${subtotal}</p>
+            <p className="checkout-summary-prices-item-title">
+              {loading && <Skeleton width={65} height={18} />}
+              {!loading && "Subtotal"}
+            </p>
+            <p className="checkout-summary-prices-item-price">
+              {loading && <Skeleton width={65} height={18} />}
+              {!loading && `$${subtotal}`}
+            </p>
           </div>
           <div className="checkout-summary-prices-item">
-            <p className="checkout-summary-prices-item-title">Tax</p>
-            <p className="checkout-summary-prices-item-price">${tax}</p>
+            <p className="checkout-summary-prices-item-title">
+              {loading && <Skeleton width={65} height={18} />}
+              {!loading && "Tax"}
+            </p>
+            <p className="checkout-summary-prices-item-price">
+              {loading && <Skeleton width={65} height={18} />}
+              {!loading && `$${tax}`}
+            </p>
           </div>
           {discount > 0 && (
             <div className="checkout-summary-prices-item">
-              <p className="checkout-summary-prices-item-title">Discount</p>
+              <p className="checkout-summary-prices-item-title">
+                {loading && <Skeleton width={65} height={18} />}
+                {!loading && "Discount"}
+              </p>
               <p className="checkout-summary-prices-item-price">
-                -$
                 {typeof shipping === "string"
                   ? discountAmount(total)
                   : discountAmount(totalWithShipping)}
@@ -82,15 +112,27 @@ const SummaryContainer = (props) => {
             </div>
           )}
           <div className="checkout-summary-prices-item">
-            <p className="checkout-summary-prices-item-title">Shipping</p>
+            <p className="checkout-summary-prices-item-title">
+              {loading && <Skeleton width={65} height={18} />}
+              {!loading && "Shipping"}
+            </p>
             <p className="checkout-summary-prices-item-price">
-              {typeof shipping === "string" ? shipping : `$${shipping}`}
+              {loading && <Skeleton width={65} height={18} />}
+              {!loading &&
+                `
+              ${typeof shipping === "string" ? shipping : `$${shipping}`}`}
             </p>
           </div>
         </div>
         <div className="checkout-summary-total">
-          <p className="checkout-summary-total-title">Total</p>
-          <p className="checkout-summary-total-price">{totalWithShipping}</p>
+          <p className="checkout-summary-total-title">
+            {loading && <Skeleton width={80} height={20} />}
+            {!loading && "Total"}
+          </p>
+          <p className="checkout-summary-total-price">
+            {loading && <Skeleton width={80} height={20} />}
+            {!loading && `$${totalWithShipping}`}
+          </p>
         </div>
       </div>
     </StyledSummary>

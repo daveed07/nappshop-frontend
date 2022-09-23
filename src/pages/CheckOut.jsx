@@ -187,269 +187,257 @@ const CheckOut = () => {
     }
   }, [cart]);
 
-  if (isLoading) {
-    return (
-      <StyledLoading
-        className="react-loader"
-        type="spin"
-        color="#425acd"
-        height={50}
-        width={50}
-      />
-    );
-  } else {
-    return (
-      <StyledCheckout>
-        <div className="checkout-container">
-          <div className="checkout-form-container">
-            <Title size="xxxlarge" color="#000">
-              Checkout
-            </Title>
-            <div className="checkout-steps">
-              <SubTitle size="medium" color="#425acd">
-                Information and shipping
-              </SubTitle>
-              /
-              <SubTitle size="medium" color="#000">
-                Payment
-              </SubTitle>
+  return (
+    <StyledCheckout>
+      <div className="checkout-container">
+        <div className="checkout-form-container">
+          <Title size="xxxlarge" color="#000">
+            Checkout
+          </Title>
+          <div className="checkout-steps">
+            <SubTitle size="medium" color="#425acd">
+              Information and shipping
+            </SubTitle>
+            /
+            <SubTitle size="medium" color="#000">
+              Payment
+            </SubTitle>
+          </div>
+          <Form width="auto">
+            <div className="checkout-form-row">
+              <div className="checkout-form-top-text">
+                <p className="checkout-form-title">Contact information</p>
+                <div className="checkout-form-links">
+                  {isLoggedIn ? null : <a href="/signup">Create an account</a>}
+                  {isLoggedIn ? (
+                    <p
+                      className="account-info"
+                      onClick={() => handleUseAccountInfo()}
+                    >
+                      Use account information
+                    </p>
+                  ) : null}
+                </div>
+              </div>
+              <div className="checkout-form-input contact-info-form">
+                <div className="contact-info-form-top">
+                  <Input
+                    type="text"
+                    id="firstName"
+                    placeholder="First name"
+                    defaultValue={contactState.firstName || ""}
+                    onChange={() => {
+                      setEmptyFields(false);
+                    }}
+                    emptyFields={emptyFields}
+                  />
+                  <Input
+                    type="text"
+                    id="lastName"
+                    placeholder="Last name"
+                    defaultValue={contactState.lastName || ""}
+                    onChange={(e) => {
+                      setEmptyFields(false);
+                    }}
+                    emptyFields={emptyFields}
+                  />
+                </div>
+                <div className="contact-info-form-bottom">
+                  <Input
+                    type="email"
+                    id="email"
+                    placeholder="Email"
+                    defaultValue={contactState.email || ""}
+                    onChange={() => {
+                      setEmptyFields(false);
+                    }}
+                    emptyFields={emptyFields}
+                  />
+                  <Input
+                    type="tel"
+                    id="phone"
+                    placeholder="Phone"
+                    defaultValue={contactState.phone || ""}
+                    onChange={() => {
+                      setEmptyFields(false);
+                    }}
+                    emptyFields={emptyFields}
+                  />
+                </div>
+                <div className="marketing-checkbox">
+                  <Input type="checkbox" id="marketing" />
+                  <span className="checkbox-label" htmlFor="marketing">
+                    I want to receive marketing emails
+                  </span>
+                </div>
+              </div>
             </div>
-            <Form width="auto">
-              <div className="checkout-form-row">
-                <div className="checkout-form-top-text">
-                  <p className="checkout-form-title">Contact information</p>
-                  <div className="checkout-form-links">
-                    {isLoggedIn ? null : (
-                      <a href="/signup">Create an account</a>
-                    )}
-                    {isLoggedIn ? (
-                      <p
-                        className="account-info"
-                        onClick={() => handleUseAccountInfo()}
-                      >
-                        Use account information
-                      </p>
-                    ) : null}
+          </Form>
+          <Form width="auto">
+            <div className="checkout-form-row">
+              <p className="checkout-form-row-title">Shipping</p>
+              <div className="shipping-form-container">
+                <div className="checkout-form-input shipping-form">
+                  <div>
+                    <Input
+                      type="radio"
+                      id="pickup"
+                      name="pickup"
+                      value="pickup"
+                      defaultChecked
+                      onChange={() => {
+                        document.getElementById("delivery").checked = false;
+                        setAddress(false);
+                        setShipping("Free");
+                      }}
+                    />
+                    <label className="shipping-label" htmlFor="pickup">
+                      Pickup in store (inmediate delivery)
+                    </label>
+                  </div>
+                  <div>
+                    <p className="shipping-price">Free</p>
                   </div>
                 </div>
-                <div className="checkout-form-input contact-info-form">
-                  <div className="contact-info-form-top">
+                <div className="checkout-form-input shipping-form">
+                  <div>
                     <Input
-                      type="text"
-                      id="firstName"
-                      placeholder="First name"
-                      defaultValue={contactState.firstName || ""}
+                      type="radio"
+                      id="delivery"
+                      name="delivery"
+                      value="delivery"
                       onChange={() => {
-                        setEmptyFields(false);
+                        document.getElementById("pickup").checked = false;
+                        setAddress(true);
+                        cart.some((item) => item.brand === "iRobot")
+                          ? setShipping("Free")
+                          : setShipping(4.5);
                       }}
-                      emptyFields={emptyFields}
                     />
-                    <Input
-                      type="text"
-                      id="lastName"
-                      placeholder="Last name"
-                      defaultValue={contactState.lastName || ""}
-                      onChange={(e) => {
-                        setEmptyFields(false);
-                      }}
-                      emptyFields={emptyFields}
-                    />
+                    <label className="shipping-label" htmlFor="delivery">
+                      Delivery RedServi (1-2 days)
+                    </label>
                   </div>
-                  <div className="contact-info-form-bottom">
+                  <div>
+                    <p className="shipping-price">
+                      {cart.some((item) => item.brand === "iRobot")
+                        ? "Free"
+                        : "Starting on $4.50"}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </Form>
+          <Form width="auto">
+            {address ? (
+              <div className="checkout-form-row">
+                <div className="checkout-form-top-text">
+                  <p className="checkout-form-row-title">Address</p>
+                  {isLoggedIn ? (
+                    <p
+                      className="account-info"
+                      onClick={() => handleUseShippingInfo()}
+                    >
+                      Use account information
+                    </p>
+                  ) : null}
+                </div>
+                <div className="checkout-form-input address-form">
+                  <select>
+                    <option value="">Panama</option>
+                  </select>
+                  <Input
+                    type="text"
+                    id="address"
+                    placeholder="Address"
+                    defaultValue={shippingState.address1 || ""}
+                    onChange={() => {
+                      setEmptyFields(false);
+                    }}
+                    emptyFields={emptyFields}
+                  />
+                  <Input
+                    type="text"
+                    id="address2"
+                    placeholder="Street, apartment, etc"
+                    defaultValue={shippingState.address2 || ""}
+                    onChange={() => {
+                      setEmptyFields(false);
+                    }}
+                    emptyFields={emptyFields}
+                  />
+                  <div className="address-form-bottom">
                     <Input
-                      type="email"
-                      id="email"
-                      placeholder="Email"
-                      defaultValue={contactState.email || ""}
+                      type="text"
+                      id="city"
+                      placeholder="City"
+                      defaultValue={shippingState.city || ""}
                       onChange={() => {
                         setEmptyFields(false);
                       }}
                       emptyFields={emptyFields}
                     />
-                    <Input
-                      type="tel"
-                      id="phone"
-                      placeholder="Phone"
-                      defaultValue={contactState.phone || ""}
+                    <select
+                      id="region"
+                      defaultValue={shippingState.region || ""}
                       onChange={() => {
-                        setEmptyFields(false);
+                        document
+                          .getElementById("region")
+                          .classList.remove("red-outline");
+                        handleShipping();
                       }}
-                      emptyFields={emptyFields}
-                    />
+                    >
+                      <option value="pa">Panama</option>
+                      <option value="col">Colón</option>
+                      <option value="chi">Chiriquí</option>
+                      <option value="ver">Veraguas</option>
+                      <option value="coc">Coclé</option>
+                      <option value="chr">Chorrera</option>
+                      <option value="her">Herrera</option>
+                      <option value="san">Los Santos</option>
+                      <option value="dar">Darién</option>
+                      <option value="boc">Bocas del Toro</option>
+                    </select>
                   </div>
                   <div className="marketing-checkbox">
                     <Input type="checkbox" id="marketing" />
                     <span className="checkbox-label" htmlFor="marketing">
-                      I want to receive marketing emails
+                      Save information for next time
                     </span>
                   </div>
                 </div>
               </div>
-            </Form>
-            <Form width="auto">
-              <div className="checkout-form-row">
-                <p className="checkout-form-row-title">Shipping</p>
-                <div className="shipping-form-container">
-                  <div className="checkout-form-input shipping-form">
-                    <div>
-                      <Input
-                        type="radio"
-                        id="pickup"
-                        name="pickup"
-                        value="pickup"
-                        defaultChecked
-                        onChange={() => {
-                          document.getElementById("delivery").checked = false;
-                          setAddress(false);
-                          setShipping("Free");
-                        }}
-                      />
-                      <label className="shipping-label" htmlFor="pickup">
-                        Pickup in store (inmediate delivery)
-                      </label>
-                    </div>
-                    <div>
-                      <p className="shipping-price">Free</p>
-                    </div>
-                  </div>
-                  <div className="checkout-form-input shipping-form">
-                    <div>
-                      <Input
-                        type="radio"
-                        id="delivery"
-                        name="delivery"
-                        value="delivery"
-                        onChange={() => {
-                          document.getElementById("pickup").checked = false;
-                          setAddress(true);
-                          cart.some((item) => item.brand === "iRobot") ? setShipping("Free") : setShipping(4.50);
-                        }}
-                      />
-                      <label className="shipping-label" htmlFor="delivery">
-                        Delivery RedServi (1-2 days)
-                      </label>
-                    </div>
-                    <div>
-                      <p className="shipping-price">
-                        {cart.some((item) => item.brand === "iRobot")
-                          ? "Free"
-                          : "Starting on $4.50"}
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </Form>
-            <Form width="auto">
-              {address ? (
-                <div className="checkout-form-row">
-                  <div className="checkout-form-top-text">
-                    <p className="checkout-form-row-title">Address</p>
-                    {isLoggedIn ? (
-                      <p
-                        className="account-info"
-                        onClick={() => handleUseShippingInfo()}
-                      >
-                        Use account information
-                      </p>
-                    ) : null}
-                  </div>
-                  <div className="checkout-form-input address-form">
-                    <select>
-                      <option value="">Panama</option>
-                    </select>
-                    <Input
-                      type="text"
-                      id="address"
-                      placeholder="Address"
-                      defaultValue={shippingState.address1 || ""}
-                      onChange={() => {
-                        setEmptyFields(false);
-                      }}
-                      emptyFields={emptyFields}
-                    />
-                    <Input
-                      type="text"
-                      id="address2"
-                      placeholder="Street, apartment, etc"
-                      defaultValue={shippingState.address2 || ""}
-                      onChange={() => {
-                        setEmptyFields(false);
-                      }}
-                      emptyFields={emptyFields}
-                    />
-                    <div className="address-form-bottom">
-                      <Input
-                        type="text"
-                        id="city"
-                        placeholder="City"
-                        defaultValue={shippingState.city || ""}
-                        onChange={() => {
-                          setEmptyFields(false);
-                        }}
-                        emptyFields={emptyFields}
-                      />
-                      <select
-                        id="region"
-                        defaultValue={shippingState.region || ""}
-                        onChange={() => {
-                          document
-                            .getElementById("region")
-                            .classList.remove("red-outline");
-                          handleShipping();
-                        }}
-                      >
-                        <option value="pa">Panama</option>
-                        <option value="col">Colón</option>
-                        <option value="chi">Chiriquí</option>
-                        <option value="ver">Veraguas</option>
-                        <option value="coc">Coclé</option>
-                        <option value="chr">Chorrera</option>
-                        <option value="her">Herrera</option>
-                        <option value="san">Los Santos</option>
-                        <option value="dar">Darién</option>
-                        <option value="boc">Bocas del Toro</option>
-                      </select>
-                    </div>
-                    <div className="marketing-checkbox">
-                      <Input type="checkbox" id="marketing" />
-                      <span className="checkbox-label" htmlFor="marketing">
-                        Save information for next time
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              ) : null}
-              <div className="checkout-form-buttons">
-                <Button primary onClick={handlePayment}>
-                  Continue to payment
-                </Button>
-                <Button
-                  secondary
-                  onClick={() => {
-                    window.location.href = "/cart";
-                  }}
-                >
-                  Return to cart
-                </Button>
-              </div>
-            </Form>
-          </div>
-          <SummaryContainer
-            cart={cart}
-            subtotal={subtotal}
-            tax={tax}
-            total={total}
-            totalWithShipping={totalWithShipping}
-            shipping={shipping}
-            discount={discount}
-            setDiscount={setDiscount}
-            codeInput
-          />
+            ) : null}
+            <div className="checkout-form-buttons">
+              <Button primary onClick={handlePayment}>
+                Continue to payment
+              </Button>
+              <Button
+                secondary
+                onClick={() => {
+                  window.location.href = "/cart";
+                }}
+              >
+                Return to cart
+              </Button>
+            </div>
+          </Form>
         </div>
-      </StyledCheckout>
-    );
-  }
+        <SummaryContainer
+          cart={cart}
+          subtotal={subtotal}
+          tax={tax}
+          total={total}
+          totalWithShipping={totalWithShipping}
+          shipping={shipping}
+          discount={discount}
+          setDiscount={setDiscount}
+          codeInput
+        />
+      </div>
+    </StyledCheckout>
+  );
 };
 
 export default CheckOut;

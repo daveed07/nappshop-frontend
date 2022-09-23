@@ -7,23 +7,16 @@ import SubTitle from "@micro-components/SubTitle";
 import Button from "@micro-components/Button";
 import Cart from "@svg-components/Cart";
 import StyledProductItem from "@styles/styledProductItem";
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
 import colors from "@constants/colors";
 import { assets } from "@constants/assets";
 
-const ProductItem = ({ product }) => {
+const ProductItem = ({ product, loading }) => {
   const cart = useSelector((state) => state.cart);
   const [add, setAdd] = useState(
     cart.find((item) => item.id === product.id) ? colors.white : colors.main
   );
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const loadData = async () => {
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-      setLoading((loading) => !loading);
-    };
-    loadData();
-  }, []);
 
   const handleAddToCart = (article) => {
     if (!cart.find((item) => item.id === article.id)) {
@@ -49,38 +42,54 @@ const ProductItem = ({ product }) => {
       <div className="text-container">
         <a href={`/products/${product.id}`}>
           <Title size="medium" color={colors.main}>
-            {product.name}
+            {loading && (
+              <div className="title-skeleton-container">
+                <Skeleton className="title-skeleton" count={2} />
+              </div>
+            )}
+            {!loading && product.name}
           </Title>
         </a>
-        <SubTitle
-          size="small"
-          color={colors.black}
-        >{`${product.description.substring(0, 40)}...`}</SubTitle>
+        <SubTitle size="small" color={colors.black}>
+          {loading && (
+            <div className="description-skeleton-container">
+              <Skeleton className="description-skeleton" count={2} />
+            </div>
+          )}
+          {!loading && `${product.description.substring(0, 40)}...`}
+        </SubTitle>
         <div className="product-bottom">
           <SubTitle size="medium" color={colors.main}>
-            ${product.price}
+            {loading && (
+              <Skeleton className="price-skeleton" height={14} width={60} />
+            )}
+            {!loading && `$${product.price}`}
           </SubTitle>
-          {product.stock <= 0 ? (
-            <Button
-              secondary
-              disabled
-              borderColor="transparent"
-              icon
-              add={add === colors.main ? colors.white : colors.main}
-              onClick={() => handleAddToCart(product)}
-            >
-              <Cart width={18} height={18} fill={add} />
-            </Button>
-          ) : (
-            <Button
-              secondary
-              icon
-              add={add === colors.main ? colors.white : colors.main}
-              onClick={() => handleAddToCart(product)}
-            >
-              <Cart width={18} height={18} fill={add} />
-            </Button>
+          {loading && (
+            <Skeleton className="button-skeleton" height={40} width={40} />
           )}
+          {!loading &&
+            (product.stock <= 0 ? (
+              <Button
+                secondary
+                disabled
+                borderColor="transparent"
+                icon
+                add={add === colors.main ? colors.white : colors.main}
+                onClick={() => handleAddToCart(product)}
+              >
+                <Cart width={18} height={18} fill={add} />
+              </Button>
+            ) : (
+              <Button
+                secondary
+                icon
+                add={add === colors.main ? colors.white : colors.main}
+                onClick={() => handleAddToCart(product)}
+              >
+                <Cart width={18} height={18} fill={add} />
+              </Button>
+            ))}
         </div>
       </div>
     </StyledProductItem>

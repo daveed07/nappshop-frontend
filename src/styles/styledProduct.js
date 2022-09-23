@@ -79,6 +79,8 @@ const styledProduct = styled.div`
   }
 
   .current-price {
+    display: flex;
+    align-items: flex-end;
     font-size: ${sizes.xxxxlarge};
     font-weight: 800;
     color: ${colors.main};

@@ -58,5 +58,14 @@ const StyledOrder = styled.div`
     align-items: center;
     gap: 16px;
   }
+
+  .skeleton-container {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .skeleton-address {
+    margin-top: 8px;
+  }
 `;
 export default StyledOrder;

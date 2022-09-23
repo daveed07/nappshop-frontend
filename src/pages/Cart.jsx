@@ -18,19 +18,9 @@ const Cart = () => {
   return (
     <>
       <Header />
-      {isLoading ? (
-        <StyledLoading
-          className="react-loader"
-          type="spin"
-          color={colors.main}
-          height={50}
-          width={50}
-        />
-      ) : (
-        <StyledCart>
-          <CartContainer />
-        </StyledCart>
-      )}
+      <StyledCart>
+        <CartContainer />
+      </StyledCart>
     </>
   );
 };
