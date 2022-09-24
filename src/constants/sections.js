@@ -15,4 +15,12 @@ exports.sections = [
       type: "all",
     },
   },
+  {
+    text: "Treat yourself with some smoothies",
+    filter: {
+      brand: "all",
+      category: "products",
+      type: "Blender",
+    },
+  },
 ];

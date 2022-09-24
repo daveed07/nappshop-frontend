@@ -85,7 +85,14 @@ const ProductContent = ({
               <p className="product-price">
                 <p className="current-price">
                   {loading && <Skeleton width={120} height={60} />}
-                  {!loading && <span>${product.price}</span>}
+                  {!loading && (
+                    <span>
+                      $
+                      {Number.isInteger(product.price)
+                        ? product.price + ".00"
+                        : product.price}
+                    </span>
+                  )}
                 </p>
                 <p className="previous-price">
                   {loading && <Skeleton width={120} height={20} />}

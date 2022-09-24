@@ -63,7 +63,12 @@ const ProductItem = ({ product, loading }) => {
             {loading && (
               <Skeleton className="price-skeleton" height={14} width={60} />
             )}
-            {!loading && `$${product.price}`}
+            {!loading &&
+              `$${
+                Number.isInteger(product.price)
+                  ? product.price + ".00"
+                  : product.price
+              }`}
           </SubTitle>
           {loading && (
             <Skeleton className="button-skeleton" height={40} width={40} />
