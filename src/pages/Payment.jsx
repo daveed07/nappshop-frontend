@@ -54,6 +54,8 @@ const Payment = () => {
       address2: shipping.address2,
       province: shipping.region,
       payment_method: paymentMethod,
+      payment_status: "pending",
+      order_status: "pending",
       name: `${contact.firstName} ${contact.lastName}`,
       email: contact.email,
       phone: contact.phone,

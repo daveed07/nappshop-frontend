@@ -34,8 +34,7 @@
     "styled-components": "^5.3.5",
     "webpack": "^5.72.0",
     "webpack-cli": "^4.9.2",
-    "webpack-dev-server": "^4.9.0",
-    "yappy-js-front-sdk": "file:yappy-js-front-sdk-1.1.200.tgz"
+    "webpack-dev-server": "^4.9.0"
   },
   "devDependencies": {
     "css-loader": "^6.7.1",
