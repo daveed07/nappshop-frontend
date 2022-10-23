@@ -292,7 +292,7 @@ const CheckOut = () => {
                       }}
                     />
                     <label className="shipping-label" htmlFor="pickup">
-                      Pickup in store (inmediate delivery)
+                      Pickup in store (immediate delivery)
                     </label>
                   </div>
                   <div>

@@ -7,23 +7,48 @@ import SubTitle from "@micro-components/SubTitle";
 import Button from "@micro-components/Button";
 import ProductContainer from "@containers/ProductContainer";
 import OrderItem from "@components/OrderItem";
-import Check from "@svg-components/Check"
+import Check from "@svg-components/Check";
 import { env } from "@constants/env";
 
 const Success = () => {
   const { order_id } = useParams();
   const order = useGetOrders(`${env.API}/orders/${order_id}`);
+
+  const subTotal = order.subtotal?.toLocaleString("en-US", {
+    style: "currency",
+    currency: "USD",
+  });
+  const shipping = order.shipping?.toLocaleString("en-US", {
+    style: "currency",
+    currency: "USD",
+  });
+  const tax = (order.subtotal * 0.07).toLocaleString("en-US", {
+    style: "currency",
+    currency: "USD",
+  });
+  const discount = order.discount?.toLocaleString("en-US", {
+    style: "currency",
+    currency: "USD",
+  });
+  const total = order.total?.toLocaleString("en-US", {
+    style: "currency",
+    currency: "USD",
+  });
+
   return (
     <StyledSuccess>
       <div className="wrapper">
         <div className="order-message">
-          <Check width="96" height="96"/>
+          <Check width="96" height="96" />
           <Title>Thanks for your order!</Title>
           <SubTitle>
             Your shop is on the way. Please check your email for order
             confirmation and detailed delivery information or contact us at
-            WhatsApp <a href={`https://wa.me/${env.WA_NUMBER}`}>{env.WA_NUMBER.replace("+507", "")}</a> to have
-            more information about your order
+            WhatsApp{" "}
+            <a href={`https://wa.me/${env.WA_NUMBER}`}>
+              {env.WA_NUMBER.replace("+507", "")}
+            </a>{" "}
+            to have more information about your order
           </SubTitle>
           <div className="button-container">
             <Button
@@ -55,34 +80,34 @@ const Success = () => {
             </div>
             <p>
               <span>Subtotal</span>
-              <span>${parseFloat(order.subtotal).toFixed(2)}</span>
+              <span>{subTotal}</span>
             </p>
             <p>
               <span>Shipping</span>
-              <span>{
-                order.shipping === 0
+              <span>
+                {order.shipping === 0
                   ? "Free"
-                  : `$${parseFloat(order.shipping).toFixed(2)}`
-              }</span>
+                  : shipping}
+              </span>
             </p>
             <p>
               <span>Tax</span>
-              <span>${parseFloat(order.subtotal * 0.07).toFixed(2)}</span>
+              <span>{tax}</span>
             </p>
             {order.discount !== 0 ? (
               <p>
                 <span>Discount</span>
-                <span>-${parseFloat(order.discount).toFixed(2)}</span>
+                <span>-{discount}</span>
               </p>
             ) : null}
             <p id="total">
               <span>Total</span>
-              <span>${order.total}</span>
+              <span>{total}</span>
             </p>
           </div>
           <p id="paid">
             <span>Paid</span>
-            <span>${order.total}</span>
+            <span>{total}</span>
           </p>
         </div>
       </div>

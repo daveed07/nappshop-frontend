@@ -9,6 +9,11 @@ import colors from "@constants/colors";
 import { assets } from "@constants/assets";
 
 const CheckoutItem = ({ product, loading }) => {
+  const price = product.price.toLocaleString("en-US", {
+    style: "currency",
+    currency: "USD",
+  });
+
   return (
     <StyledCheckoutItem>
       <Image
@@ -27,8 +32,7 @@ const CheckoutItem = ({ product, loading }) => {
         </Title>
         <SubTitle size="medium" color={colors.black}>
           {loading && <Skeleton width={60} height={18} />}
-          {!loading &&
-            `${parseFloat(product.price * product.quantity).toFixed(2)}`}
+          {!loading && price}
         </SubTitle>
       </div>
     </StyledCheckoutItem>

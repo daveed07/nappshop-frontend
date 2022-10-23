@@ -18,6 +18,12 @@ const ProductItem = ({ product, loading }) => {
     cart.find((item) => item.id === product.id) ? colors.white : colors.main
   );
 
+  const description = product.description.substring(0, 40) + "...";
+  const price = product.price.toLocaleString("en-US", {
+    style: "currency",
+    currency: "USD",
+  });
+
   const handleAddToCart = (article) => {
     if (!cart.find((item) => item.id === article.id)) {
       store.dispatch({
@@ -56,19 +62,14 @@ const ProductItem = ({ product, loading }) => {
               <Skeleton className="description-skeleton" count={2} />
             </div>
           )}
-          {!loading && `${product.description.substring(0, 40)}...`}
+          {!loading && description}
         </SubTitle>
         <div className="product-bottom">
           <SubTitle size="medium" color={colors.main}>
             {loading && (
               <Skeleton className="price-skeleton" height={14} width={60} />
             )}
-            {!loading &&
-              `$${
-                Number.isInteger(product.price)
-                  ? product.price + ".00"
-                  : product.price
-              }`}
+            {!loading && price}
           </SubTitle>
           {loading && (
             <Skeleton className="button-skeleton" height={40} width={40} />

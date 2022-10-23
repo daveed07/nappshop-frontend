@@ -30,7 +30,10 @@ const SummaryContainer = (props) => {
   const tax = props.tax || costs.tax;
   const discount = props.discount || costs.discount || 0;
   const discountAmount = (tot) => {
-    return parseFloat((tot * discount) / 100).toFixed(2);
+    return parseFloat((tot * discount) / 100).toLocaleString("en-US", {
+      style: "currency",
+      currency: "USD",
+    });
   };
 
   return (
@@ -85,7 +88,11 @@ const SummaryContainer = (props) => {
             </p>
             <p className="checkout-summary-prices-item-price">
               {loading && <Skeleton width={65} height={18} />}
-              {!loading && `$${subtotal}`}
+              {!loading &&
+                subtotal.toLocaleString("en-US", {
+                  style: "currency",
+                  currency: "USD",
+                })}
             </p>
           </div>
           <div className="checkout-summary-prices-item">
@@ -95,7 +102,11 @@ const SummaryContainer = (props) => {
             </p>
             <p className="checkout-summary-prices-item-price">
               {loading && <Skeleton width={65} height={18} />}
-              {!loading && `$${tax}`}
+              {!loading &&
+                Number(tax).toLocaleString("en-US", {
+                  style: "currency",
+                  currency: "USD",
+                })}
             </p>
           </div>
           {discount > 0 && (
@@ -120,7 +131,14 @@ const SummaryContainer = (props) => {
               {loading && <Skeleton width={65} height={18} />}
               {!loading &&
                 `
-              ${typeof shipping === "string" ? shipping : `$${shipping}`}`}
+              ${
+                typeof shipping === "string"
+                  ? shipping
+                  : `${shipping.toLocaleString("en-US", {
+                      style: "currency",
+                      currency: "USD",
+                    })}`
+              }`}
             </p>
           </div>
         </div>
@@ -131,7 +149,11 @@ const SummaryContainer = (props) => {
           </p>
           <p className="checkout-summary-total-price">
             {loading && <Skeleton width={80} height={20} />}
-            {!loading && `$${totalWithShipping}`}
+            {!loading &&
+              Number(totalWithShipping).toLocaleString("en-US", {
+                style: "currency",
+                currency: "USD",
+              })}
           </p>
         </div>
       </div>

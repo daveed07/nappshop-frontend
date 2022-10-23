@@ -28,7 +28,7 @@ const App = () => {
             <Route path="/brands/:brand" element={<Home />} />
             <Route path="/cart" element={<Cart />} />
             <Route path="/checkout" element={<CheckOut />} />
-            <Route path="payment" element={<Payment />} />
+            <Route path="/payment" element={<Payment />} />
             {isLoggedIn ? (
               <Route path="/profile" element={<Profile />} />
             ) : (

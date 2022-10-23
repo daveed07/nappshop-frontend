@@ -9,6 +9,11 @@ import colors from "@constants/colors";
 import { assets } from "@constants/assets";
 
 const OrderItem = ({ item, loading }) => {
+  const price = item.product_price.toLocaleString("en-US", {
+    style: "currency",
+    currency: "USD",
+  });
+
   return (
     <StyledOrderItem className="order-item">
       <Image
@@ -27,7 +32,7 @@ const OrderItem = ({ item, loading }) => {
         </Title>
         <SubTitle size="medium" color={colors.black}>
           {loading && <Skeleton width={60} height={18} />}
-          {!loading && `$${item.product_price}`}
+          {!loading && price}
         </SubTitle>
       </div>
     </StyledOrderItem>

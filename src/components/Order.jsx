@@ -11,7 +11,18 @@ import colors from "@constants/colors";
 
 const Order = ({ order, loading }) => {
   const [toggle, setToggle] = useState(false);
+
   const date = new Date(order.created_date).toLocaleDateString();
+  const total = order.total.toLocaleString("en-US", {
+    style: "currency",
+    currency: "USD",
+  });
+
+  // payment method on title case
+  const paymentMethod = order.payment_method
+    .split("_")
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(" ");
 
   const [loadOrder, setLoadOrder] = useState(false);
 
@@ -37,7 +48,7 @@ const Order = ({ order, loading }) => {
           </SubTitle>
           <SubTitle size="medium" color={colors.black}>
             {loading && <Skeleton width={60} height={18} />}
-            {!loading && `${order.total}`}
+            {!loading && `Total ${total}`}
           </SubTitle>
           {toggle ? (
             <Up onClick={() => setToggle(!toggle)} />
@@ -59,7 +70,7 @@ const Order = ({ order, loading }) => {
                         <Skeleton width={200} height={18} />
                       </div>
                     )}
-                    {!loadOrder && order.shipping_address.address1}
+                    {!loadOrder && order.shipping_address.address1}{", "}
                     {!loadOrder && order.shipping_address.address2}
                   </p>
                   <p>
@@ -68,7 +79,7 @@ const Order = ({ order, loading }) => {
                   </p>
                   <p>
                     {loadOrder && <Skeleton className="skeleton-address" width={160} height={18} />}
-                    {!loadOrder && order.shipping_address.province}
+                    {!loadOrder && order.shipping_address.province.toUpperCase()}
                   </p>
                 </>
               ) : (
@@ -81,7 +92,7 @@ const Order = ({ order, loading }) => {
             <div className="payment-method">
               <p>
                 {loadOrder && <Skeleton width={80} height={18} />}
-                {!loadOrder && order.payment_method}
+                {!loadOrder && `Payment Method: ${paymentMethod}`}
               </p>
             </div>
           </div>

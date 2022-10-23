@@ -45,7 +45,11 @@ const CartContainer = () => {
           </p>
           <p>
             {isLoading && <Skeleton width={100} height={20} />}
-            {!isLoading && `Total: $${totalPrice}`}
+            {!isLoading &&
+              `Total: ${totalPrice.toLocaleString("en-US", {
+                style: "currency",
+                currency: "USD",
+              })}`}
           </p>
           <p className="clean-cart" onClick={() => handleDeleteCart()}>
             {isLoading && <Skeleton width={80} height={20} />}

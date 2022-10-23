@@ -17,6 +17,12 @@ import { assets } from "@constants/assets";
 const CartItem = ({ product }) => {
   const cart = useSelector((state) => state.cart);
 
+  const description = product.description.substring(0, 40) + "...";
+  const price = (product.price * product.quantity).toLocaleString("en-US", {
+    style: "currency",
+    currency: "USD",
+  });
+
   const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
     const loadData = async () => {
@@ -53,12 +59,11 @@ const CartItem = ({ product }) => {
         </Title>
         <SubTitle className="description" size="small" color={colors.greyDark}>
           {isLoading && <Skeleton width={160} count={2} />}
-          {!isLoading && `${product.description.substring(0, 40)}...`}
+          {!isLoading && description}
         </SubTitle>
         <SubTitle size="medium" color={colors.black}>
           {isLoading && <Skeleton width={60} height={20} />}
-          {!isLoading &&
-            `$${parseFloat(product.price * product.quantity).toFixed(2)}`}
+          {!isLoading && price}
         </SubTitle>
       </div>
       <div className="actions">

@@ -83,5 +83,9 @@ const StyledSuccess = styled.div`
     font-weight: 500;
     color: ${colors.main};
   }
+
+  .info h1 {
+    text-align: right;
+  }
 `;
 export default StyledSuccess;
