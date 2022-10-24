@@ -34,6 +34,10 @@ const StyledOrder = styled.div`
     margin-bottom: 16px;
   }
 
+  .order-body-info p {
+    margin-bottom: 8px;
+  }
+
   .payment-method {
     text-align: right;
   }

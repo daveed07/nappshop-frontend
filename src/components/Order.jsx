@@ -24,6 +24,11 @@ const Order = ({ order, loading }) => {
     .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
     .join(" ");
 
+  const orderStatus = order.order_status
+    .split("_")
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(" ");
+
   const [loadOrder, setLoadOrder] = useState(false);
 
   useEffect(() => {
@@ -93,6 +98,10 @@ const Order = ({ order, loading }) => {
               <p>
                 {loadOrder && <Skeleton width={80} height={18} />}
                 {!loadOrder && `Payment Method: ${paymentMethod}`}
+              </p>
+              <p>
+                {loadOrder && <Skeleton width={80} height={18} />}
+                {!loadOrder && `Order Status: ${orderStatus}`}
               </p>
             </div>
           </div>

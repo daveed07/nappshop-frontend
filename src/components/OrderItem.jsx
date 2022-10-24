@@ -9,6 +9,9 @@ import colors from "@constants/colors";
 import { assets } from "@constants/assets";
 
 const OrderItem = ({ item, loading }) => {
+  const name =
+    item.product_name?.length > 28 ? item.product_name.slice(0, 28) + "..." : item.product_name;
+
   const price = item.product_price.toLocaleString("en-US", {
     style: "currency",
     currency: "USD",
@@ -28,7 +31,7 @@ const OrderItem = ({ item, loading }) => {
       <div className="info">
         <Title size="medium" color={colors.black}>
           {loading && <Skeleton width={160} height={18} />}
-          {!loading && item.product_name}
+          {!loading && name}
         </Title>
         <SubTitle size="medium" color={colors.black}>
           {loading && <Skeleton width={60} height={18} />}
