@@ -26,6 +26,8 @@ const Profile = () => {
   const [message, setMessage] = useState("");
   const user = useSelector((state) => state.user);
 
+  console.log(user);
+
   useEffect(() => {
     const loadData = async () => {
       await new Promise((resolve) => setTimeout(resolve, 1000));
