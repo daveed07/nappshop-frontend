@@ -103,6 +103,10 @@ const Order = ({ order, loading }) => {
                 {loadOrder && <Skeleton width={80} height={18} />}
                 {!loadOrder && `Order Status: ${orderStatus}`}
               </p>
+              <p>
+                {loadOrder && <Skeleton width={80} height={18} />}
+                {!loadOrder && `Payment Status: ${order.payment_status}`}
+              </p>
             </div>
           </div>
           <div className="order-items">

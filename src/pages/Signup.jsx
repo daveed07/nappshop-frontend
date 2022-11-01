@@ -30,7 +30,7 @@ const Signup = () => {
                 store.dispatch({
                   type: "SIGN_UP",
                   payload: {
-                    id: response.data.id,
+                    id: response.data.user_id,
                     username: response.data.user_name,
                     name: response.data.name,
                     email: response.data.email,
