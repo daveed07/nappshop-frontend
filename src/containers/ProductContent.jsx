@@ -30,7 +30,13 @@ const ProductContent = ({
             <Image
               display
               loading={loading}
-              src={image || product.images[0] || assets.product_placeholder}
+              src={
+                image ||
+                product.images[
+                  product.images.findIndex((item) => item.includes("1.jpg"))
+                ] ||
+                assets.product_placeholder
+              }
               alt={product.name}
               id={product.id}
               nohref
@@ -107,14 +113,14 @@ const ProductContent = ({
                     {loading && <Skeleton width={100} height={20} />}
                     {!loading
                       ? product.brand === "iRobot"
-                        ? "Free shipping"
-                        : "Starts at $4.50"
+                        ? "Envío gratis"
+                        : "Desde $4.50"
                       : null}
                   </p>
                 </div>
                 <p>
                   {loading && <Skeleton width={120} height={20} />}
-                  {!loading && "Next day delivery"}
+                  {!loading && "Envíos al día siguiente"}
                 </p>
               </div>
             </div>
@@ -123,7 +129,7 @@ const ProductContent = ({
                 loading ? (
                   <Skeleton width={193} height={60} />
                 ) : (
-                  <Button disabled>Out of stock</Button>
+                  <Button disabled>Agotado</Button>
                 )
               ) : (
                 <>
@@ -140,15 +146,15 @@ const ProductContent = ({
                         <Cart2 width={24} height={24} />
                       )}
                       {cart.find((item) => item.id === product.id)
-                        ? "Added to cart"
-                        : "Add to cart"}
+                        ? "Agregado"
+                        : "Agregar al carrito"}
                     </Button>
                   )}
                   {loading && <Skeleton width={193} height={60} />}
                   {!loading && (
                     <Button primary buy onClick={() => handleBuyNow()}>
                       <BagFill width={24} height={24} />
-                      Buy now
+                      Comprar ahora
                     </Button>
                   )}
                 </>

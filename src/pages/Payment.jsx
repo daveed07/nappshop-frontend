@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import axios from "axios";
-import { store } from "@redux/store";
 import useScript from "@hooks/useScript";
 import SummaryContainer from "@containers/SummaryContainer";
 import Title from "@micro-components/Title";
@@ -9,6 +8,8 @@ import SubTitle from "@micro-components/SubTitle";
 import Input from "@micro-components/Input";
 import Button from "@micro-components/Button";
 import StyledPayment from "@styles/styledPayment";
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
 import colors from "@constants/colors";
 import whatsappText from "@utils/whatsappText";
 import resetStore from "@utils/resetStore";
@@ -25,6 +26,15 @@ const Payment = () => {
   const [paymentMethod, setPaymentMethod] = useState("");
   const [buttonText, setButtonText] = useState("Finish order");
   const [paymentBottom, setPaymentBottom] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  // create a loading effect
+  useEffect(() => {
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+    }, 1000);
+  }, []);
 
   const { isLoaded } = useScript(
     "https://secure.paguelofacil.com/HostedFields/vendor/scripts/WALLET/PFScript.js"
@@ -89,7 +99,7 @@ const Payment = () => {
         }
         if (paymentMethod === "cash") {
           resetStore();
-          window.location.href = `/success/${res.data.order_id}`;
+          window.location.href = `/orden-exitosa/${res.data.order_id}`;
         }
         if (open) {
           window.open(
@@ -102,51 +112,10 @@ const Payment = () => {
             })}`
           );
           resetStore();
-          window.location.href = `/success/${res.data.order_id}`;
+          window.location.href = `/orden-exitosa/${res.data.order_id}`;
         }
       })
       .catch((err) => console.log(err));
-  };
-
-  // create function that adds spaces every 4 digits
-  const formatNumber = (number) => {
-    if (/\S{5}/.test(number)) {
-      return number.replace(/\s/g, "").replace(/(\d{4})/g, "$1 ");
-    }
-  };
-
-  // turn code above into modern js code
-  const formatCreditCard = (number) => {
-    const regex = /^(\d{0,4})(\d{0,4})(\d{0,4})(\d{0,4})$/g;
-    const onlyNumbers = number.replace(/[^\d]/g, "");
-
-    return onlyNumbers.replace(regex, (regex, $1, $2, $3, $4) =>
-      [$1, $2, $3, $4].filter((group) => !!group).join(" ")
-    );
-  };
-
-  const formatExpirationDate = (date) => {
-    return date
-      .replace(
-        /[^0-9]/g,
-        "" // To allow only numbers
-      )
-      .replace(
-        /^([2-9])$/g,
-        "0$1" // To handle 3 > 03
-      )
-      .replace(
-        /^(1{1})([3-9]{1})$/g,
-        "0$1/$2" // 13 > 01/3
-      )
-      .replace(
-        /^0{1,}/g,
-        "0" // To handle 00 > 0
-      )
-      .replace(
-        /^([0-1]{1}[0-9]{1})([0-9]{1,2}).*/g,
-        "$1/$2" // To handle 113 > 11/3
-      );
   };
 
   return (
@@ -154,20 +123,22 @@ const Payment = () => {
       <div className="payment-container">
         <div className="payment-form-container">
           <Title size="xxxlarge" color={colors.black}>
-            Payment
+            {loading ? <Skeleton width={100} height={38} /> : "Pago"}
           </Title>
           <div className="payment-steps">
             <SubTitle size="medium" color={colors.black}>
-              Information and shipping
+              1. Información de contacto y envío
             </SubTitle>
             /
             <SubTitle size="medium" color={colors.main}>
-              Payment
+              2. Método de pago
             </SubTitle>
           </div>
           <form className="payment-form">
             <div className="payment-form-row">
-              <p className="payment-form-row-title">Payment method</p>
+              <p className="payment-form-row-title">
+                Métodos de pago
+              </p>
               <div className="payment-form-row-content-container">
                 <div className="payment-form-row-content">
                   <div className="payment-info-form">
@@ -177,10 +148,10 @@ const Payment = () => {
                       id="cash"
                       onChange={(e) => {
                         setPaymentMethod(e.target.id);
-                        setButtonText("Finish order");
+                        setButtonText("Terminar orden");
                       }}
                     />
-                    <label htmlFor="cash">Cash</label>
+                    <label htmlFor="cash">Efectivo</label>
                   </div>
                 </div>
                 <div className="payment-form-row-content">
@@ -193,10 +164,12 @@ const Payment = () => {
                           id="credit-card"
                           onChange={(e) => {
                             setPaymentMethod(e.target.id);
-                            setButtonText("Finish order");
+                            setButtonText("Terminar orden");
                           }}
                         />
-                        <label htmlFor="credit-card">Credit card</label>
+                        <label htmlFor="credit-card">
+                          Tarjeta de crédito / débito
+                        </label>
                       </div>
                       <div className="payment-info-form-wrapper-right">
                         <div className="payment-icons">
@@ -222,22 +195,11 @@ const Payment = () => {
                       <img src={assets.yappy} id="yappy-logo" />
                     </label>
                   </div>
-                  {paymentMethod === "yappy" && (
-                    <div className="payment-info-form  yappy">
-                      <Input
-                        type="text"
-                        id="yappyPhone"
-                        placeholder="Phone Number"
-                        label
-                        name="Input your phone number ot finish order on WhatsApp"
-                      />
-                    </div>
-                  )}
                 </div>
               </div>
             </div>
             <div className="payment-form-buttons">
-              {buttonText === "Finish order" ? (
+              {buttonText === "Terminar orden" ? (
                 paymentBottom ? (
                   <div id="container-form"></div>
                 ) : (
@@ -262,7 +224,7 @@ const Payment = () => {
                   window.location.href = "/checkout";
                 }}
               >
-                Return to shipping
+                Regresar
               </Button>
             </div>
           </form>

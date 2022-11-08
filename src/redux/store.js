@@ -33,7 +33,7 @@ const initialState = {
     subtotal: 0,
     total: 0,
     totalWithShipping: 0,
-    shipping: "Free",
+    shipping: "Gratis",
     tax: 0,
     discount: 0,
   },

@@ -49,12 +49,12 @@ const Order = ({ order, loading }) => {
       <div className="order-header">
         <Title size="medium" color={colors.black}>
           {loading && <Skeleton width={80} height={18} />}
-          {!loading && `Order #${order.order_id}`}
+          {!loading && `Orden #${order.order_id}`}
         </Title>
         <div className="order-header-info">
           <SubTitle size="medium" color={colors.black}>
             {loading && <Skeleton width={150} height={18} />}
-            {!loading && `Placed on ${date}`}
+            {!loading && `Realizado el ${date}`}
           </SubTitle>
           <SubTitle size="medium" color={colors.black}>
             {loading && <Skeleton width={60} height={18} />}
@@ -95,22 +95,22 @@ const Order = ({ order, loading }) => {
               ) : (
                 <p>
                   {loadOrder && <Skeleton width={160} height={18} />}
-                  {!loadOrder && "store pickup"}
+                  {!loadOrder && "Retirar en tienda"}
                 </p>
               )}
             </div>
             <div className="payment-method">
               <p>
                 {loadOrder && <Skeleton width={80} height={18} />}
-                {!loadOrder && `Payment Method: ${paymentMethod}`}
+                {!loadOrder && `Método de Pago: ${paymentMethod}`}
               </p>
               <p>
                 {loadOrder && <Skeleton width={80} height={18} />}
-                {!loadOrder && `Order Status: ${orderStatus}`}
+                {!loadOrder && `Estado de la Orden: ${orderStatus}`}
               </p>
               <p>
                 {loadOrder && <Skeleton width={80} height={18} />}
-                {!loadOrder && `Payment Status: ${paymentStatus}`}
+                {!loadOrder && `Estado del Pago: ${paymentStatus}`}
               </p>
             </div>
           </div>

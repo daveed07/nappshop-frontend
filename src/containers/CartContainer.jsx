@@ -35,13 +35,13 @@ const CartContainer = () => {
       <div className="cart-header">
         <Title size="xxxlarge" color={colors.black}>
           {isLoading && <Skeleton width={100} height={40} />}
-          {!isLoading && "Cart"}
+          {!isLoading && "Carrito"}
         </Title>
         <div className="cart-info">
           <p>
             {isLoading && <Skeleton width={60} height={20} />}
             {!isLoading &&
-              `${cart.length} ${cart.length > 1 ? "items" : "item"}`}
+              `${cart.length} ${cart.length > 1 ? "artículos" : "artículo"}`}
           </p>
           <p>
             {isLoading && <Skeleton width={100} height={20} />}
@@ -53,7 +53,7 @@ const CartContainer = () => {
           </p>
           <p className="clean-cart" onClick={() => handleDeleteCart()}>
             {isLoading && <Skeleton width={80} height={20} />}
-            {!isLoading && "Clean cart"}
+            {!isLoading && "Limpiar carrito"}
           </p>
         </div>
       </div>
@@ -64,7 +64,7 @@ const CartContainer = () => {
       </div>
       <div className="cart-footer">
         {isLoading && (
-          <div className="buttton-skeleton-container">
+          <div className="button-skeleton-container">
             <Skeleton width="100%" height={48} />
           </div>
         )}

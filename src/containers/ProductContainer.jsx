@@ -8,16 +8,6 @@ import { env } from "@constants/env";
 
 const ProductContainer = ({ filter, loading }) => {
   const { brand } = useParams();
-  // const queryUrl = `${env.API}/products?${
-  //   brand
-  //     ? `filterByBrand=${brand}`
-  //     : filter.brand !== "all"
-  //     ? `filterByBrand=${filter.brand}`
-  //     : ""
-  // }${
-  //   filter.category !== "all" ? `&filterByCategory=${filter.category}` : ""
-  // }${filter.type !== "all" ? `&filterByType=${filter.type}&` : ""}`;
-
   const queryUrl = `${env.API}/products?${
     brand ? `filterByBrand=${brand}` : filter && filter.brand !== "all"
   }${
@@ -25,9 +15,6 @@ const ProductContainer = ({ filter, loading }) => {
       ? `&filterByCategory=${filter.category}`
       : ""
   }${filter && filter.type !== "all" ? `&filterByType=${filter.type}&` : ""}`;
-
-  // const queryUrl = `${env.API}/products?filterByBrand=${brand}`;
-
   const products = useGetProducts(queryUrl);
 
   return (

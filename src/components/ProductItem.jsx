@@ -41,12 +41,16 @@ const ProductItem = ({ product, loading }) => {
     <StyledProductItem>
       <Image
         loading={loading}
-        src={product.images[0] || assets.product_placeholder}
+        src={
+          product.images[
+            product.images.findIndex((item) => item.includes("1.jpg"))
+          ] || assets.product_placeholder
+        }
         alt={product.name}
         id={product.id}
       />
       <div className="text-container">
-        <a href={`/products/${product.id}`}>
+        <a href={`/productos/${product.id}`}>
           <Title size="medium" color={colors.main}>
             {loading && (
               <div className="title-skeleton-container">

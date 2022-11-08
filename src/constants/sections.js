@@ -3,7 +3,7 @@ exports.sections = [
     text: "iRobot Roombas are back!",
     filter: {
       brand: "iRobot",
-      category: "products",
+      category: "productos",
       type: "Robot Vacuum",
     },
   },
@@ -11,7 +11,7 @@ exports.sections = [
     text: "iRobot accessories",
     filter: {
       brand: "iRobot",
-      category: "accesories",
+      category: "accesorios",
       type: "all",
     },
   },
@@ -19,7 +19,7 @@ exports.sections = [
     text: "Treat yourself with some smoothies",
     filter: {
       brand: "all",
-      category: "products",
+      category: "productos",
       type: "Blender",
     },
   },

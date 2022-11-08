@@ -7,7 +7,6 @@ import Title from "@micro-components/Title";
 import SubTitle from "@micro-components/SubTitle";
 import Form from "@micro-components/Form";
 import Input from "@micro-components/Input";
-import StyledLoading from "@styles/styledLoading";
 import StyledCheckout from "@styles/styledCheckout";
 
 const CheckOut = () => {
@@ -27,7 +26,7 @@ const CheckOut = () => {
   }, []);
 
   const [address, setAddress] = useState(false);
-  const [shipping, setShipping] = useState("Free");
+  const [shipping, setShipping] = useState("Gratis");
   const [discount, setDiscount] = useState(0);
   const [emptyFields, setEmptyFields] = useState(false);
 
@@ -38,7 +37,7 @@ const CheckOut = () => {
   const tax = parseFloat(subtotal * 0.07).toFixed(2);
   const total = parseFloat(subtotal + parseFloat(tax)).toFixed(2);
   const totalWithShipping =
-    shipping === "Free"
+    shipping === "Gratis"
       ? total
       : parseFloat(Number(total) + Number(shipping)).toFixed(2);
 
@@ -98,7 +97,7 @@ const CheckOut = () => {
             discount,
           },
         });
-        window.location.href = "/payment";
+        window.location.href = "/pago";
       }
     } else {
       const address1 = document.getElementById("address").value;
@@ -150,7 +149,7 @@ const CheckOut = () => {
             discount,
           },
         });
-        window.location.href = "/payment";
+        window.location.href = "/pago";
       }
     }
   };
@@ -174,13 +173,13 @@ const CheckOut = () => {
           break;
       }
     } else {
-      setShipping("Free");
+      setShipping("Gratis");
     }
   };
 
   // if user goes back to the previous page, then reset the state.costs
   useEffect(() => {
-    if (window.location.pathname === "/cart") {
+    if (window.location.pathname === "/carrito") {
       store.dispatch({
         type: "RESET_COSTS",
       });
@@ -196,25 +195,27 @@ const CheckOut = () => {
           </Title>
           <div className="checkout-steps">
             <SubTitle size="medium" color="#425acd">
-              Information and shipping
+              1. Información de contacto y envío
             </SubTitle>
             /
             <SubTitle size="medium" color="#000">
-              Payment
+              2. Método de pago
             </SubTitle>
           </div>
           <Form width="auto">
             <div className="checkout-form-row">
               <div className="checkout-form-top-text">
-                <p className="checkout-form-title">Contact information</p>
+                <p className="checkout-form-title">Información de contacto</p>
                 <div className="checkout-form-links">
-                  {isLoggedIn ? null : <a href="/signup">Create an account</a>}
+                  {isLoggedIn ? null : (
+                    <a href="/registrarse">Crear una cuenta</a>
+                  )}
                   {isLoggedIn ? (
                     <p
                       className="account-info"
                       onClick={() => handleUseAccountInfo()}
                     >
-                      Use account information
+                      Usar información de cuenta
                     </p>
                   ) : null}
                 </div>
@@ -224,7 +225,7 @@ const CheckOut = () => {
                   <Input
                     type="text"
                     id="firstName"
-                    placeholder="First name"
+                    placeholder="Nombre"
                     defaultValue={contactState.firstName || ""}
                     onChange={() => {
                       setEmptyFields(false);
@@ -234,7 +235,7 @@ const CheckOut = () => {
                   <Input
                     type="text"
                     id="lastName"
-                    placeholder="Last name"
+                    placeholder="Apellido"
                     defaultValue={contactState.lastName || ""}
                     onChange={(e) => {
                       setEmptyFields(false);
@@ -256,7 +257,7 @@ const CheckOut = () => {
                   <Input
                     type="tel"
                     id="phone"
-                    placeholder="Phone"
+                    placeholder="Teléfono"
                     defaultValue={contactState.phone || ""}
                     onChange={() => {
                       setEmptyFields(false);
@@ -264,18 +265,18 @@ const CheckOut = () => {
                     emptyFields={emptyFields}
                   />
                 </div>
-                <div className="marketing-checkbox">
+                {/* <div className="marketing-checkbox">
                   <Input type="checkbox" id="marketing" />
                   <span className="checkbox-label" htmlFor="marketing">
                     I want to receive marketing emails
                   </span>
-                </div>
+                </div> */}
               </div>
             </div>
           </Form>
           <Form width="auto">
             <div className="checkout-form-row">
-              <p className="checkout-form-row-title">Shipping</p>
+              <p className="checkout-form-row-title">Información de envío</p>
               <div className="shipping-form-container">
                 <div className="checkout-form-input shipping-form">
                   <div>
@@ -292,11 +293,11 @@ const CheckOut = () => {
                       }}
                     />
                     <label className="shipping-label" htmlFor="pickup">
-                      Pickup in store (immediate delivery)
+                      Retirar en tienda (Entrega inmediata)
                     </label>
                   </div>
                   <div>
-                    <p className="shipping-price">Free</p>
+                    <p className="shipping-price">Gratis</p>
                   </div>
                 </div>
                 <div className="checkout-form-input shipping-form">
@@ -310,18 +311,18 @@ const CheckOut = () => {
                         document.getElementById("pickup").checked = false;
                         setAddress(true);
                         cart.some((item) => item.brand === "iRobot")
-                          ? setShipping("Free")
+                          ? setShipping("Gratis")
                           : setShipping(4.5);
                       }}
                     />
                     <label className="shipping-label" htmlFor="delivery">
-                      Delivery RedServi (1-2 days)
+                      Envío a domicilio (Entrega en 1-2 días hábiles)
                     </label>
                   </div>
                   <div>
                     <p className="shipping-price">
                       {cart.some((item) => item.brand === "iRobot")
-                        ? "Free"
+                        ? "Gratis"
                         : "Starting on $4.50"}
                     </p>
                   </div>
@@ -333,24 +334,24 @@ const CheckOut = () => {
             {address ? (
               <div className="checkout-form-row">
                 <div className="checkout-form-top-text">
-                  <p className="checkout-form-row-title">Address</p>
+                  <p className="checkout-form-row-title">Dirección de envío</p>
                   {isLoggedIn ? (
                     <p
                       className="account-info"
                       onClick={() => handleUseShippingInfo()}
                     >
-                      Use account information
+                      Usar información de cuenta
                     </p>
                   ) : null}
                 </div>
                 <div className="checkout-form-input address-form">
                   <select>
-                    <option value="">Panama</option>
+                    <option value="">Panamá</option>
                   </select>
                   <Input
                     type="text"
                     id="address"
-                    placeholder="Address"
+                    placeholder="Dirección"
                     defaultValue={shippingState.address1 || ""}
                     onChange={() => {
                       setEmptyFields(false);
@@ -360,7 +361,7 @@ const CheckOut = () => {
                   <Input
                     type="text"
                     id="address2"
-                    placeholder="Street, apartment, etc"
+                    placeholder="Apartamento, suite, etc."
                     defaultValue={shippingState.address2 || ""}
                     onChange={() => {
                       setEmptyFields(false);
@@ -371,7 +372,7 @@ const CheckOut = () => {
                     <Input
                       type="text"
                       id="city"
-                      placeholder="City"
+                      placeholder="Ciudad"
                       defaultValue={shippingState.city || ""}
                       onChange={() => {
                         setEmptyFields(false);
@@ -388,7 +389,7 @@ const CheckOut = () => {
                         handleShipping();
                       }}
                     >
-                      <option value="pa">Panama</option>
+                      <option value="pa">Panamá</option>
                       <option value="col">Colón</option>
                       <option value="chi">Chiriquí</option>
                       <option value="ver">Veraguas</option>
@@ -401,9 +402,9 @@ const CheckOut = () => {
                     </select>
                   </div>
                   <div className="marketing-checkbox">
-                    <Input type="checkbox" id="marketing" />
-                    <span className="checkbox-label" htmlFor="marketing">
-                      Save information for next time
+                    <Input type="checkbox" id="save-address" />
+                    <span className="checkbox-label" htmlFor="save-address">
+                      Guardar esta dirección para futuras compras
                     </span>
                   </div>
                 </div>
@@ -411,15 +412,15 @@ const CheckOut = () => {
             ) : null}
             <div className="checkout-form-buttons">
               <Button primary onClick={handlePayment}>
-                Continue to payment
+                Pagar
               </Button>
               <Button
                 secondary
                 onClick={() => {
-                  window.location.href = "/cart";
+                  window.location.href = "/carrito";
                 }}
               >
-                Return to cart
+                Regresar al carrito
               </Button>
             </div>
           </Form>

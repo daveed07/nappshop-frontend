@@ -42,10 +42,16 @@ const Header = () => {
         wrap="wrap"
         color={colors.black}
       />
-      <Nav justifyContent="center" gap="24px" wrap="nowrap" color={colors.black} mobile >
+      <Nav
+        justifyContent="center"
+        gap="24px"
+        wrap="nowrap"
+        color={colors.black}
+        mobile
+      >
         {isLoggedIn ? (
           <>
-            <a href="/profile">
+            <a href="/perfil">
               <PersonFill />
             </a>
             <a href="/">
@@ -54,16 +60,22 @@ const Header = () => {
           </>
         ) : (
           <>
-            <Button secondary onClick={() => (window.location.href = "/login")}>Log in</Button>
-            <Button primary onClick={() => (window.location.href = "/signup")}>Sign up</Button>
+            <Button secondary onClick={() => (window.location.href = "/login")}>
+              Iniciar sesión
+            </Button>
+            <Button primary onClick={() => (window.location.href = "/signup")}>
+              Registrarse
+            </Button>
           </>
         )}
-        <a href="/cart">
+        <a href="/carrito">
           <div className="cart-container">
             <Cart width={24} height={24} />
             {cart.length > 0 ? (
               <span className="quantity">{cart.length}</span>
-            ) : false}
+            ) : (
+              false
+            )}
           </div>
         </a>
         <div className="menu-container">

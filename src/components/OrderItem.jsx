@@ -10,7 +10,9 @@ import { assets } from "@constants/assets";
 
 const OrderItem = ({ item, loading }) => {
   const name =
-    item.product_name?.length > 28 ? item.product_name.slice(0, 28) + "..." : item.product_name;
+    item.product_name?.length > 28
+      ? item.product_name.slice(0, 28) + "..."
+      : item.product_name;
 
   const price = item.product_price.toLocaleString("en-US", {
     style: "currency",
@@ -21,7 +23,11 @@ const OrderItem = ({ item, loading }) => {
     <StyledOrderItem className="order-item">
       <Image
         checkout
-        src={item.product_images[0] || assets.product_placeholder}
+        src={
+          item.product_images[
+            product.images.findIndex((item) => item.includes("1.jpg"))
+          ] || assets.product_placeholder
+        }
         id={item.product_id}
         alt="product_image"
         loading={loading}

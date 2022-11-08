@@ -40,15 +40,17 @@ const Success = () => {
       <div className="wrapper">
         <div className="order-message">
           <Check width="96" height="96" />
-          <Title>Thanks for your order!</Title>
+          <Title>
+            Gracias por tu compra, tu pedido se ha realizado con éxito
+          </Title>
           <SubTitle>
-            Your shop is on the way. Please check your email for order
-            confirmation and detailed delivery information or contact us at
+            Tu pedido se encuentra en camino. Por favor revisa tu correo para la
+            confirmación de tu pedido y detalles de entrega o contáctanos por
             WhatsApp{" "}
             <a href={`https://wa.me/${env.WA_NUMBER}`}>
               {env.WA_NUMBER.replace("+507", "")}
             </a>{" "}
-            to have more information about your order
+            para cualquier duda.
           </SubTitle>
           <div className="button-container">
             <Button
@@ -57,20 +59,22 @@ const Success = () => {
                 window.location.replace("/");
               }}
             >
-              Continue Shopping
+              Volver a la tienda
             </Button>
             <Button
               secondary
               onClick={() => {
-                window.location.replace("/profile");
+                window.location.replace("/perfil");
               }}
             >
-              See order
+              Ver mis pedidos
             </Button>
           </div>
         </div>
         <div className="order-summary">
-          <Title>Order Summary</Title>
+          <Title>
+            Resumen de tu pedido <span>#{order_id}</span>
+          </Title>
           <div className="order-summary-content">
             <div className="order-items">
               {order.order_items &&
@@ -83,20 +87,16 @@ const Success = () => {
               <span>{subTotal}</span>
             </p>
             <p>
-              <span>Shipping</span>
-              <span>
-                {order.shipping === 0
-                  ? "Free"
-                  : shipping}
-              </span>
+              <span>Envío</span>
+              <span>{order.shipping === 0 ? "Gratis" : shipping}</span>
             </p>
             <p>
-              <span>Tax</span>
+              <span>ITBMS</span>
               <span>{tax}</span>
             </p>
             {order.discount !== 0 ? (
               <p>
-                <span>Discount</span>
+                <span>Descuento</span>
                 <span>-{discount}</span>
               </p>
             ) : null}
@@ -106,13 +106,15 @@ const Success = () => {
             </p>
           </div>
           <p id="paid">
-            <span>Paid</span>
+            <span>Pagado</span>
             <span>{total}</span>
           </p>
         </div>
       </div>
       <div className="bottom">
-        <Title>Other products that might interest you</Title>
+        <Title>
+          También te puede interesar:
+        </Title>
         <ProductContainer />
       </div>
     </StyledSuccess>

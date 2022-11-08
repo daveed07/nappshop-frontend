@@ -16,24 +16,26 @@ const Failure = () => {
     <StyledFailure>
       <div className="wrapper">
         <XCircle width="96" height="96" />
-        <Title>Sorry, your order was not completed</Title>
+        <Title>Lo sentimos, tu orden no pudo ser procesada.</Title>
         <SubTitle>
-          Please try again or contact us at WhatsApp{" "}
+          Por favor, intenta nuevamente o contáctanos a nuestro WhatsApp{" "}
           {
             <a href={`https://wa.me/${env.WA_NUMBER}`}>
               {env.WA_NUMBER.replace("+507", "")}
             </a>
           }{" "}
-          for assistance, we will be happy to help you. You can also check your payment information or try again with a different payment method.
+          Para asistencia, estaremos encantados de ayudarte. También puedes
+          revisar tu información de pago o intentar nuevamente con un método de
+          pago diferente.
         </SubTitle>
         <div className="button-container">
           <Button
             primary
             onClick={() => {
-              window.location.replace("/payment");
+              window.location.replace("/pago");
             }}
           >
-            Try again
+            Intentar nuevamente
           </Button>
           <Button
             secondary
@@ -41,7 +43,7 @@ const Failure = () => {
               window.location.replace("/");
             }}
           >
-            Continue Shopping
+            Continuar comprando
           </Button>
         </div>
       </div>

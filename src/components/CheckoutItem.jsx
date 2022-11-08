@@ -18,7 +18,11 @@ const CheckoutItem = ({ product, loading }) => {
     <StyledCheckoutItem>
       <Image
         checkout
-        src={product.images[0] || assets.product_placeholder}
+        src={
+          product.images[
+            product.images.findIndex((item) => item.includes("1.jpg"))
+          ] || assets.product_placeholder
+        }
         alt={product.name}
         id={product.id}
         loading={loading}

@@ -39,7 +39,7 @@ const SummaryContainer = (props) => {
   return (
     <StyledSummary>
       <Title size="xxxlarge" color={colors.black}>
-        Summary
+        {loading ? <Skeleton width={260} height={38} /> : "Resumen de compra"}
       </Title>
       <div className="checkout-summary-items">
         <div className="checkout-summary">
@@ -57,7 +57,7 @@ const SummaryContainer = (props) => {
               marginBottom="0"
               type="text"
               id="discountCode"
-              placeholder="Discount code"
+              placeholder="Código de descuento"
             />
             <Button
               primary
@@ -76,7 +76,7 @@ const SummaryContainer = (props) => {
                 }
               }}
             >
-              Apply
+              Aplicar
             </Button>
           </div>
         )}
@@ -98,7 +98,7 @@ const SummaryContainer = (props) => {
           <div className="checkout-summary-prices-item">
             <p className="checkout-summary-prices-item-title">
               {loading && <Skeleton width={65} height={18} />}
-              {!loading && "Tax"}
+              {!loading && "ITBMS"}
             </p>
             <p className="checkout-summary-prices-item-price">
               {loading && <Skeleton width={65} height={18} />}
@@ -113,7 +113,7 @@ const SummaryContainer = (props) => {
             <div className="checkout-summary-prices-item">
               <p className="checkout-summary-prices-item-title">
                 {loading && <Skeleton width={65} height={18} />}
-                {!loading && "Discount"}
+                {!loading && "Descuento"}
               </p>
               <p className="checkout-summary-prices-item-price">
                 {typeof shipping === "string"
@@ -125,7 +125,7 @@ const SummaryContainer = (props) => {
           <div className="checkout-summary-prices-item">
             <p className="checkout-summary-prices-item-title">
               {loading && <Skeleton width={65} height={18} />}
-              {!loading && "Shipping"}
+              {!loading && "Envío"}
             </p>
             <p className="checkout-summary-prices-item-price">
               {loading && <Skeleton width={65} height={18} />}

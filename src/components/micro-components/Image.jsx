@@ -25,8 +25,8 @@ const Image = (props) => {
         ) : (
           <a
             href={
-              `${props.logo ? "/" : "/products/" + props.id}` ||
-              `${props.profile ? "/profile" : "/products/" + props.id}`
+              `${props.logo ? "/" : "/productos/" + props.id}` ||
+              `${props.profile ? "/perfil" : "/productos/" + props.id}`
             }
           >
             <StyledImage

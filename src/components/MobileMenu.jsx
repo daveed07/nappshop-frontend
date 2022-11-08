@@ -9,7 +9,7 @@ const MobileMenu = () => {
   return (
     <StyledMenu>
       <div>
-        <Title size="xxxlarge" color={colors.black}>Categories</Title>
+        <Title size="xxxlarge" color={colors.black}>Marcas</Title>
         <Nav
         items={[
           { id: 1, text: "iRobot" },

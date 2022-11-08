@@ -12,27 +12,29 @@ import colors from "@constants/colors";
 import { env } from "@constants/env";
 
 const Login = () => {
-  const [alert, setAlert] = useState('');
+  const [alert, setAlert] = useState("");
 
   const handleLogin = (email, password) => {
     if (email && password) {
       const body = {
         email,
         password,
-      }
-      axios.post(`${env.API}/users/login`, body)
-        .then(response => {
+      };
+      axios
+        .post(`${env.API}/users/login`, body)
+        .then((response) => {
           store.dispatch({
             type: "LOGIN",
             payload: response.data.user,
           });
-          console.log(response.data)
-          window.location.href = '/';
-        }).catch(error => {
-          setAlert(error.response.data.message);
+          console.log(response.data);
+          window.location.href = "/";
         })
-     } else {
-      setAlert("Email and password cannot be empty");
+        .catch((error) => {
+          setAlert(error.response.data.message);
+        });
+    } else {
+      setAlert("Por favor, ingresa tu correo y contraseña.");
     }
   };
 
@@ -40,21 +42,49 @@ const Login = () => {
     <>
       <Header />
       <StyledLogin login>
-        <Title size="xxxlarge" color={colors.black}>Log In</Title>
+        <Title size="xxxlarge" color={colors.black}>
+          Log In
+        </Title>
         <SubTitle size="medium" color={colors.greyDark}>
-          Welcome back! Please type in your details
+          Bienvenido de vuelta, por favor ingresa tus datos.
         </SubTitle>
         <Form width="20%">
-        {alert && <p className="alert">{alert}</p>}
-          <Input label type="text" id="email" name="Email" onChange={() => {setAlert('')}}/>
-          <Input label type="password" id="password" name="Password" onChange={() => {setAlert('')}}/>
-          <Button primary onClick={() => handleLogin(document.getElementById("email").value, document.getElementById("password").value)}>Log In</Button>
+          {alert && <p className="alert">{alert}</p>}
+          <Input
+            label
+            type="text"
+            id="email"
+            name="Email"
+            onChange={() => {
+              setAlert("");
+            }}
+          />
+          <Input
+            label
+            type="password"
+            id="password"
+            name="Password"
+            onChange={() => {
+              setAlert("");
+            }}
+          />
+          <Button
+            primary
+            onClick={() =>
+              handleLogin(
+                document.getElementById("email").value,
+                document.getElementById("password").value
+              )
+            }
+          >
+            Log In
+          </Button>
         </Form>
-        <a href="/">Forgot my password</a>
-        <a href="signup">Sign up</a>
+        <a href="/">¿Olvidaste tu contraseña?</a>
+        <a href="registrarse">¿No tienes una cuenta? Regístrate</a>
       </StyledLogin>
     </>
   );
-}
+};
 
 export default Login;

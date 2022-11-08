@@ -22,20 +22,20 @@ const App = () => {
         <>
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/signup" element={<Signup />} />
-            <Route path="/products/:id" element={<Product />} />
-            <Route path="/brands/:brand" element={<Home />} />
-            <Route path="/cart" element={<Cart />} />
+            <Route path="/iniciar-sesion" element={<Login />} />
+            <Route path="/registrarse" element={<Signup />} />
+            <Route path="/productos/:id" element={<Product />} />
+            <Route path="/marcas/:brand" element={<Home />} />
+            <Route path="/carrito" element={<Cart />} />
             <Route path="/checkout" element={<CheckOut />} />
-            <Route path="/payment" element={<Payment />} />
+            <Route path="/pago" element={<Payment />} />
             {isLoggedIn ? (
-              <Route path="/profile" element={<Profile />} />
+              <Route path="/perfil" element={<Profile />} />
             ) : (
-              <Route path="/profile" element={<Navigate to="/login" />} />
+              <Route path="/perfil" element={<Navigate to="/login" />} />
             )}
-            <Route path="/success/:order_id" element={<Success />} />
-            <Route path="/failure" element={<Failure />} />
+            <Route path="/orden-exitosa/:order_id" element={<Success />} />
+            <Route path="/orden-fallida" element={<Failure />} />
             <Route path="*" element={<div>404</div>} />
           </Routes>
         </>

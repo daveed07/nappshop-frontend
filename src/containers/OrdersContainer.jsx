@@ -17,7 +17,7 @@ const OrdersContainer = (props) => {
     <StyledOrdersContainer>
       <Title size="xxlarge" color={colors.black}>
         {props.loading && <Skeleton className="title-skeleton" width={160} />}
-        {!props.loading && 'My Orders'}
+        {!props.loading && 'Mis pedidos'}
       </Title>
       <div className="orders-list">
         {orders.map(order => (

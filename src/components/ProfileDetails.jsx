@@ -15,7 +15,7 @@ const ProfileDetails = (props) => {
         {props.loading && <Skeleton width="100%" height={18} />}
         {!props.loading && (
           <>
-            Name: <span>{props.user.name}</span>
+            Nombre: <span>{props.user.name}</span>
           </>
         )}
       </SubTitle>
@@ -35,7 +35,7 @@ const ProfileDetails = (props) => {
         )}
         {!props.loading && (
           <>
-            Address:{" "}
+            Dirección:{" "}
             <span>
               {props.user.address1}, {props.user.address2}
             </span>
@@ -50,7 +50,7 @@ const ProfileDetails = (props) => {
         )}
         {!props.loading && (
           <>
-            Region:{" "}
+            Región:{" "}
             <span>
               {props.user.city}, {props.user.region}
             </span>
@@ -61,7 +61,7 @@ const ProfileDetails = (props) => {
         {props.loading && <Skeleton height={18} />}
         {!props.loading && (
           <>
-            Phone: <span>{props.user.phone}</span>
+            Teléfono: <span>{props.user.phone}</span>
           </>
         )}
       </SubTitle>

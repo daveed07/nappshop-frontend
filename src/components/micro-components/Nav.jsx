@@ -17,7 +17,7 @@ const Nav = (props) => {
                 <StyledLi>
                   <StyledA
                     color={props.color}
-                    href={`/brands/${item.text}`}
+                    href={`/marcas/${item.text}`}
                   >
                     {item.text}
                   </StyledA>

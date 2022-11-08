@@ -40,22 +40,22 @@ const Profile = () => {
     setEdit(!edit);
   };
 
-  const handleUpload = (e) => {
-    const file = e.target.files[0];
-    const formData = new FormData();
-    formData.append("image", file);
-    axios
-      .patch(`${API}/users/profile/${user.id}`, formData)
-      .then((res) => {
-        store.dispatch({ type: "SET_USER", payload: res.data.user.img });
-        setOpen(true);
-        setMessage(res.data.message);
-      })
-      .catch((err) => {
-        setOpen(true);
-        setMessage(err.response.data.message);
-      });
-  };
+  // const handleUpload = (e) => {
+  //   const file = e.target.files[0];
+  //   const formData = new FormData();
+  //   formData.append("image", file);
+  //   axios
+  //     .patch(`${API}/users/profile/${user.id}`, formData)
+  //     .then((res) => {
+  //       store.dispatch({ type: "SET_USER", payload: res.data.user.img });
+  //       setOpen(true);
+  //       setMessage(res.data.message);
+  //     })
+  //     .catch((err) => {
+  //       setOpen(true);
+  //       setMessage(err.response.data.message);
+  //     });
+  // };
 
   return (
     <>
@@ -68,7 +68,7 @@ const Profile = () => {
           <div className="profile-container">
             <Title size="xxlarge" color={colors.black}>
               {loading && <Skeleton width={100} height={30} />}
-              {!loading && "Profile"}
+              {!loading && "Perfil"}
             </Title>
             <Image
               loading={loading}
@@ -78,7 +78,7 @@ const Profile = () => {
               src={user.avatar || assets.default_profile}
               alt="avatar"
             >
-              <div className="image-overlay">
+              {/* <div className="image-overlay">
                 <Input
                   id="avatar"
                   type="file"
@@ -90,7 +90,7 @@ const Profile = () => {
                 <label htmlFor="avatar">
                   <Upload />
                 </label>
-              </div>
+              </div> */}
             </Image>
             {edit ? (
               <ProfileEdit
@@ -110,9 +110,11 @@ const Profile = () => {
                 <Skeleton width={200} height={48} />
               </div>
             ) : (
-              <Button primary onClick={handleEdit}>
-                Edit profile
-              </Button>
+              !edit && (
+                <Button primary onClick={handleEdit}>
+                  Edita tu perfil
+                </Button>
+              )
             )}
           </div>
           <OrdersContainer loading={loading} />
