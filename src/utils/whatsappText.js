@@ -5,32 +5,32 @@ Order: ${bold(order_id)}
 %0A
 ----------------
 %0A
-New order from ${bold(contact.firstName)} ${bold(contact.lastName)}
+Nueva orden de ${bold(contact.firstName)} ${bold(contact.lastName)}
 %0A%0A
 ${cart.map((product) => `${product.quantity} x ${product.name} - ($${product.price})`).join(" %0A")}
 %0A%0A
 ${bold('Subtotal:')} ${costs.subtotal}
 %0A
-${bold('Shipping:')} ${costs.shipping}
+${bold('Envío:')} ${costs.shipping}
 %0A
 ${bold('Total:')}  ${costs.totalWithShipping}
 %0A
-${bold('Payment method:')}  Yappy
+${bold('Método de pago:')}  Yappy
 %0A%0A
-${bold('Shipping method:')}  ${shipping.address1 !== "" ? "Delivery" : "Store Pickup"}
+${bold('Método de entrega:')}  ${shipping.address1 !== "" ? "Delivery" : "Retirar en la tienda"}
 %0A%0A
-${bold('Phone:')}  ${contact.phone}
+${bold('Teléfono:')}  ${contact.phone}
 %0A
-${bold('Shipping address:')}  ${shipping.address1 !== false ? `${shipping.address1} ${shipping.address2} ${shipping.city} ${shipping.region}` : storeAddress}
+${bold('Dirección de entrega:')}  ${shipping.address1 !== false ? `${shipping.address1} ${shipping.address2} ${shipping.city} ${shipping.region}` : storeAddress}
 %0A%0A
-Thanks!
+Muchas gracias!
 %0A%0A
 %0A
 ----------------
 %0A
-(Message to client)
+(Mensaje para el cliente)
 %0A%0A
-Remember to pay on Yappy to:
+Recuerda pagar tu orden en Yappy para que podamos procesarla.
 %0A
 Yappy: 66731685
 %0A
