@@ -4,7 +4,7 @@ exports.sections = [
     filter: {
       brand: "iRobot",
       category: "productos",
-      type: "Robot Vacuum",
+      type: "Aspiradora Robot",
     },
   },
   {
@@ -20,7 +20,7 @@ exports.sections = [
     filter: {
       brand: "all",
       category: "productos",
-      type: "Blender",
+      type: "Licuadora",
     },
   },
 ];

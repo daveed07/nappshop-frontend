@@ -25,7 +25,7 @@ const OrderItem = ({ item, loading }) => {
         checkout
         src={
           item.product_images[
-            product.images.findIndex((item) => item.includes("1.jpg"))
+            item.product_images.findIndex((item) => item.includes("1.jpg"))
           ] || assets.product_placeholder
         }
         id={item.product_id}
