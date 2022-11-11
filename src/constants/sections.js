@@ -1,6 +1,6 @@
 exports.sections = [
   {
-    text: "iRobot Roombas are back!",
+    text: "Las Roomba están de vuelta",
     filter: {
       brand: "iRobot",
       category: "productos",
@@ -8,19 +8,27 @@ exports.sections = [
     },
   },
   {
-    text: "iRobot accessories",
-    filter: {
-      brand: "iRobot",
-      category: "accesorios",
-      type: "all",
-    },
-  },
-  {
-    text: "Treat yourself with some smoothies",
+    text: "Haz unos buenos batidos",
     filter: {
       brand: "all",
       category: "productos",
       type: "Licuadora",
+    },
+  },
+  {
+    text: "Cafecito por la mañana",
+    filter: {
+      brand: "all",
+      category: "productos",
+      type: "Cafetera",
+    }
+  },
+  {
+    text: "Accesorios iRobot",
+    filter: {
+      brand: "iRobot",
+      category: "accesorios",
+      type: "all",
     },
   },
 ];
