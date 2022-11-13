@@ -17,6 +17,8 @@ const ProductContainer = ({ filter, loading }) => {
   }${filter && filter.type !== "all" ? `&filterByType=${filter.type}&` : ""}`;
   const products = useGetProducts(queryUrl);
 
+  console.log(queryUrl);
+
   return (
     <StyledProductContainer>
       <div className="product-wrapper">
