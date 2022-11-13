@@ -9,7 +9,11 @@ import { env } from "@constants/env";
 const ProductContainer = ({ filter, loading }) => {
   const { brand } = useParams();
   const queryUrl = `${env.API}/products?${
-    brand ? `filterByBrand=${brand}` : `filterByBrand=${filter.brand}`
+    brand
+      ? `filterByBrand=${brand}`
+      : filter.brand && filter.brand !== "all"
+      ? `filterByBrand=${filter.brand}`
+      : ""
   }${
     filter && filter.category !== "all"
       ? `&filterByCategory=${filter.category}`
