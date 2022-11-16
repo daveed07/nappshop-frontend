@@ -30,6 +30,24 @@ const CheckOut = () => {
   const [discount, setDiscount] = useState(0);
   const [emptyFields, setEmptyFields] = useState(false);
 
+  // create state for every input field to be able to validate them if they are empty or not
+  const [firstName, setFirstName] = useState(contactState.firstName || "");
+  const [lastName, setLastName] = useState(contactState.lastName || "");
+  const [email, setEmail] = useState(contactState.email || "");
+  const [phone, setPhone] = useState(contactState.phone || "");
+  const [address1, setAddress1] = useState(shippingState.address1 || "");
+  const [address2, setAddress2] = useState(shippingState.address2 || "");
+  const [region, setRegion] = useState(shippingState.region || "");
+  const [city, setCity] = useState(shippingState.city || "");
+
+  // create state for every input to check if they are empty or not
+  const [firstNameEmpty, setFirstNameEmpty] = useState(false);
+  const [lastNameEmpty, setLastNameEmpty] = useState(false);
+  const [emailEmpty, setEmailEmpty] = useState(false);
+  const [phoneEmpty, setPhoneEmpty] = useState(false);
+  const [address1Empty, setAddress1Empty] = useState(false);
+  const [cityEmpty, setCityEmpty] = useState(false);
+
   const subtotal = cart.reduce(
     (acc, curr) => acc + curr.price * curr.quantity,
     0
@@ -42,35 +60,128 @@ const CheckOut = () => {
       : parseFloat(Number(total) + Number(shipping)).toFixed(2);
 
   const handleUseAccountInfo = () => {
-    document.getElementById("firstName").value = user.name.split(" ")[0] || "";
-    document.getElementById("lastName").value = user.name.split(" ")[1] || "";
-    document.getElementById("email").value = user.email;
-    document.getElementById("phone").value = user.phone || "";
+    // document.getElementById("firstName").value = user.name.split(" ")[0] || "";
+    // document.getElementById("lastName").value = user.name.split(" ")[1] || "";
+    // document.getElementById("email").value = user.email;
+    // document.getElementById("phone").value = user.phone || "";
+
+    setFirstName(user.name.split(" ")[0] || "");
+    setLastName(user.name.split(" ")[1] || "");
+    setEmail(user.email);
+    setPhone(user.phone || "");
   };
 
   const handleUseShippingInfo = () => {
-    document.getElementById("address").value = user.address1;
-    document.getElementById("address2").value = user.address2;
-    document.getElementById("city").value = user.city;
-    // change region select to match user's region
-    const regionSelect = document.getElementById("region");
-    regionSelect.options.map((option) => {
-      if (option.value === user.region) {
-        option.selected = true;
-      }
-    });
+    // document.getElementById("address").value = user.address1;
+    // document.getElementById("address2").value = user.address2;
+    // document.getElementById("city").value = user.city;
+    // // change region select to match user's region
+    // const regionSelect = document.getElementById("region");
+    // regionSelect.options.map((option) => {
+    //   if (option.value === user.region) {
+    //     option.selected = true;
+    //   }
+    // });
+
+    setAddress1(user.address1);
+    setAddress2(user.address2);
+    setCity(user.city);
+    setRegion(user.region);
   };
 
   const handlePayment = () => {
     // evaluate every single input individually and if it is empty, then return false
-    const firstName = document.getElementById("firstName").value;
-    const lastName = document.getElementById("lastName").value;
-    const email = document.getElementById("email").value;
-    const phone = document.getElementById("phone").value;
+    // const firstName = document.getElementById("firstName").value;
+    // const lastName = document.getElementById("lastName").value;
+    // const email = document.getElementById("email").value;
+    // const phone = document.getElementById("phone").value;
+
+    // if (!address) {
+    //   if (firstName === "" || lastName === "" || email === "" || phone === "") {
+    //     setEmptyFields(true);
+    //     return;
+    //   } else {
+    //     store.dispatch({
+    //       type: "SET_SHIPPING",
+    //       payload: {
+    //         address1: false,
+    //         address2: false,
+    //         city: false,
+    //         region: false,
+    //       },
+    //     });
+    //     store.dispatch({
+    //       type: "SET_CONTACT",
+    //       payload: { firstName, lastName, email, phone },
+    //     });
+    //     store.dispatch({
+    //       type: "SET_COSTS",
+    //       payload: {
+    //         subtotal,
+    //         total,
+    //         totalWithShipping,
+    //         shipping,
+    //         tax,
+    //         discount,
+    //       },
+    //     });
+    //     window.location.href = "/pago";
+    //   }
+    // } else {
+    //   const address1 = document.getElementById("address").value;
+    //   const address2 = document.getElementById("address2").value;
+    //   const city = document.getElementById("city").value;
+    //   const region = document.getElementById("region").value;
+
+    //   console.log(address1, address2, city, region);
+    //   if (
+    //     firstName === "" ||
+    //     lastName === "" ||
+    //     email === "" ||
+    //     phone === "" ||
+    //     address1 === "" ||
+    //     address2 === "" ||
+    //     city === "" ||
+    //     region === ""
+    //   ) {
+    //     setEmptyFields(true);
+    //     return;
+    //   } else {
+    //     // if all input is filled, then redirect to payment page
+    //     store.dispatch({
+    //       type: "SET_SHIPPING",
+    //       payload: {
+    //         address1: address1,
+    //         address2: address2,
+    //         city: city,
+    //         region: region,
+    //       },
+    //     });
+    //     store.dispatch({
+    //       type: "SET_CONTACT",
+    //       payload: { firstName, lastName, email, phone },
+    //     });
+    //     store.dispatch({
+    //       type: "SET_COSTS",
+    //       payload: {
+    //         subtotal,
+    //         total,
+    //         totalWithShipping,
+    //         shipping,
+    //         tax,
+    //         discount,
+    //       },
+    //     });
+    //     window.location.href = "/pago";
+    //   }
+    // }
 
     if (!address) {
       if (firstName === "" || lastName === "" || email === "" || phone === "") {
-        setEmptyFields(true);
+        setFirstNameEmpty(firstName === "");
+        setLastNameEmpty(lastName === "");
+        setEmailEmpty(email === "");
+        setPhoneEmpty(phone === "");
         return;
       } else {
         store.dispatch({
@@ -100,29 +211,21 @@ const CheckOut = () => {
         window.location.href = "/pago";
       }
     } else {
-      const address1 = document.getElementById("address").value;
-      const address2 = document.getElementById("address2").value;
-      const city = document.getElementById("city").value;
-      const region = document.getElementById("region").value;
       if (
         firstName === "" ||
         lastName === "" ||
         email === "" ||
         phone === "" ||
         address1 === "" ||
-        address2 === "" ||
-        city === "" ||
-        region === ""
+        city === ""
       ) {
-        // if any of the input is empty, turn input outline red
-        document.getElementById("firstName").classList.add("red-outline");
-        document.getElementById("lastName").classList.add("red-outline");
-        document.getElementById("email").classList.add("red-outline");
-        document.getElementById("phone").classList.add("red-outline");
-        document.getElementById("address").classList.add("red-outline");
-        document.getElementById("address2").classList.add("red-outline");
-        document.getElementById("city").classList.add("red-outline");
-        document.getElementById("region").classList.add("red-outline");
+        setFirstNameEmpty(firstName === "");
+        setLastNameEmpty(lastName === "");
+        setEmailEmpty(email === "");
+        setPhoneEmpty(phone === "");
+        setAddress1Empty(address1 === "");
+        setCityEmpty(city === "");
+        return;
       } else {
         // if all input is filled, then redirect to payment page
         store.dispatch({
@@ -226,21 +329,23 @@ const CheckOut = () => {
                     type="text"
                     id="firstName"
                     placeholder="Nombre"
-                    defaultValue={contactState.firstName || ""}
+                    defaultValue={firstName || ""}
                     onChange={() => {
-                      setEmptyFields(false);
+                      setFirstName(document.getElementById("firstName").value);
+                      setFirstNameEmpty(false);
                     }}
-                    emptyFields={emptyFields}
+                    emptyFields={firstNameEmpty}
                   />
                   <Input
                     type="text"
                     id="lastName"
                     placeholder="Apellido"
-                    defaultValue={contactState.lastName || ""}
+                    defaultValue={lastName || ""}
                     onChange={(e) => {
-                      setEmptyFields(false);
+                      setLastName(document.getElementById("lastName").value);
+                      setLastNameEmpty(false);
                     }}
-                    emptyFields={emptyFields}
+                    emptyFields={lastNameEmpty}
                   />
                 </div>
                 <div className="contact-info-form-bottom">
@@ -248,21 +353,23 @@ const CheckOut = () => {
                     type="email"
                     id="email"
                     placeholder="Email"
-                    defaultValue={contactState.email || ""}
+                    defaultValue={email || ""}
                     onChange={() => {
-                      setEmptyFields(false);
+                      setEmail(document.getElementById("email").value);
+                      setEmailEmpty(false);
                     }}
-                    emptyFields={emptyFields}
+                    emptyFields={emailEmpty}
                   />
                   <Input
                     type="tel"
                     id="phone"
                     placeholder="Teléfono"
-                    defaultValue={contactState.phone || ""}
+                    defaultValue={phone || ""}
                     onChange={() => {
-                      setEmptyFields(false);
+                      setPhone(document.getElementById("phone").value);
+                      setPhoneEmpty(false);
                     }}
-                    emptyFields={emptyFields}
+                    emptyFields={phoneEmpty}
                   />
                 </div>
                 {/* <div className="marketing-checkbox">
@@ -289,7 +396,7 @@ const CheckOut = () => {
                       onChange={() => {
                         document.getElementById("delivery").checked = false;
                         setAddress(false);
-                        setShipping("Free");
+                        setShipping("Gratis");
                       }}
                     />
                     <label className="shipping-label" htmlFor="pickup">
@@ -352,36 +459,37 @@ const CheckOut = () => {
                     type="text"
                     id="address"
                     placeholder="Dirección"
-                    defaultValue={shippingState.address1 || ""}
+                    defaultValue={address1 || ""}
                     onChange={() => {
-                      setEmptyFields(false);
+                      setAddress1(document.getElementById("address").value);
+                      setAddress1Empty(false);
                     }}
-                    emptyFields={emptyFields}
+                    emptyFields={address1Empty}
                   />
                   <Input
                     type="text"
                     id="address2"
-                    placeholder="Apartamento, suite, etc."
-                    defaultValue={shippingState.address2 || ""}
+                    placeholder="Apartamento, suite, etc. (opcional)"
+                    defaultValue={address2 || ""}
                     onChange={() => {
-                      setEmptyFields(false);
+                      setAddress2(document.getElementById("address2").value);
                     }}
-                    emptyFields={emptyFields}
                   />
                   <div className="address-form-bottom">
                     <Input
                       type="text"
                       id="city"
                       placeholder="Ciudad"
-                      defaultValue={shippingState.city || ""}
+                      defaultValue={city || ""}
                       onChange={() => {
-                        setEmptyFields(false);
+                        setCity(document.getElementById("city").value);
+                        setCityEmpty(false);
                       }}
-                      emptyFields={emptyFields}
+                      emptyFields={cityEmpty}
                     />
                     <select
                       id="region"
-                      defaultValue={shippingState.region || ""}
+                      defaultValue={region || ""}
                       onChange={() => {
                         document
                           .getElementById("region")
@@ -418,6 +526,29 @@ const CheckOut = () => {
                 secondary
                 onClick={() => {
                   window.location.href = "/carrito";
+                  store.dispatch({
+                    type: "SET_SHIPPING",
+                    payload: {
+                      address1: "",
+                      address2: "",
+                      city: "",
+                      region: "",
+                    },
+                  });
+
+                  store.dispatch({
+                    type: "SET_CONTACT",
+                    payload: {
+                      firstName: "",
+                      lastName: "",
+                      email: "",
+                      phone: "",
+                    },
+                  });
+
+                  store.dispatch({
+                    type: "RESET_COSTS",
+                  });
                 }}
               >
                 Regresar al carrito
