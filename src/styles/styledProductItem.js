@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import colors from '@constants/colors';
 
 const StyledProductItem = styled.div`
   .product-bottom {
@@ -24,6 +25,27 @@ const StyledProductItem = styled.div`
 
   .description-skeleton {
     margin-bottom: 4px;
+  }
+
+  .product__discount {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 65px;
+    height: 65px;
+    background-color: ${colors.main};
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+    border-radius: 50%;
+  }
+
+  .product__discount--text {
+    color: ${colors.white};
+    font-size: 18px;
+    font-weight: 700;
+    padding: 4px 8px;
   }
 
   @media (max-width: 768px) {

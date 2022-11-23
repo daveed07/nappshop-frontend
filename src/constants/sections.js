@@ -8,6 +8,14 @@ exports.sections = [
     },
   },
   {
+    text: "Accesorios iRobot",
+    filter: {
+      brand: "iRobot",
+      category: "accesorios",
+      type: "all",
+    },
+  },
+  {
     text: "Haz unos buenos batidos",
     filter: {
       brand: "all",
@@ -21,14 +29,6 @@ exports.sections = [
       brand: "all",
       category: "productos",
       type: "Cafetera",
-    }
-  },
-  {
-    text: "Accesorios iRobot",
-    filter: {
-      brand: "iRobot",
-      category: "accesorios",
-      type: "all",
     },
   },
 ];
