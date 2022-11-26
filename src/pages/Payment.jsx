@@ -44,7 +44,7 @@ const Payment = () => {
   console.log(contact);
   console.log(shipping);
 
-  const submitOrder = async (open) => {
+  const submitOrder = async () => {
     const order = {
       user_id: user.id,
       subtotal: parseFloat(costs.subtotal),
@@ -101,7 +101,7 @@ const Payment = () => {
           resetStore();
           window.location.href = `/orden-exitosa/${res.data.order_id}`;
         }
-        if (open) {
+        if (paymentMethod === "yappy") {
           window.open(
             `https://wa.me/${env.WA_NUMBER}?text=${whatsappText({
               cart,
@@ -208,7 +208,7 @@ const Payment = () => {
                     Button
                     primary
                     disabled={!paymentMethod}
-                    onClick={() => submitOrder(false)}
+                    onClick={() => submitOrder()}
                   >
                     {buttonText}
                   </Button>
