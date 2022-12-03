@@ -48,14 +48,7 @@ const ProductItem = ({ product, loading }) => {
         }
         alt={product.name}
         id={product.id}
-      >
-        {product.type === "Aspiradora Robot" ||
-        product.type === "Trapeador Robot" ? (
-          <div className="product__discount">
-            <span className="product__discount--text">-20%</span>
-          </div>
-        ) : null}
-      </Image>
+      />
       <div className="text-container">
         <a href={`/productos/${product.id}`}>
           <Title size="medium" color={colors.main}>
